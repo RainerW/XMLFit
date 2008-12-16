@@ -1,0 +1,73 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema file:/C:/Programme/Exchanger/types/XML%20Schema/Validation/XMLSchema.xsd">
+<xsd:element name = "test">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref ="call" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="fixture" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="author" use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<xsd:element name = "fixture">
+	<xsd:complexType>
+		 <xsd:choice minOccurs="1" maxOccurs="unbounded">
+  			<xsd:element ref="command"/>
+  			<xsd:element ref="columns"/>
+  			<xsd:element ref="rows"/>
+  		</xsd:choice>
+  		<xsd:attribute name="name" use="optional"/>
+		<xsd:attribute name="type" use="optional"/>
+  	</xsd:complexType>
+</xsd:element>	
+	
+<xsd:element name="command">	
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element ref="target" minOccurs="1"/>
+			<xsd:element ref="value" minOccurs="0"/>
+			<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="name" use="required">
+             <xsd:simpleType>
+                <xsd:restriction base="xsd:NMTOKEN">
+                	<xsd:enumeration value="start"/>
+       				<xsd:enumeration value="press"/>
+        			<xsd:enumeration value="check"/>
+        			<xsd:enumeration value="enter"/>
+        		</xsd:restriction>
+           </xsd:simpleType>
+       </xsd:attribute> 
+	</xsd:complexType>
+ </xsd:element>
+ 
+<xsd:element name="target">
+</xsd:element>
+
+<xsd:element name="value">
+</xsd:element>
+
+<xsd:element name="var">
+	<xsd:complexType>
+		<xsd:attribute name="name" use="required"/>
+	</xsd:complexType>
+</xsd:element> 
+ 
+ 
+ <xsd:element name="call">
+ 	<xsd:complexType>
+ 		<xsd:attribute name="test" use="required"/>
+	</xsd:complexType>	
+</xsd:element>
+ 
+ <xsd:element name="columns">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name ="column" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="rows">
+	</xsd:element>
+ </xsd:schema>

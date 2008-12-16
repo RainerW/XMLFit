@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>Introduction XMLFit</title>
+  </properties>
+  <body>
+    <section name="Introduction">
+      <p>
+        XMLFit is a Java and XML based solution to convert testcases written in XML to the FIT HTML table structure.
+      </p>
+    </section>
+  </body>
+</document>

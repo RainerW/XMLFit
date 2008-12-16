@@ -1,0 +1,79 @@
+.logo{
+	background-image: url("images/XMLFitLogo.jpg");
+	background-repeat:no-repeat;
+	width: 400px;
+ 	height: 80px;
+	position:absolute;
+	left:350px;
+	top:1px;
+}
+
+
+.image {
+	background-image: url("images/logo.jpg");
+	background-repeat:no-repeat;
+	width: 400px;
+ 	height: 80px
+	
+}
+
+.test {
+	width:400px;
+	background-color:#F0F8FF;
+ 	border:1px solid #000000;
+	margin: 4px;
+	padding: 2px;
+	
+}
+
+.main {
+	width:414px;
+	background-color:#C0C0C0;
+	border:1px solid #000000;
+	margin-top: 20px; 
+	margin-left: 4px; 
+	margin-right:4px;
+	margin-bottom;4px;
+}
+
+
+
+.author {
+	width:400px;
+	background-color:#F0F8FF;
+	margin: 4px;
+	padding: 2px;
+	border:1px solid #000000;
+}
+
+.back{
+	width:100px;
+	background-color:#C0C0C0;
+	border:1px solid #000000;
+	margin-left:4px;
+}
+
+
+.testname {
+	margin:4px;	
+	width:100px;
+	background-color:#F0F8FF;
+ 	border:1px solid #000000;
+	padding:2px;
+}
+
+
+table {
+	
+	border:1px solid #000000;
+	margin:4px;
+	padding:2px;
+	background-color:#C0C0C0;
+}
+
+td, tr {
+	border:1px solid #000000;
+	background-color:#B0E0E6;
+	padding:2px;
+	margin:4px;
+}
