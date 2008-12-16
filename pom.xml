@@ -68,13 +68,12 @@
   
   <issueManagement>
     <system>Sourceforge Tracker</system>
-    <url></url>
+    <url>http://sourceforge.net/tracker2/?group_id=246962&atid=1126231</url>
   </issueManagement>
   
   <build> 
     <plugins>   
-      
-      
+    
         <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
@@ -156,6 +155,17 @@
       <url>scp://shell.sourceforge.net//home/groups/x/xm/xmlfit/htdocs</url>
     </site>
   </distributionManagement>
+  
+  <scm>
+        <connection> 
+              scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk
+          </connection>
+        <developerConnection> 
+              scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk
+        </developerConnection>
+        <tag>HEAD</tag>
+        <url>scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk</url>
+  </scm>
   
 
 </project>
