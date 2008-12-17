@@ -68,6 +68,14 @@ public class XMLFit
       }
     }
   
+    
+//    JAXBContext jc = JAXBContext.newInstance("generated");
+//    Unmarshaller unmarshaller = jc.createUnmarshaller();
+//    
+//    JAXBElement<Testsuite> unmarshal = 
+//        (JAXBElement<Testsuite>) unmarshaller.unmarshal(new File(testsuite));
+//    TestSuite suite = unmarshal.getValue();
+    
    validator.validate(testsuite, inputDir+"/");
     
     
