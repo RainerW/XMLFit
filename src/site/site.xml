@@ -2,6 +2,7 @@
 <project name="Maven">
   <body>
     <links>
+      <item name="Seitenbau Gmbh" href="http://www.seitenbau.de" />
       <item name="XMLFit Sourceforge site" href="https://sourceforge.net/projects/xmlfit/" />
     </links>
     <menu name="Overview">
