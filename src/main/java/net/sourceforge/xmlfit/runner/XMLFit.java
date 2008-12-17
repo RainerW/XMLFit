@@ -29,6 +29,23 @@ public class XMLFit
   private static final int BUFFER = 4096;
   
   
+  public static void run(XMLFitRunner runner)
+  {
+    XMLFit xmlfit = new XMLFit();
+    xmlfit.setOutputDir(runner.getOutputDir());
+    xmlfit.setInputDir(runner.getInputDir());
+    xmlfit.setTestsuite(runner.getTestsuite());
+    xmlfit.setCssfile(runner.getStylesheet());
+    try
+    {
+      xmlfit.generate();
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
+  
   public void generate() throws Exception 
   {
    net.sourceforge.xmlfit.xslt.Validate validator = new net.sourceforge.xmlfit.xslt.Validate();
