@@ -3,6 +3,7 @@ package net.sourceforge.xmlfit.runner;
 import java.io.File;
 import java.net.URL;
 
+import org.apache.log4j.Logger;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -96,16 +97,22 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
  
   public static void main(String[] args) throws Exception
   {  
+    Logger logger = Logger.getLogger("log");
     XMLFitCommandLineRunner runner = new XMLFitCommandLineRunner();
     CmdLineParser parser = new CmdLineParser(runner);
-    try {
+    try 
+    {
       parser.parseArgument(args);
+      logger.info("Starting XMLFit");
       XMLFit.run(runner);
-      } catch (CmdLineException e) {
+    } 
+    catch (CmdLineException e) 
+    {
+          logger.error(e.getMessage());
           // handling of wrong arguments
           System.err.println(e.getMessage());
           parser.printUsage(System.err);
-      }
     }
-  }
+   }
+ }
 
