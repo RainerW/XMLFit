@@ -24,6 +24,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 
+import org.apache.log4j.Logger;
+
 /**XMLFit 
  *@author faigle
  */
@@ -36,14 +38,18 @@ public class XMLFit
   private String inputDir;
   private String testsuite;
   private String cssfile;
+  private Logger logger;
  
   private static final int BUFFER = 4096;
   private   List<String> tests = new ArrayList<String>();
  
-  
+  public XMLFit()
+  {
+   logger=Logger.getLogger("log");
+  }
+ 
   public static void run(XMLFitRunner runner)
   {
-    
     XMLFit xmlfit = new XMLFit();
     xmlfit.setOutputDir(runner.getOutputDir());
     xmlfit.setInputDir(runner.getInputDir());
@@ -68,6 +74,7 @@ public class XMLFit
     File dir = new File(outputdir);
     if(!dir.exists()) 
     {
+      logger.info("OutputDirectory does not exist. XMLFit will create it.");
       System.out.println("OutputDirectory does not exist. XMLFit will create it.");
       dir.mkdir();
     }
@@ -76,6 +83,7 @@ public class XMLFit
     
     if(files != null)
     {  
+      logger.info("Deleting old testfiles in" + outputdir);
       for(int i=0; i < files.length; i++)
       {
         files[i].delete();
