@@ -8,6 +8,11 @@
       <p>
         XMLFit is a Java and XML based solution to convert testcases written in XML to the FIT HTML table structure.
       </p>
+      <subsection name="Functional Overview">
+        <p>
+            <img src="images/overview.jpg"/>
+        </p>
+      </subsection>
     </section>
   </body>
 </document>

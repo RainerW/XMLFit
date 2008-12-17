@@ -6,8 +6,107 @@
   <body>
     <section name="Usage">
       <p>
-        TODO.
+        The next four steps will explain the usage of XMlFit. To Use XMLFit just follow these steps.
       </p>
+    <subsection name="Step 1: Create a test">
+      <p>
+        First of all you have to define a valid test that XMLFit is able to understand. 
+        Here is an example of a valid XMLFit test:
+   <source>
+&lt;test author="cfaigle"&gt;
+     &lt;fixture&gt;
+         &lt;command name="enter"&gt;
+            &lt;target&gt;select&lt;/target&gt;
+            &lt;value&gt;&lt;var name="trackNumber"/&gt;&lt;/value&gt;            
+        &lt;/command&gt;
+             &lt;command name="check"&gt;
+            &lt;target&gt;title&lt;/target&gt;
+            &lt;value&gt;&lt;var name="title"/&gt;&lt;/value&gt;            
+        &lt;/command&gt;
+             &lt;command name="check"&gt;
+            &lt;target&gt;artist&lt;/target&gt;
+            &lt;value&gt;&lt;var name="artist"/&gt;&lt;/value&gt;            
+        &lt;/command&gt;
+             &lt;command name="check"&gt;
+            &lt;target&gt;album&lt;/target&gt;
+            &lt;value&gt;&lt;var name="album"/&gt;&lt;/value&gt;            
+        &lt;/command&gt;
+             &lt;command name="check"&gt;
+            &lt;target&gt;year&lt;/target&gt;
+            &lt;value&gt;&lt;var name="year"/&gt;&lt;/value&gt;            
+        &lt;/command&gt;
+     &lt;/fixture&gt;
+&lt;/test&gt;   
+    </source>
+    As you can see the XMLFit language is quit simple. The example shows the XMLFit Notation for an ActionFixture.
+    The command element has one required parameter 'name' and two child elements called 'target' and 'value'. The 'value' element is
+    optional. To split the test data from the test logic you can define variables in the test. Variables can be defined by using the element 
+    'var' with the required attribute 'name'. XMLFit will search for these variables in additional data files.
+      </p>
+     </subsection>
+    <subsection name="Step 2: Create testdata">
+     <p>
+      The following example shows how to define test data for tests:
+      <source>
+  &lt;testdata&gt;
+    &lt;dataset&gt;
+        &lt;trackNumber&gt;1&lt;/trackNumber&gt;
+        &lt;title&gt;Akila&lt;/title&gt;
+        &lt;artist&gt;Toure Kunda&lt;/artist&gt;
+    &lt;/dataset&gt;
+    &lt;dataset&gt;
+        &lt;trackNumber&gt;2&lt;/trackNumber&gt;
+        &lt;title&gt;American Tango&lt;/title&gt;
+        &lt;artist&gt;Weather Report&lt;/artist&gt;
+        &lt;album&gt;Mysterious Traveller&lt;/album&gt;
+        &lt;year&gt;1974&lt;/year&gt;
+    &lt;/dataset&gt;
+    &lt;dataset&gt;
+        &lt;trackNumber&gt;3&lt;/trackNumber&gt;
+        &lt;title&gt;Ananas&lt;/title&gt;
+        &lt;artist&gt;James Taylor&lt;/artist&gt;
+        &lt;album&gt;Hourglass&lt;/album&gt;
+        &lt;year&gt;1997&lt;/year&gt;
+    &lt;/dataset&gt;
+  &lt;/testdata&gt;
+      </source>
+      XMLFit will create a FIT table for each dataset. You can define each variable given in the test file but you don´t have to.
+      </p>
+    </subsection>
+    <subsection name="Step 3: Create testsuite">
+     <p>
+      Finally to connect the test logic with the test data you have to define a XML File called testsuite.
+      A sample testsuite is shown below:
+      <source>
+   &lt;testsuite author="faigle"&gt;
+        &lt;testgroup name="ExampleTest" id="1" defaultData="data/defaultData.xml"&gt;
+             &lt;call test="testMusic.xml" data="data/musicData.xml"/&gt;
+        &lt;/testgroup&gt;
+   &lt;/testsuite&gt;
+      </source>
+      </p>
+     </subsection>
+    <subsection name="Step 4: Run XMLFit">
+     <p>
+ To run XMLFit just open a cmd window and type:
+      <source>
+ java -jar XMLFit.jar
+       </source>
+       Parameters:
+       <source>
+ -inputDir <i>input directory</i><br/><b>required</b>
+       </source>
+       <source>
+  -outputDir <i>output directory</i><br/><b>required</b>
+       </source>
+        <source>
+ -testsuite <i>testsuite file</i><br/><b>required</b>
+       </source>
+         <source>
+ -style <i>custom CSS file</i><br/><b>optional</b>
+       </source>
+      </p>
+     </subsection>
     </section>
   </body>
 </document>
