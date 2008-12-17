@@ -10,7 +10,11 @@
       </p>
       <subsection name="Functional Overview">
         <p>
-            <img src="images/overview.jpg"/>
+            This graphic shows the basic functionality of XMLFit. The input is defined in the XML notation and XMLFit transforms this input into 
+            the FIT HTML table notation. For more details, see chapter 'Usage'.
+        </p>
+        <p>
+             <img src="images/overview.jpg"/>
         </p>
       </subsection>
     </section>
