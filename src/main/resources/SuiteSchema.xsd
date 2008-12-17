@@ -21,6 +21,7 @@
 
 <xsd:element name="call">
  	<xsd:complexType>
+ 		<xsd:attribute name="test" use="required"/>
  		<xsd:anyAttribute processContents="skip"/>
  	</xsd:complexType>
 </xsd:element>
