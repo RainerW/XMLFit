@@ -1,6 +1,11 @@
 
 package net.sourceforge.xmlfit.runner;
 
+import generated.Call;
+import generated.Testgroup;
+import generated.Testsuite;
+
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -11,7 +16,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.QName;
 
 /**XMLFit 
  *@author faigle
@@ -27,10 +38,12 @@ public class XMLFit
   private String cssfile;
  
   private static final int BUFFER = 4096;
-  
+  private   List<String> tests = new ArrayList<String>();
+ 
   
   public static void run(XMLFitRunner runner)
   {
+    
     XMLFit xmlfit = new XMLFit();
     xmlfit.setOutputDir(runner.getOutputDir());
     xmlfit.setInputDir(runner.getInputDir());
@@ -46,6 +59,7 @@ public class XMLFit
     }
   }
   
+  @SuppressWarnings("unchecked")
   public void generate() throws Exception 
   {
    net.sourceforge.xmlfit.xslt.Validate validator = new net.sourceforge.xmlfit.xslt.Validate();
@@ -69,14 +83,26 @@ public class XMLFit
     }
   
     
-//    JAXBContext jc = JAXBContext.newInstance("generated");
-//    Unmarshaller unmarshaller = jc.createUnmarshaller();
-//    
-//    JAXBElement<Testsuite> unmarshal = 
-//        (JAXBElement<Testsuite>) unmarshaller.unmarshal(new File(testsuite));
-//    TestSuite suite = unmarshal.getValue();
+
+    JAXBContext jc = JAXBContext.newInstance("generated");
+    Unmarshaller unmarshaller = jc.createUnmarshaller();
+ 
+    Object unmarshal = unmarshaller.unmarshal(new File(testsuite));
+    JAXBElement<Testsuite> el = new JAXBElement(new QName("generated"), this.getClass(), unmarshal);
     
-   validator.validate(testsuite, inputDir+"/");
+    Testsuite suite = el.getValue();
+    List<Testgroup> testgroups = suite.getTestgroup();
+    for (Testgroup testgroup : testgroups)
+    {
+      List<Call> calls = testgroup.getCall();
+    
+        for (int i = 0; i < calls.size(); i++)
+        {
+          tests.add(inputDir +"/"+ calls.get(i).getTest());
+        }
+    }
+    
+    validator.validate(testsuite, tests);
     
     
    //getting XSLT Files out of the jar

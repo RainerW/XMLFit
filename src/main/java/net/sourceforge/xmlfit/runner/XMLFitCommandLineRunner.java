@@ -1,7 +1,6 @@
 package net.sourceforge.xmlfit.runner;
 
 import java.io.File;
-
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -45,7 +44,11 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
   
   public String getStylesheet()
   {
-    return stylesheet.getAbsolutePath();
+    if(!(stylesheet == null))
+    {
+      return stylesheet.getAbsolutePath();
+    }
+    return null;
   }
 
   public void setStylesheet(File stylesheet)
