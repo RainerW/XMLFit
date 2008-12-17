@@ -6,7 +6,7 @@
   <body>
     <section name="Usage">
       <p>
-        The next four steps will explain the usage of XMlFit. To use XMLFit just follow these steps.
+        The next four steps will explain the usage of XMLFit. To use XMLFit just follow these steps.
       </p>
     <subsection name="Step 1: Create a test">
       <p>
@@ -15,23 +15,23 @@
    <source>
 &lt;test author="cfaigle"&gt;
      &lt;fixture&gt;
-         &lt;command name="enter"&gt;
+        &lt;command name="enter"&gt;
             &lt;target&gt;select&lt;/target&gt;
             &lt;value&gt;&lt;var name="trackNumber"/&gt;&lt;/value&gt;            
         &lt;/command&gt;
-             &lt;command name="check"&gt;
+        &lt;command name="check"&gt;
             &lt;target&gt;title&lt;/target&gt;
             &lt;value&gt;&lt;var name="title"/&gt;&lt;/value&gt;            
         &lt;/command&gt;
-             &lt;command name="check"&gt;
+        &lt;command name="check"&gt;
             &lt;target&gt;artist&lt;/target&gt;
             &lt;value&gt;&lt;var name="artist"/&gt;&lt;/value&gt;            
         &lt;/command&gt;
-             &lt;command name="check"&gt;
+        &lt;command name="check"&gt;
             &lt;target&gt;album&lt;/target&gt;
             &lt;value&gt;&lt;var name="album"/&gt;&lt;/value&gt;            
         &lt;/command&gt;
-             &lt;command name="check"&gt;
+        &lt;command name="check"&gt;
             &lt;target&gt;year&lt;/target&gt;
             &lt;value&gt;&lt;var name="year"/&gt;&lt;/value&gt;            
         &lt;/command&gt;
