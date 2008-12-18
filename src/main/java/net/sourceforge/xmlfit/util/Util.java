@@ -35,9 +35,10 @@ private static Logger logger = Logger.getLogger(Util.class);
   {
     bufOut = new BufferedOutputStream(new FileOutputStream(output));
   } 
-  catch (FileNotFoundException e1)
+  catch (FileNotFoundException e)
   {
-    e1.printStackTrace();
+    logger.info("File not found. See log for details");
+    logger.error(e.getMessage());
   }
 
   byte[] inByte = new byte[BUFFER];
@@ -51,7 +52,8 @@ private static Logger logger = Logger.getLogger(Util.class);
   } 
   catch (IOException e) 
   {
-    e.printStackTrace();
+    logger.info("Error occured. See log for details");
+    logger.error(e.getMessage());
   }
 
   try 
@@ -60,8 +62,8 @@ private static Logger logger = Logger.getLogger(Util.class);
   }
    catch (IOException e) 
   {
-     e.printStackTrace();
- 
+     logger.info("Error occured. See log for details");
+     logger.error(e.getMessage());
   }
   try 
   {
@@ -69,14 +71,14 @@ private static Logger logger = Logger.getLogger(Util.class);
   } 
     catch (IOException e) 
   {
-      e.printStackTrace();
+      logger.info("Error occured. See log for details");
+      logger.error(e.getMessage());
   }
    
   logger.debug(method + "End");
   
 }
  public void copy(File sourceLocation , File targetLocation)
- throws IOException 
  {
     String method = "copy() : ";
     logger.debug(method + "Start");
@@ -99,20 +101,26 @@ private static Logger logger = Logger.getLogger(Util.class);
      } 
      else 
      {
-         
-         InputStream in = new FileInputStream(sourceLocation);
-         OutputStream out = new FileOutputStream(targetLocation);
-       
-         byte[] buf = new byte[BUFFER];
-         int len;
-         while ((len = in.read(buf)) > 0) 
+         try
          {
+           InputStream in = new FileInputStream(sourceLocation);
+           OutputStream out = new FileOutputStream(targetLocation);
+       
+           byte[] buf = new byte[BUFFER];
+           int len;
+           while ((len = in.read(buf)) > 0) 
+           {
              out.write(buf, 0, len);
+           }
+           in.close();
+           out.close();
          }
-         in.close();
-         out.close();
+         catch(IOException e)
+         {
+           logger.info("Problems occured. See log files for details.");
+           logger.error(e.getMessage());
+         }
+         logger.debug(method + "End");
      }
-     logger.debug(method + "End");
- }
-
+   }
 }
