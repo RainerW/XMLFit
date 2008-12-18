@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URL;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -98,15 +99,16 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
 
  
   public static void main(String[] args) throws Exception
-  {  
-    Logger logger = Logger.getLogger("log");
+  { 
+    PropertyConfigurator.configureAndWatch("log4j.properties", 60*1000 );
     XMLFitCommandLineRunner runner = new XMLFitCommandLineRunner();
     CmdLineParser parser = new CmdLineParser(runner);
     try 
     {
       parser.parseArgument(args);
-      logger.info("Starting XMLFit");
+      logger.info("Start XMLFit");
       XMLFit.run(runner);
+      logger.info("End XMLFit");
     } 
     catch (CmdLineException e) 
     {

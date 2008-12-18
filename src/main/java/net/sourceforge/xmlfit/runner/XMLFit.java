@@ -82,7 +82,6 @@ public class XMLFit
     if(!dir.exists()) 
     {
       logger.info("OutputDirectory does not exist. XMLFit will create it.");
-      System.out.println("OutputDirectory does not exist. XMLFit will create it.");
       dir.mkdir();
     }
     
@@ -90,7 +89,7 @@ public class XMLFit
     
     if(files != null)
     {  
-      logger.info("Deleting old testfiles in" + outputdir);
+      logger.info("Deleting old testfiles in " + outputdir + " directory");
       for(int i=0; i < files.length; i++)
       {
         files[i].delete();
