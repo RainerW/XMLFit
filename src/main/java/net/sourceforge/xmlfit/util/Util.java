@@ -19,11 +19,12 @@ public class Util
 
 private static final int BUFFER = 4096;  
 private static Logger logger = Logger.getLogger(Util.class);
-  
+
   
  public void copyOutOfJar(String input, String output)
   {
     String method = "copyOutOfJar() : ";
+    String error = "Error occured in "+ method +" . See xmlfit.log for details";
     logger.debug(method + "Start");
     logger.debug("Copy " + input + " to " + output);
     InputStream in = getClass().getResourceAsStream(input);
@@ -37,7 +38,7 @@ private static Logger logger = Logger.getLogger(Util.class);
   } 
   catch (FileNotFoundException e)
   {
-    logger.info("File not found. See log for details");
+    logger.info("File not found. See xmlfit.log for details");
     logger.error(e.getMessage());
   }
 
@@ -52,7 +53,7 @@ private static Logger logger = Logger.getLogger(Util.class);
   } 
   catch (IOException e) 
   {
-    logger.info("Error occured. See log for details");
+    logger.info(error);
     logger.error(e.getMessage());
   }
 
@@ -62,7 +63,7 @@ private static Logger logger = Logger.getLogger(Util.class);
   }
    catch (IOException e) 
   {
-     logger.info("Error occured. See log for details");
+     logger.info(error);
      logger.error(e.getMessage());
   }
   try 
@@ -71,7 +72,7 @@ private static Logger logger = Logger.getLogger(Util.class);
   } 
     catch (IOException e) 
   {
-      logger.info("Error occured. See log for details");
+      logger.info(error);
       logger.error(e.getMessage());
   }
    
@@ -82,7 +83,8 @@ private static Logger logger = Logger.getLogger(Util.class);
  {
     String method = "copy() : ";
     logger.debug(method + "Start");
- 
+    String error = "Error occured in "+ method +" . See xmlfit.log for details";
+     
      if (sourceLocation.isDirectory())
      {
          if (!targetLocation.exists()) 
@@ -117,7 +119,7 @@ private static Logger logger = Logger.getLogger(Util.class);
          }
          catch(IOException e)
          {
-           logger.info("Problems occured. See log files for details.");
+           logger.info(error);
            logger.error(e.getMessage());
          }
          logger.debug(method + "End");
