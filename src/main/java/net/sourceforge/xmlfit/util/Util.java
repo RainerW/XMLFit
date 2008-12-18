@@ -14,6 +14,9 @@ import net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner;
 
 import org.apache.log4j.Logger;
 
+/**Utility class for XMLFit 
+ *@author faigle
+ */
 public class Util
 {
 
