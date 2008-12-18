@@ -56,8 +56,11 @@ public class XMLFit
     
     XMLFit xmlfit = new XMLFit();
     xmlfit.setOutputDir(runner.getOutputDir());
+    logger.info("Setting output directory to: " + runner.getOutputDir());
     xmlfit.setInputDir(runner.getInputDir());
+    logger.info("Setting input directory to: " + runner.getInputDir());
     xmlfit.setTestsuite(runner.getTestsuite());
+    logger.info("Setting testuite file to: " + runner.getTestsuite());
     xmlfit.setCssfile(runner.getStylesheet());
     try
     {
@@ -174,7 +177,9 @@ public class XMLFit
  public void copyDirectory(File sourceLocation , File targetLocation)
   throws IOException 
   {
-      
+     String method = "copyDirectory() : ";
+     logger.debug(method + "Start");
+  
       if (sourceLocation.isDirectory())
       {
           if (!targetLocation.exists()) 
@@ -204,11 +209,14 @@ public class XMLFit
           in.close();
           out.close();
       }
+      logger.debug(method + "End");
   }
   
 //Utility method to copy files out of the jar
   public void copy(String input, String output)
   {
+    String method = "copy() : ";
+    logger.debug(method + "Start");
     InputStream in = getClass().getResourceAsStream(input);
     BufferedInputStream bufIn = new BufferedInputStream(in);
 
@@ -254,7 +262,10 @@ public class XMLFit
   {
       e.printStackTrace();
   }
- }
+   
+  logger.debug(method + "End");
+  
+}
 
   
   //Getter and Setter
