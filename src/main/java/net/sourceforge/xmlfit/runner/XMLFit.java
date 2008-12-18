@@ -161,8 +161,8 @@ public class XMLFit
    else
    {
      String filename = new File(cssfile).getName();
-     util.copyDirectory(new File(cssfile), new File(outputdir+"/css/"+filename));
-     util.copyDirectory(new File(cssfile), new File(outputdir+ "/"+ testdir+ "/css/"+filename));
+     util.copy(new File(cssfile), new File(outputdir+"/css/"+filename));
+     util.copy(new File(cssfile), new File(outputdir+ "/"+ testdir+ "/css/"+filename));
      util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
    }
 }

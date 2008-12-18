@@ -26,7 +26,7 @@ private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
   
  public void copyOutOfJar(String input, String output)
   {
-    String method = "copy() : ";
+    String method = "copyOutOfJar() : ";
     logger.debug(method + "Start");
     InputStream in = getClass().getResourceAsStream(input);
     BufferedInputStream bufIn = new BufferedInputStream(in);
@@ -77,10 +77,10 @@ private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
   logger.debug(method + "End");
   
 }
- public void copyDirectory(File sourceLocation , File targetLocation)
+ public void copy(File sourceLocation , File targetLocation)
  throws IOException 
  {
-    String method = "copyDirectory() : ";
+    String method = "copy() : ";
     logger.debug(method + "Start");
  
      if (sourceLocation.isDirectory())
@@ -93,7 +93,7 @@ private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
          String[] children = sourceLocation.list();
          for (int i=0; i<children.length; i++) 
          {
-             copyDirectory(new File(sourceLocation, children[i]),
+             copy(new File(sourceLocation, children[i]),
                      new File(targetLocation, children[i]));
          }
      } 
