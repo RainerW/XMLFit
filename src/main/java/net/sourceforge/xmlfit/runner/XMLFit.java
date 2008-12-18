@@ -6,15 +6,8 @@ import generated.Testgroup;
 import generated.Testsuite;
 
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +35,7 @@ public class XMLFit
   private String testsuite;
   private String cssfile;
   
-  private static final int BUFFER = 4096;
+ 
   private List<String> tests = new ArrayList<String>();
  
   public XMLFit()
@@ -80,8 +73,9 @@ public class XMLFit
   {
    net.sourceforge.xmlfit.xslt.Validate validator = new net.sourceforge.xmlfit.xslt.Validate();
    net.sourceforge.xmlfit.xslt.Transform transformer = new net.sourceforge.xmlfit.xslt.Transform();
-   
-    File dir = new File(outputdir);
+   net.sourceforge.xmlfit.util.Util util = new net.sourceforge.xmlfit.util.Util();
+    
+   File dir = new File(outputdir);
     if(!dir.exists()) 
     {
       logger.info("OutputDirectory does not exist. XMLFit will create it.");
@@ -156,118 +150,23 @@ public class XMLFit
    
    if(cssfile == null)
    {
-     copy("/css/suite.css", outputdir+ "/css/suite.css"); 
-     copy("/css/suite.css", outputdir +"/"+ testdir +"/css/suite.css");
-     copy("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
-     copy("/css/images/logo2.jpg", outputdir+ "/css/images/logo.jpg"); 
-     copy("/css/images/XMLFitLogo.jpg", outputdir+ "/css/images/XMLFitLogo.jpg");
-     copy("/css/images/logo2.jpg", outputdir+ "/"+ testdir +"/css/images/logo.jpg"); 
-     copy("/css/images/XMLFitLogo.jpg", outputdir+ "/"+ testdir +"/css/images/XMLFitLogo.jpg"); 
+     util.copyOutOfJar("/css/suite.css", outputdir+ "/css/suite.css"); 
+     util.copyOutOfJar("/css/suite.css", outputdir +"/"+ testdir +"/css/suite.css");
+     util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
+     util.copyOutOfJar("/css/images/logo2.jpg", outputdir+ "/css/images/logo.jpg"); 
+     util.copyOutOfJar("/css/images/XMLFitLogo.jpg", outputdir+ "/css/images/XMLFitLogo.jpg");
+     util.copyOutOfJar("/css/images/logo2.jpg", outputdir+ "/"+ testdir +"/css/images/logo.jpg"); 
+     util.copyOutOfJar("/css/images/XMLFitLogo.jpg", outputdir+ "/"+ testdir +"/css/images/XMLFitLogo.jpg"); 
    }
    else
    {
      String filename = new File(cssfile).getName();
-     copyDirectory(new File(cssfile), new File(outputdir+"/css/"+filename));
-     copyDirectory(new File(cssfile), new File(outputdir+ "/"+ testdir+ "/css/"+filename));
-     copy("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
+     util.copyDirectory(new File(cssfile), new File(outputdir+"/css/"+filename));
+     util.copyDirectory(new File(cssfile), new File(outputdir+ "/"+ testdir+ "/css/"+filename));
+     util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
    }
 }
 
- //Utility method to copy directorys and files
- public void copyDirectory(File sourceLocation , File targetLocation)
-  throws IOException 
-  {
-     String method = "copyDirectory() : ";
-     logger.debug(method + "Start");
-  
-      if (sourceLocation.isDirectory())
-      {
-          if (!targetLocation.exists()) 
-          {
-              targetLocation.mkdir();
-          }
-          
-          String[] children = sourceLocation.list();
-          for (int i=0; i<children.length; i++) 
-          {
-              copyDirectory(new File(sourceLocation, children[i]),
-                      new File(targetLocation, children[i]));
-          }
-      } 
-      else 
-      {
-          
-          InputStream in = new FileInputStream(sourceLocation);
-          OutputStream out = new FileOutputStream(targetLocation);
-        
-          byte[] buf = new byte[BUFFER];
-          int len;
-          while ((len = in.read(buf)) > 0) 
-          {
-              out.write(buf, 0, len);
-          }
-          in.close();
-          out.close();
-      }
-      logger.debug(method + "End");
-  }
-  
-//Utility method to copy files out of the jar
-  public void copy(String input, String output)
-  {
-    String method = "copy() : ";
-    logger.debug(method + "Start");
-    InputStream in = getClass().getResourceAsStream(input);
-    BufferedInputStream bufIn = new BufferedInputStream(in);
-
-    BufferedOutputStream bufOut = null;
-
-  try 
-  {
-    bufOut = new BufferedOutputStream(new FileOutputStream(output));
-  } 
-  catch (FileNotFoundException e1)
-  {
-    e1.printStackTrace();
-  }
-
-  byte[] inByte = new byte[BUFFER];
-  int count = -1;
-  try 
-  {
-    while ((count = bufIn.read(inByte))!=-1) 
-    {
-      bufOut.write(inByte, 0, count);
-    }
-  } 
-  catch (IOException e) 
-  {
-    e.printStackTrace();
-  }
-
-  try 
-  {
-    bufOut.close();
-  }
-   catch (IOException e) 
-  {
-     e.printStackTrace();
- 
-  }
-  try 
-  {
-    bufIn.close();
-  } 
-    catch (IOException e) 
-  {
-      e.printStackTrace();
-  }
-   
-  logger.debug(method + "End");
-  
-}
-
-  
   //Getter and Setter
   
   public String getTestdir()
