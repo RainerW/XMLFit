@@ -22,11 +22,13 @@ import org.xml.sax.SAXException;
 public class Validate
 {
 
-  private static Logger logger = Logger.getLogger(Validate.class);
+ private static Logger logger = Logger.getLogger(Validate.class);
   
  public void validate(String src, List<String> tests) throws Exception
  { 
-  
+  String method = "validate() : ";
+  logger.debug(method + "Start");
+   
   SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
   URL suiteSchemaLocation = this.getClass().getResource("/SuiteSchema.xsd");
   URL fileSchemaLocation = this.getClass().getResource("/FileSchema.xsd");
@@ -39,12 +41,13 @@ public class Validate
   try 
   {
     suiteValidator.validate(source);
-    System.out.println(new File(src).toURI() + " is a valid XMLFit testsuite file.");
+    logger.info(new File(src).toURI() + " is a valid XMLFit testsuite file");
   }
   catch (SAXException ex) 
   {
-    System.out.println(new File(src).toURI()+ " is not valid because ");
-    System.out.println(ex.getMessage());
+    logger.info("Validation failed see xmlfit.log for more details");
+    logger.error(new File(src).toURI()+ " is not valid because ");
+    logger.error(ex.getMessage());
   }  
  
   for(int i = 0; i < tests.size(); i++)
@@ -53,13 +56,15 @@ public class Validate
     try
     {
       fileValidator.validate(sc);
-      System.out.println(tests.get(i) + " is a valid XMLFit testfile ");
+      logger.info(new File(tests.get(i)).toURI() + " is a valid XMLFit testfile ");
     }
     catch (SAXException ex)
     {
-      System.out.println(tests.get(i) + " is not valid because ");
-      System.out.println(ex.getMessage());
+      logger.info("Validation failed see xmlfit.log for more details");
+      logger.error(new File(tests.get(i)).toURI() + " is not valid because ");
+      logger.error(ex.getMessage());
     }
    }
-  }
+  logger.debug(method + "End");
+ }
 }

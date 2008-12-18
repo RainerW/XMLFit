@@ -28,14 +28,16 @@ public class Transform
 {
 
  
-  private static Logger logger = Logger.getLogger(Transform.class);
+ private static Logger logger = Logger.getLogger(Transform.class);
   
  private String cssfile;
   
  public void transform(File testsuite, URL xsltFile, String outputSrc, String testDir, 
      String fileDir, String inputDir, int choice) 
- throws Exception 
  {
+   String method = "transform() : ";
+   logger.debug(method + "Start");
+  
    Source xsltSource = new StreamSource(xsltFile.toString());
    TransformerFactory transFact = TransformerFactory.newInstance();
    if (transFact instanceof TransformerFactoryImpl) 
@@ -43,6 +45,8 @@ public class Transform
      transFact.setAttribute(TransformerFactoryImpl.FEATURE_SOURCE_LOCATION, 
                         Boolean.TRUE);
    }
+   try
+   {
    Transformer trans = transFact.newTransformer(xsltSource);
    trans.setParameter("test_dir", testDir);
    trans.setParameter("base_dir", testDir);
@@ -54,17 +58,30 @@ public class Transform
    
    if(choice == 0)
    {
-   trans.transform(xmlSource, new StreamResult(new File(outputSrc+"/"
+    logger.info("Processing " + testsuite.getName() + " with xslt file " + xsltFile.getFile());
+    trans.transform(xmlSource, new StreamResult(new File(outputSrc+"/"
        +testsuite.getName().replaceAll(".xml", ".html"))));
    }
    else if(choice == 1)
    {
-    trans.transform(xmlSource, new StreamResult(new File(outputSrc+"/"+ "allFiles"
+    logger.info("Processing " + testsuite.getName() + " with xslt file " + xsltFile.getFile());
+     trans.transform(xmlSource, new StreamResult(new File(outputSrc+"/"+ "allFiles"
         +testsuite.getName().replaceAll(".xml", ".html"))));
     
-    new File(outputSrc+"/"+ "allFiles"
+    logger.info("Deleting temporary File " + outputSrc+"/"+ "allFiles" 
+        +testsuite.getName().replaceAll(".xml", ".html"));
+     new File(outputSrc+"/"+ "allFiles"
         +testsuite.getName().replaceAll(".xml", ".html")).delete();
+  
+    }
    }
+   catch(Exception e)
+   {
+     logger.info("Validation failed see xmlfit.log for more details");
+     logger.error("Transformation failed " + e.getMessage());
+   }
+   
+   logger.debug(method + "End");
  
  }
 
