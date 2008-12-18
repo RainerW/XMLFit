@@ -1,5 +1,9 @@
 package net.sourceforge.xmlfit.runner;
 
+
+/**XMLFit Runner Interface
+ *@author faigle
+ */
 public interface XMLFitRunner
 {
 

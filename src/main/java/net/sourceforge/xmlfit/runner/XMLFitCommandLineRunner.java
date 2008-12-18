@@ -1,7 +1,5 @@
 package net.sourceforge.xmlfit.runner;
 
-import java.io.File;
-import java.net.URL;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
