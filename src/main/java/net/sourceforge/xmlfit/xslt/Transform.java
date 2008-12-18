@@ -77,7 +77,7 @@ public class Transform
    }
    catch(Exception e)
    {
-     logger.info("Validation failed see xmlfit.log for more details");
+     logger.info("Transformation failed see xmlfit.log for more details");
      logger.error("Transformation failed " + e.getMessage());
    }
    
