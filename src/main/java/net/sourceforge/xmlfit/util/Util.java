@@ -9,9 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner;
-
 import org.apache.log4j.Logger;
 
 /**Utility class for XMLFit 
@@ -21,13 +18,14 @@ public class Util
 {
 
 private static final int BUFFER = 4096;  
-private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
+private static Logger logger = Logger.getLogger(Util.class);
   
   
  public void copyOutOfJar(String input, String output)
   {
     String method = "copyOutOfJar() : ";
     logger.debug(method + "Start");
+    logger.debug("Copy " + input + " to " + output);
     InputStream in = getClass().getResourceAsStream(input);
     BufferedInputStream bufIn = new BufferedInputStream(in);
 
@@ -87,12 +85,14 @@ private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
      {
          if (!targetLocation.exists()) 
          {
+             logger.debug("Creating " +targetLocation);
              targetLocation.mkdir();
          }
          
          String[] children = sourceLocation.list();
          for (int i=0; i<children.length; i++) 
          {
+             logger.debug("Copy " + children[i] + "to " + targetLocation);
              copy(new File(sourceLocation, children[i]),
                      new File(targetLocation, children[i]));
          }
