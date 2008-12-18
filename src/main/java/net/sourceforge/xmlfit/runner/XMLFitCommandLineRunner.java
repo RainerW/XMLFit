@@ -16,7 +16,7 @@ import org.kohsuke.args4j.Option;
  */
 public final class XMLFitCommandLineRunner implements XMLFitRunner
 {
-  
+  private static final int DELAY = 6000;
   private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
   
   @Option(
@@ -100,7 +100,7 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
  
   public static void main(String[] args) throws Exception
   { 
-    PropertyConfigurator.configureAndWatch("log4j.properties", 60*1000 );
+    PropertyConfigurator.configureAndWatch("log4j.properties", DELAY);
     XMLFitCommandLineRunner runner = new XMLFitCommandLineRunner();
     CmdLineParser parser = new CmdLineParser(runner);
     try 
