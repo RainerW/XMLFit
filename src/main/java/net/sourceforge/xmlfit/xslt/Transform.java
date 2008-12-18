@@ -7,6 +7,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.stream.StreamResult;
 
+
+import org.apache.log4j.Logger;
 import org.apache.xalan.processor.TransformerFactoryImpl;
 
 
@@ -26,6 +28,7 @@ public class Transform
 {
 
  
+  private static Logger logger = Logger.getLogger(Transform.class);
   
  private String cssfile;
   

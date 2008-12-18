@@ -26,30 +26,34 @@ import javax.xml.namespace.QName;
 
 import org.apache.log4j.Logger;
 
+
 /**XMLFit 
  *@author faigle
  */
 public class XMLFit  
 {
  
+  private static Logger logger = Logger.getLogger(XMLFit.class);
+  
   private String testdir = "testfiles";
   private String filedir = "xmlfiles";
   private String outputdir;
   private String inputDir;
   private String testsuite;
   private String cssfile;
-  private Logger logger;
- 
+  
   private static final int BUFFER = 4096;
-  private   List<String> tests = new ArrayList<String>();
+  private List<String> tests = new ArrayList<String>();
  
   public XMLFit()
   {
-   logger=Logger.getLogger("log");
   }
  
   public static void run(XMLFitRunner runner)
   {
+    String method = "run() : ";
+    logger.debug(method + "Start");
+    
     XMLFit xmlfit = new XMLFit();
     xmlfit.setOutputDir(runner.getOutputDir());
     xmlfit.setInputDir(runner.getInputDir());
@@ -61,8 +65,11 @@ public class XMLFit
     }
     catch (Exception e)
     {
-      e.printStackTrace();
+      logger.error(method + "generate fit tests failed", e);
+      logger.info("Generate FIT tests fails");
     }
+    
+    logger.debug(method + "End");
   }
   
   @SuppressWarnings("unchecked")

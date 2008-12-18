@@ -9,6 +9,8 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 
@@ -20,6 +22,8 @@ import org.xml.sax.SAXException;
 public class Validate
 {
 
+  private static Logger logger = Logger.getLogger(Validate.class);
+  
  public void validate(String src, List<String> tests) throws Exception
  { 
   

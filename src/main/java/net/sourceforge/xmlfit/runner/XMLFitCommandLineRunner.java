@@ -16,6 +16,8 @@ import org.kohsuke.args4j.Option;
 public final class XMLFitCommandLineRunner implements XMLFitRunner
 {
   
+  private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
+  
   @Option(
       name="-outputDir", 
       usage="The output dir for the FIT tests. (required)",
