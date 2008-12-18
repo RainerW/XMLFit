@@ -16,7 +16,12 @@
         <p>
              <img src="images/overview.jpg"/>
         </p>
-      </subsection>
+       </subsection>
+      <subsection name="Structure of tests">
+        <p>
+        <img src="images/FeinkonzeptXMLFit.png"/>
+        </p>
+       </subsection>
     </section>
   </body>
 </document>

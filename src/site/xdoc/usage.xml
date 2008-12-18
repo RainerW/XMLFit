@@ -84,6 +84,19 @@
         &lt;/testgroup&gt;
    &lt;/testsuite&gt;
       </source>
+      The testsuite file contains several testgroups. The 'testgroup' element contains the call elements. There can be any number of testgroups in a testsuite and any number of calls in a testgroup.
+      In the second line you see the definition of the default data. The default data is stored in a separate XML file. If any variable is not defined in the testdata XMLFit will lookup this variable in the default data file.
+      Some Example:
+      <source>
+    &lt;defaultdata&gt;
+        &lt;startTarget&gt;eg.music.Browser&lt;/startTarget&gt;
+        &lt;libraryTarget&gt;library&lt;/libraryTarget&gt;
+        &lt;libraryValue&gt;D:/workspace/sb-fit-ng/src/eg/music/Music.txt&lt;/libraryValue&gt;
+        &lt;totalSongsTarget&gt;total songs&lt;/totalSongsTarget&gt;
+        &lt;totalSongs&gt;37&lt;/totalSongs&gt;
+        &lt;trackNumber&gt;66&lt;/trackNumber&gt;
+    &lt;/defaultdata&gt;
+      </source>
       </p>
      </subsection>
     <subsection name="Step 4: Run XMLFit">
