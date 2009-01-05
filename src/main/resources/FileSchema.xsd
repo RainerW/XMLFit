@@ -23,11 +23,11 @@
 	
 <xsd:element name="command">	
 	<xsd:complexType>
-		<xsd:sequence>
-			<xsd:element ref="target" minOccurs="0"/>
-			<xsd:element ref="value" minOccurs="0"/>
-			<xsd:element name="comment" type="xsd:string" minOccurs="0"/>
-		</xsd:sequence>
+		 <xsd:choice minOccurs="0" maxOccurs="unbounded">
+  			<xsd:element ref="target"/>
+  			<xsd:element ref="value"/>
+  			<xsd:element ref="comment"/>
+  		</xsd:choice>
 		<xsd:attribute name="name" use="required">
              <xsd:simpleType>
                 <xsd:restriction base="xsd:NMTOKEN">
@@ -72,6 +72,9 @@
 </xsd:element>
 
 <xsd:element name="value">
+</xsd:element>
+
+<xsd:element name="comment">
 </xsd:element>
 
 <xsd:element name="var">
