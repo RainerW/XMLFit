@@ -92,9 +92,7 @@ public class XMLFit
         files[i].delete();
       }
     }
-  
     
-
     JAXBContext jc = JAXBContext.newInstance("generated");
     Unmarshaller unmarshaller = jc.createUnmarshaller();
  
@@ -131,7 +129,6 @@ public class XMLFit
    else
    {
      transformer.setCssfile("suite.css"); 
-   
    }
    
    transformer.transform(new File(testsuite), transformSuite, 
