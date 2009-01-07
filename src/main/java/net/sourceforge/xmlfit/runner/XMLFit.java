@@ -53,7 +53,7 @@ public class XMLFit
     xmlfit.setInputDir(runner.getInputDir());
     logger.info("Setting input directory to: " + runner.getInputDir());
     xmlfit.setTestsuite(runner.getTestsuite());
-    logger.info("Setting testuite file to: " + runner.getTestsuite());
+    logger.info("Setting testsuite file to: " + runner.getTestsuite());
     xmlfit.setCssfile(runner.getStylesheet());
     try
     {
@@ -125,10 +125,12 @@ public class XMLFit
    {
      String filename = new File(cssfile).getName();
      transformer.setCssfile(filename); 
+     logger.info("Setting Stylesheet to " + cssfile);
    }
    else
    {
      transformer.setCssfile("suite.css"); 
+     logger.info("Using default Stylesheet");
    }
    
    transformer.transform(new File(testsuite), transformSuite, 
