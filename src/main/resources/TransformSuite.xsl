@@ -114,6 +114,13 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="filename" select="@test"/>
 	<xsl:variable name="testname" select="@name"/>
 	<xsl:variable name="filenode" select="document($filename)"/>
+	<xsl:variable name="firstletter" select="substring($filenode/test/fixture/command/@name, 1, 1)"/>
+	<xsl:variable name="headless" select="substring-after($filenode/test/fixture/command/@name, $firstletter)"/>
+	<xsl:variable name="upperCase" select="translate($firstletter, 'cdioqrsu', 'CDIOQRSU')"/>
+	<xsl:variable name="gothead" select="concat($upperCase, $headless)"/>
+	<xsl:variable name="fixturename" select="concat('dbfit.fixture.', $gothead)"/> 
+	<xsl:apply-templates select="$filenode/test/header"/>
+	<xsl:apply-templates select="$filenode/test/comment"/>
 	<xsl:apply-templates select="$filenode/test/call"/>
 		<xsl:variable name="datanode" select="document(@data)"/>
 		<div class="main">
@@ -123,8 +130,17 @@ extension-element-prefixes="redirect">
 		</div>	
 			<xsl:choose>
 				<xsl:when test="$filenode/test/fixture[@type='DBFit']">
-					<table cellpadding="1" cellspacing="1" border="1">
+					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
+						 	<xsl:choose>
+								<xsl:when test="$filenode/test/fixture/command[@name='connect']">
+									<tr><td>dbfit.fixture.DatabaseEnvironment</td></tr>
+								</xsl:when>
+								<xsl:otherwise>
+									<tr><td><xsl:value-of select="$fixturename"/></td></tr>
+								</xsl:otherwise>
+							</xsl:choose>
 							<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
@@ -133,10 +149,12 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 								</xsl:apply-templates>
+							<xsl:if test="$filenode/test/fixture/columns">
 							<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 								</xsl:apply-templates></tr>
+							</xsl:if>
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
 								<xsl:with-param name="loopnode" select="document(@loopdata)"/>
@@ -149,7 +167,8 @@ extension-element-prefixes="redirect">
 					</table>
 				</xsl:when>
 				<xsl:when test="$filenode/test/fixture[@type!='Selenium']">
-					<table cellpadding="1" cellspacing="1" border="1">
+					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
 							<tr><td><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
 							<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
@@ -172,7 +191,8 @@ extension-element-prefixes="redirect">
 				<xsl:when test="$datanode">
 				<xsl:for-each select="$datanode/testdata/dataset">
 					<xsl:variable name="actualnode" select="self::*"/>
-					<table cellpadding="1" cellspacing="1" border="1">
+					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
 							<tr><td>selenium.SeleniumFixture</td></tr>
 								<xsl:apply-templates select="$filenode/test/fixture/command">
@@ -189,7 +209,8 @@ extension-element-prefixes="redirect">
 					</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<table cellpadding="1" cellspacing="1" border="1">
+						<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+						<table cellpadding="0" cellspacing="0" border="1">
 							<tbody>
 								<tr><td>selenium.SeleniumFixture</td></tr>
 									<xsl:apply-templates select="$filenode/test/fixture/command">
@@ -220,7 +241,8 @@ extension-element-prefixes="redirect">
 											</xsl:otherwise>
 										</xsl:choose>
 										<xsl:variable name="actualnode" select="self::*"/>
-										<table cellpadding="1" cellspacing="1" border="1">
+										<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+										<table cellpadding="0" cellspacing="0" border="1">
 											<tbody>
 												<tr><td colspan="3">fit.ActionFixture</td></tr>
 													<xsl:apply-templates select="$filenode/test/fixture/command">
@@ -239,7 +261,8 @@ extension-element-prefixes="redirect">
 								</xsl:for-each>
 						</xsl:when>
 						<xsl:otherwise>
-							<table cellpadding="1" cellspacing="1" border="1">
+							<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+							<table cellpadding="0" cellspacing="0" border="1">
 										<tbody>
 											<tr><td colspan="3">fit.ActionFixture</td></tr>
 											<xsl:apply-templates select="$filenode/test/fixture/command">
@@ -575,7 +598,11 @@ extension-element-prefixes="redirect">
 <!-- Template for the 'comment' element. -->
 <!-- ================================================================================== -->	
 <xsl:template match="comment">
-	<b><xsl:value-of select="."/></b>
+	<xsl:value-of select="."/>
+</xsl:template>
+
+<xsl:template match="header">
+	<h1><xsl:value-of select="."/></h1>
 </xsl:template>
 
 </xsl:stylesheet>
