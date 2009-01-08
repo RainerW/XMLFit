@@ -122,6 +122,32 @@ extension-element-prefixes="redirect">
 		<div class="author">Author: <xsl:value-of select="$filenode/test/@author"/></div>	
 		</div>	
 			<xsl:choose>
+				<xsl:when test="$filenode/test/fixture[@type='DBFit']">
+					<table cellpadding="1" cellspacing="1" border="1">
+						<tbody>
+							<xsl:apply-templates select="$filenode/test/fixture/command">
+									<xsl:with-param name="datanode" select="$datanode"/>
+									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
+									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
+									<xsl:with-param name="loopmax" select="@loopmax"/> 
+									<xsl:with-param name="filename" select="$filename"/>
+									<xsl:with-param name="ubertestname" select="$ubertestname"/>
+								</xsl:apply-templates>
+							<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
+									<xsl:with-param name="filename" select="$filename"/>
+									<xsl:with-param name="ubertestname" select="$ubertestname"/>
+								</xsl:apply-templates></tr>
+							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
+								<xsl:with-param name="datanode" select="$datanode"/>
+								<xsl:with-param name="loopnode" select="document(@loopdata)"/>
+								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
+								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="loopmax" select="@loopmax"/> 
+								<xsl:with-param name="filenode" select="document($filename)"/>
+							</xsl:apply-templates>
+						</tbody>
+					</table>
+				</xsl:when>
 				<xsl:when test="$filenode/test/fixture[@type!='Selenium']">
 					<table cellpadding="1" cellspacing="1" border="1">
 						<tbody>
