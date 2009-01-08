@@ -135,11 +135,8 @@ extension-element-prefixes="redirect">
 						<tbody>
 						 	<xsl:choose>
 								<xsl:when test="$filenode/test/fixture/command[@name='connect']">
-									<tr><td>dbfit.fixture.DatabaseEnvironment</td></tr>
+									<tr><td>dbfit.MySqlTest</td></tr>
 								</xsl:when>
-								<xsl:otherwise>
-									<tr><td><xsl:value-of select="$fixturename"/></td></tr>
-								</xsl:otherwise>
 							</xsl:choose>
 							<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
