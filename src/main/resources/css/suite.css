@@ -12,8 +12,6 @@
 
 .main {
 	width:414;
-	background-color:#C0C0C0;
-	border:1px solid #000000;
 }
 
 
@@ -27,50 +25,27 @@
 
 .author, .date {
 	width:400px;
-	background-color:#F0F8FF;
-	color:darkblue;
-	margin: 4px;
-	padding: 2px;
-	border:1px solid #000000;
+	font:bold;
 }
 
 .test {
 	width:400px;
-	background-color:#B0E0E6;
-	color:darkblue;
-	margin: 4px;
-	padding: 2px;
-	border:1px solid #000000;
+	font:bold;
 }
 
-.back{
+.testname { 
     width:100px;
-    background-color:#C0C0C0;
-    border:1px solid #000000;
-    margin-left:4px;
 }
-
-
-.testname {
-    margin:4px; 
-    width:100px;
-    background-color:#F0F8FF;
-    border:1px solid #000000;
-    padding:2px;
-}
-
 
 table {
-    
-    border:1px solid #000000;
-    margin:4px;
-    padding:2px;
-    background-color:#C0C0C0;
+ border-collapse: collapse;
+ border:1px solid #000000;
 }
+
 
 td, tr {
     border:1px solid #000000;
-    background-color:#B0E0E6;
-    padding:2px;
-    margin:4px;
+    padding:1px;
+
 }
+
