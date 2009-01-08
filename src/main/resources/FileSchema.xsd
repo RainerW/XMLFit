@@ -2,6 +2,8 @@
 <xsd:element name = "test">
 	<xsd:complexType>
 		<xsd:sequence>
+			<xsd:element ref="header" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element ref="comment" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element ref ="call" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element ref="fixture" minOccurs="1" maxOccurs="unbounded"/>
 		</xsd:sequence>
@@ -15,6 +17,7 @@
   			<xsd:element ref="command"/>
   			<xsd:element ref="columns"/>
   			<xsd:element ref="rows"/>
+  		    <xsd:element ref="comment"/>
   		</xsd:choice>
   		<xsd:attribute name="name" use="optional"/>
 		<xsd:attribute name="type" use="optional"/>
@@ -26,8 +29,7 @@
 		 <xsd:choice minOccurs="0" maxOccurs="unbounded">
   			<xsd:element ref="target"/>
   			<xsd:element ref="value"/>
-  			<xsd:element ref="comment"/>
-  		</xsd:choice>
+  	    </xsd:choice>
 		<xsd:attribute name="name" use="required">
              <xsd:simpleType>
                 <xsd:restriction base="xsd:NMTOKEN">
@@ -75,6 +77,9 @@
 </xsd:element>
 
 <xsd:element name="comment">
+</xsd:element>
+
+<xsd:element name="header">
 </xsd:element>
 
 <xsd:element name="var">
