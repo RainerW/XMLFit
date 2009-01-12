@@ -114,28 +114,25 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="filename" select="@test"/>
 	<xsl:variable name="testname" select="@name"/>
 	<xsl:variable name="filenode" select="document($filename)"/>
-	<xsl:variable name="firstletter" select="substring($filenode/test/fixture/command/@name, 1, 1)"/>
-	<xsl:variable name="headless" select="substring-after($filenode/test/fixture/command/@name, $firstletter)"/>
-	<xsl:variable name="upperCase" select="translate($firstletter, 'cdioqrsu', 'CDIOQRSU')"/>
-	<xsl:variable name="gothead" select="concat($upperCase, $headless)"/>
-	<xsl:variable name="fixturename" select="concat('dbfit.fixture.', $gothead)"/> 
-	<xsl:apply-templates select="$filenode/test/header"/>
 	<xsl:apply-templates select="$filenode/test/comment"/>
 	<xsl:apply-templates select="$filenode/test/call"/>
 		<xsl:variable name="datanode" select="document(@data)"/>
 		<div class="main">
 		<div class="test">Testfile: <a><xsl:attribute name="href"><xsl:value-of select="$src_dir"/>/<xsl:value-of select="$filename"/></xsl:attribute><xsl:value-of select="$filename"/></a>
-		Testdata: <a><xsl:attribute name="href"><xsl:value-of select="$src_dir"/>/<xsl:value-of select="@data"/></xsl:attribute><xsl:value-of select="@data"/></a><br/></div>
+		<xsl:if test="@data">
+			Testdata: <a><xsl:attribute name="href"><xsl:value-of select="$src_dir"/>/<xsl:value-of select="@data"/></xsl:attribute><xsl:value-of select="@data"/></a><br/>
+		</xsl:if>
+		</div>
 		<div class="author">Author: <xsl:value-of select="$filenode/test/@author"/></div>	
 		</div>	
 			<xsl:choose>
-				<xsl:when test="$filenode/test/fixture[@type='DBFit']">
+				<xsl:when test="$filenode/test/fixture[contains(@type, 'dbfit')]">
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
 						 	<xsl:choose>
 								<xsl:when test="$filenode/test/fixture/command[@name='connect']">
-									<tr><td>dbfit.MySqlTest</td></tr>
+									<tr><td><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
 								</xsl:when>
 							</xsl:choose>
 							<xsl:apply-templates select="$filenode/test/fixture/command">
@@ -187,11 +184,19 @@ extension-element-prefixes="redirect">
 				<xsl:choose>
 				<xsl:when test="$datanode">
 				<xsl:for-each select="$datanode/testdata/dataset">
+					<xsl:choose>
+						<xsl:when test="$testname">
+							<div class="testname"><xsl:value-of select="$testname"/>: <xsl:value-of select="position()"/></div>
+						</xsl:when>
+						<xsl:otherwise>
+						    <div class="testname"><xsl:value-of select="substring-before($filename, '.')"/>: <xsl:value-of select="position()"/></div>
+						</xsl:otherwise>
+				    </xsl:choose>
 					<xsl:variable name="actualnode" select="self::*"/>
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
-							<tr><td>selenium.SeleniumFixture</td></tr>
+							<tr><td colspan="3">selenium.SeleniumFixture</td></tr>
 								<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
@@ -209,7 +214,7 @@ extension-element-prefixes="redirect">
 						<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 						<table cellpadding="0" cellspacing="0" border="1">
 							<tbody>
-								<tr><td>selenium.SeleniumFixture</td></tr>
+								<tr><td colspan="3">selenium.SeleniumFixture</td></tr>
 									<xsl:apply-templates select="$filenode/test/fixture/command">
 										<xsl:with-param name="datanode" select="$datanode"/>
 										<xsl:with-param name="defaultnode" select= "$defaultnode"/>
@@ -408,7 +413,7 @@ extension-element-prefixes="redirect">
 				<xsl:when test="$actualnode">
 					<xsl:choose>
 						<xsl:when test="$actualnode/child::*[name()=$value]">
-								<td><xsl:value-of select="$actualnode/child::*[name()=$value]"/></td>
+							 <td><xsl:value-of select="$actualnode/child::*[name()=$value]"/></td>
 						</xsl:when>
 						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$value]">
 							<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$value]"/></td>
@@ -595,11 +600,8 @@ extension-element-prefixes="redirect">
 <!-- Template for the 'comment' element. -->
 <!-- ================================================================================== -->	
 <xsl:template match="comment">
-	<xsl:value-of select="."/>
+	<xsl:copy-of select="*"/>
 </xsl:template>
 
-<xsl:template match="header">
-	<h1><xsl:value-of select="."/></h1>
-</xsl:template>
 
 </xsl:stylesheet>
