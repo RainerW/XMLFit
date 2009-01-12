@@ -64,6 +64,11 @@
         			<xsd:enumeration value="assertSelectOptions"/>
         			<xsd:enumeration value="assertElementPresent"/>
         			<xsd:enumeration value="captureEntirePageScreenshot"/>
+        			<xsd:enumeration value="connect"/>
+        			<xsd:enumeration value="query"/>
+        			<xsd:enumeration value="insert"/>
+        			<xsd:enumeration value="update"/>
+        			<xsd:enumeration value="execute"/>
         		</xsd:restriction>
            </xsd:simpleType>
        </xsd:attribute> 
