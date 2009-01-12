@@ -49,4 +49,28 @@ td, tr {
     padding:1px;
 
 }
+/**********
 
+ Used in FIT
+
+**********/
+
+.pass
+{
+    background-color: #AAFFAA;
+}
+
+.fail
+{
+    background-color: #FFAAAA;
+}
+
+.error
+{
+    background-color: #FFFFAA;
+}
+
+.ignore
+{
+    background-color: #CCCCCC;
+}
