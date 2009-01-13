@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**Utility class for XMLFit 
  *@author faigle
@@ -19,7 +20,7 @@ public class Util
 
 private static final int BUFFER = 4096;  
 private static Logger logger = Logger.getLogger(Util.class);
-
+private static final int DELAY = 6000;
   
  public void copyOutOfJar(String input, String output)
   {
@@ -125,4 +126,9 @@ private static Logger logger = Logger.getLogger(Util.class);
          logger.debug(method + "End");
      }
    }
+ 
+ public void configureLog4j() 
+ {
+   PropertyConfigurator.configureAndWatch(this.getClass().getResource("/log4j.properties").toString(), DELAY);
+ }
 }
