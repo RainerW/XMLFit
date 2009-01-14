@@ -123,13 +123,12 @@ public class XMLFit
    
    if(cssfile != null) 
    {
-     String filename = new File(cssfile).getName();
-     transformer.setCssfile(filename); 
+     transformer.setCssfile(cssfile); 
      logger.info("Setting Stylesheet to " + cssfile);
    }
    else
    {
-     transformer.setCssfile("suite.css"); 
+     transformer.setCssfile("css/suite.css"); 
      logger.info("Using default Stylesheet");
    }
    
