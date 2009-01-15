@@ -46,8 +46,8 @@ public class Validate
   catch (SAXException ex) 
   {
     logger.info("Validation failed see xmlfit.log for more details");
-    logger.error(new File(src).toURI()+ " is not valid because ");
-    logger.error(ex.getMessage());
+    logger.warn(new File(src).toURI()+ " is not valid because ");
+    logger.warn(ex.getMessage());
   }  
  
   for(int i = 0; i < tests.size(); i++)
@@ -61,8 +61,8 @@ public class Validate
     catch (SAXException ex)
     {
       logger.info("Validation failed see xmlfit.log for more details");
-      logger.error(new File(tests.get(i)).toURI() + " is not valid because ");
-      logger.error(ex.getMessage());
+      logger.warn(new File(tests.get(i)).toURI() + " is not valid because ");
+      logger.warn(ex.getMessage());
     }
    }
   logger.debug(method + "End");
