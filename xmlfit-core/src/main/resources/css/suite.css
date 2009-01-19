@@ -1,0 +1,76 @@
+.logo{
+	background-image: url("images/XMLFitLogo.jpg");
+	background-repeat:no-repeat;
+	width: 400px;
+ 	height: 80px;
+	position:absolute;
+	left:350px;
+	top:1px;
+}
+
+
+
+.main {
+	width:414;
+}
+
+
+.image {
+	background-image: url("images/logo.jpg");
+	background-repeat:no-repeat;
+	width: 400px;
+ 	height: 80px;
+	align:left;
+}
+
+.author, .date {
+	width:400px;
+	font:bold;
+}
+
+.test {
+	width:400px;
+	font:bold;
+}
+
+.testname { 
+    width:100px;
+}
+
+table {
+ margin:2px;
+ border-collapse: collapse;
+ border:1px solid #000000;
+}
+
+
+td, tr {
+    border:1px solid #000000;
+    padding:1px;
+
+}
+/**********
+
+ Used in FIT
+
+**********/
+
+.pass
+{
+    background-color: #AAFFAA;
+}
+
+.fail
+{
+    background-color: #FFAAAA;
+}
+
+.error
+{
+    background-color: #FFFFAA;
+}
+
+.ignore
+{
+    background-color: #CCCCCC;
+}
