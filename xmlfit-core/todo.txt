@@ -1,0 +1,5 @@
+# TODO XMLFit
+
+- Cmd extract in own project
+- add maven parnet project
+
