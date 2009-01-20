@@ -18,8 +18,8 @@
       <version>2.0</version>
     </dependency>
      <dependency>
-      <groupId>com.seitenbau.common</groupId>
-      <artifactId>xmlfit</artifactId>
+      <groupId>net.sourceforge.xmlfit</groupId>
+      <artifactId>XMLFit</artifactId>
       <version>0.0.1</version>
     </dependency>
      <dependency>
