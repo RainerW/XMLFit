@@ -74,7 +74,9 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="testname" select="@name"/>
 	<xsl:variable name="testID" select="@id"/>
 	<xsl:variable name="outputname" select="concat($testname, '.html')"/>
-	<xsl:variable name="outputnamewithDir" select="concat($newDir, $outputname)"/>
+	<xsl:variable name="position" select="concat(position(),'-')"/>
+	<xsl:variable name="outputnamewithposition" select="concat($position, $outputname)"/>
+	<xsl:variable name="outputnamewithDir" select="concat($newDir, $outputnamewithposition)"/>
 	
 	<redirect:write file="{$outputnamewithDir}">
 		<html>
