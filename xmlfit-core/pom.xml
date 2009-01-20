@@ -1,17 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
- 
   <groupId>net.sourceforge.xmlfit</groupId>
-  <artifactId>xmlfit</artifactId>
+  <artifactId>xmlfit-core</artifactId>
   <packaging>jar</packaging>
-  <name>XMLFit</name>
-  <version>0.0.1</version>
+  <name>xmlfit-core</name>
+  <version>0.0.1-SNAPSHOT</version>
   
-  <description>XMLFit is a Java and XML based solution to convert testcases written in XML to the FIT HTML table structure. </description>
-  
-  <url>http://xmlfit.sourceforge.net/</url>
-  
+  <!-- 
+   <parent>
+    <groupId>net.sourceforge.xmlfit</groupId>
+    <artifactId>xmlfit-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../xmlfit-parent</relativePath>
+  </parent>
+   -->
+   
   <repositories>
     <repository>
         <id>dev Java</id>
