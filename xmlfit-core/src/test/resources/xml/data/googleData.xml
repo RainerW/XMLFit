@@ -1,0 +1,26 @@
+<testdata>
+	<dataset>
+		<input>HTWG Konstanz</input>
+	</dataset>
+	<dataset>
+		<input>UNI Konstanz</input>
+	</dataset>
+	<dataset>
+		<input>FH Koeln</input>
+	</dataset>
+	<dataset>
+		<input>Uni Koeln</input>
+	</dataset>
+	<dataset>
+		<input>RWTH Aachen</input>
+	</dataset>
+	<dataset>
+		<input>Uni freiburg</input>
+	</dataset>
+	<dataset>
+		<input>Seitenbau</input>
+	</dataset>
+	<dataset>
+		<input>Christian Faigle</input>
+	</dataset>
+</testdata>

@@ -1,0 +1,10 @@
+<test author="cfaigle">
+	<fixture type="Selenium">
+		<command name="startBrowser">
+			<value>FIREFOX</value>
+			<value>localhost</value>
+			<value>4444</value>
+			<value>http://www.google.de</value>
+		</command>
+	</fixture>
+</test>

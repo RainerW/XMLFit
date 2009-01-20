@@ -1,0 +1,22 @@
+<test author="cfaigle">
+	<fixture type="dbfit.MySqlTest">
+		
+		<command name="insert">
+			<value>table1</value>
+		</command>
+		
+		<columns>
+			<column>id</column>
+			<column>name</column>
+			<column>number</column>
+		</columns>
+		
+		<rows>
+			<row>
+				<id><var name="id"/></id>
+				<name><var name="name"/></name>
+				<number><var name="number"/></number>
+			</row>
+		</rows>
+	</fixture>
+</test>

@@ -1,0 +1,5 @@
+<test author="cfaigle">
+	<fixture type="Selenium">
+		<command name="shutdownBrowser"/>
+	</fixture>
+</test>

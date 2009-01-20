@@ -1,0 +1,20 @@
+<test author="cfaigle">
+	<fixture type="Selenium">
+		<command name="open">
+			<target>http://www.google.de</target>
+			<value></value>
+		</command>
+		<command name="type">
+			<target>q</target>
+			<value><var name="input"/></value>
+		</command>
+		<command name="click">
+			<target>btnG</target>
+			<value></value>
+		</command>
+		<command name="waitForTextPresent">
+			<target><var name="input"/></target>
+			<value></value>
+		</command>
+	</fixture>
+</test>

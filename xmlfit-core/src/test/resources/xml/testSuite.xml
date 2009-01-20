@@ -1,0 +1,35 @@
+<testsuite author="faigle">
+	<testgroup name="TestInsert1" id="2" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testInsert.xml" data="data/dbData1.xml"/>
+    </testgroup>
+	<testgroup name="TestQuery" id="1" defaultData="data/defaultData.xml">
+	   <call test="connectDB.xml"/>
+	   <call test="testQuery.xml" data="data/dbData1.xml"/>
+	</testgroup>
+    <testgroup name="TestInsert2" id="2" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testInsert.xml" data="data/dbData2.xml"/>
+    </testgroup>
+    <testgroup name="TestUpdate" id="3" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testUpdate.xml"/>
+    </testgroup>
+    <testgroup name="TestQuery2" id="4" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testQuery.xml" data="data/dbData2.xml"/>
+    </testgroup>
+    <testgroup name="TestExecute" id="6" defaultData="data/defaultData.xml">
+         <call test="connectDB.xml"/>
+        <call test="testExecute.xml"/>
+    </testgroup>
+     <testgroup name="SeleniumTest" id="5" defaultData="data/defaultData.xml">
+       <call test="startSelenium.xml"/>
+       <call test="testGoogle.xml" data="data/googleData.xml"/>
+       <call test="stopSelenium.xml"/>
+    </testgroup> 
+     <testgroup name="PDFTest" id="5" defaultData="data/defaultData.xml">
+       <call test="testPDF.xml"/>
+       <!-- <call test="testPDFLocal.xml"/> -->
+     </testgroup>
+</testsuite>

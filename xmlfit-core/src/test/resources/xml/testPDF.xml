@@ -1,0 +1,32 @@
+<test author="cfaigle">
+	<fixture>
+		<command name="start">
+		  <target>pdf.PDFFixture</target>
+		</command>
+		
+		<command name="enter">
+		  <target>document</target>
+		  <value>http://www.in.htwg-konstanz.de/inhalte/de/SERVICE/Download/pruefung-atteste/pruefungsanmeldung_bit_htwg.pdf</value>
+		</command>
+        
+        <command name="check">
+            <target>authorsName</target>
+            <value>Wilhelm Erben</value>
+        </command>
+        
+         <command name="check">
+            <target>documentIsEncrypted</target>
+            <value>false</value>
+        </command>
+        
+        <command name="enter">
+            <target>text</target>
+            <value>Semester</value>
+        </command>
+        
+        <command name="check">
+            <target>textIsPresent</target>
+            <value>true</value>
+        </command>
+    </fixture>
+</test>
