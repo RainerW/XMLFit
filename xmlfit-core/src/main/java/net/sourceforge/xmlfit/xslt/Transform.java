@@ -38,6 +38,7 @@ public class Transform
    String method = "transform() : ";
    logger.debug(method + "Start");
   
+   String baseDir = System.getProperty("user.dir");
    Source xsltSource = new StreamSource(xsltFile.toString());
    TransformerFactory transFact = TransformerFactory.newInstance();
    if (transFact instanceof TransformerFactoryImpl) 
@@ -50,6 +51,7 @@ public class Transform
    Transformer trans = transFact.newTransformer(xsltSource);
    trans.setParameter("test_dir", testDir);
    trans.setParameter("base_dir", testDir);
+   trans.setParameter("project_dir", baseDir);
    trans.setParameter("file_dir", fileDir);
    trans.setParameter("input_dir", inputDir);
    trans.setParameter("css_file", cssfile);
