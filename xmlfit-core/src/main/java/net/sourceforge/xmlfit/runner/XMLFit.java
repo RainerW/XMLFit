@@ -79,7 +79,7 @@ public class XMLFit
     if(!dir.exists()) 
     {
       logger.info("OutputDirectory does not exist. XMLFit will create it.");
-      dir.mkdir();
+      dir.mkdirs();
     }
     
     File testfiledir = new File(outputdir + "/testfiles");
@@ -139,13 +139,10 @@ public class XMLFit
    transformer.transform(new File(testsuite), transformFiles, 
         outputdir, filedir, testdir, inputDir, 1);
    
-   
-   new File(outputdir+"/css").mkdir();
-   new File(outputdir+"/css/images").mkdir();
-   new File(outputdir +"/"+ testdir +"/css").mkdir();
-   new File(outputdir +"/"+ testdir +"/css/images").mkdir();
-   new File(outputdir +"/"+ filedir +"/css").mkdir();
-   new File(outputdir +"/"+ filedir +"/css/images").mkdir();
+  
+   new File(outputdir+"/css/images").mkdirs();
+   new File(outputdir +"/"+ testdir +"/css/images").mkdirs();
+   new File(outputdir +"/"+ filedir +"/css/images").mkdirs();
    
    
    if(cssfile == null)
