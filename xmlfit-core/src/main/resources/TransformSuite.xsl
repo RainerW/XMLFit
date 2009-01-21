@@ -80,7 +80,7 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="outputnamewithDir" select="concat($newDir, $outputnamewithposition)"/>
 	<xsl:variable name="testsuiteDir" select="concat($base_dir, $outputname)"/>
 	
-	<xsl:if test="@type='suite'">
+	<xsl:if test="call/@testsuite">
 		<redirect:write file="{$outputname}">
 			<html>
 			<head>
@@ -150,7 +150,7 @@ extension-element-prefixes="redirect">
 		<div class="author">Author: <xsl:value-of select="$filenode/test/@author"/></div>	
 		</div>	
 			<xsl:choose>
-				<xsl:when test="$filenode/testsuite">
+				<xsl:when test="@testsuite">
 					<xsl:apply-templates select="$filenode/testsuite"/>
 				</xsl:when>
 				<xsl:when test="$filenode/test/fixture[contains(@type, 'dbfit')]">
