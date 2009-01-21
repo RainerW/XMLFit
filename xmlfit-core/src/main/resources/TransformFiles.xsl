@@ -17,10 +17,10 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 <!-- ================================================================================== -->
 <!-- Template for the root element. Calls: 'test' template	-->
 <!-- ================================================================================== -->
-<xsl:template match ="/">
+<xsl:template match ="testsuite">
 	<html>
 		<body>
-			<xsl:apply-templates select="testsuite/testgroup"/>
+			<xsl:apply-templates select="testgroup"/>
 		</body>
 	</html>
 	
@@ -29,7 +29,7 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 <!-- ================================================================================== -->
 <!-- Template for the test element. Calls: 'call' template	-->
 <!-- ================================================================================== -->
-<xsl:template match="testsuite/testgroup">
+<xsl:template match="testgroup">
 	<xsl:apply-templates select="call">
 		<xsl:with-param name="testname" select="@name"/>
 	</xsl:apply-templates>
@@ -47,8 +47,12 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 	<xsl:variable name="tmp2" select="concat($tmp, '.html')"/>	
 	<xsl:variable name="tmp3" select="concat('_', $tmp2)"/>
 	<xsl:variable name="newfilename" select="concat($testname, $tmp3)"/> 
-	
 	<xsl:variable name="filenamewithDir" select="concat('xmlfiles/', $newfilename)"/>	
+	<xsl:choose>
+	<xsl:when test="$filenode/testsuite">
+		<xsl:apply-templates select="$filenode/testsuite"/>
+	</xsl:when>
+	<xsl:otherwise>
 		<redirect:write file="{$filenamewithDir}">
 			<html>
 				<head>
@@ -66,6 +70,8 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 				</body>
 			</html>
 		</redirect:write>
+		</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>	
 	
 
