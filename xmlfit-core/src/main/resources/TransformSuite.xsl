@@ -157,11 +157,7 @@ extension-element-prefixes="redirect">
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
-						 	<xsl:choose>
-								<xsl:when test="$filenode/test/fixture/command[@name='connect']">
-									<tr><td><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
-								</xsl:when>
-							</xsl:choose>
+						 <tr><td><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
 							<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
