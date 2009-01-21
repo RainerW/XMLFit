@@ -85,15 +85,6 @@ public class XMLFit
     File testfiledir = new File(outputdir + "/testfiles");
     File[] files = testfiledir.listFiles();
     
-    if(files != null)
-    {  
-      logger.info("Deleting old testfiles in " + outputdir + " directory");
-      for(int i=0; i < files.length; i++)
-      {
-        files[i].delete();   
-     }
-    }
-    
     JAXBContext jc = JAXBContext.newInstance("generated");
     Unmarshaller unmarshaller = jc.createUnmarshaller();
  
