@@ -17,6 +17,9 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 <!-- ================================================================================== -->
 <!-- Template for the root element. Calls: 'test' template	-->
 <!-- ================================================================================== -->
+<xsl:param name="file_dir" select="'filedir'"/>
+<xsl:param name="output_dir" select="'outputdir'"/>
+
 <xsl:template match ="testsuite">
 	<html>
 		<body>
@@ -47,7 +50,9 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 	<xsl:variable name="tmp2" select="concat($tmp, '.html')"/>	
 	<xsl:variable name="tmp3" select="concat('_', $tmp2)"/>
 	<xsl:variable name="newfilename" select="concat($testname, $tmp3)"/> 
-	<xsl:variable name="filenamewithDir" select="concat('xmlfiles/', $newfilename)"/>	
+	<xsl:variable name="filename2" select="concat($file_dir, '/')"/>
+	<xsl:variable name="filenamewithDir" select="concat($filename2, $newfilename)"/>	
+	
 	<xsl:choose>
 	<xsl:when test="$filenode/testsuite">
 		<xsl:apply-templates select="$filenode/testsuite"/>

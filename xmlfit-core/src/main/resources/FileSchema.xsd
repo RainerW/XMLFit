@@ -2,7 +2,6 @@
 <xsd:element name = "test">
 	<xsd:complexType>
 		<xsd:sequence>
-			<xsd:element ref="header" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element ref="comment" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element ref ="call" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element ref="fixture" minOccurs="1" maxOccurs="unbounded"/>

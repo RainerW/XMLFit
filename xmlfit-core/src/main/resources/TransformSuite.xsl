@@ -19,12 +19,12 @@ extension-element-prefixes="redirect">
 <!-- ================================================================================== -->
 <xsl:param name="base_dir" select="'basedir'"/>
 <xsl:param name="project_dir" select="'projectdir'"/>
+<xsl:param name="output_dir" select="'outputdir'"/>
 <xsl:param name="test_dir" select="'testdir'"/>
 <xsl:param name="input_dir" select="'inputDir'"/>
 <xsl:param name="css_file" select="'cssfile'"/>
 <xsl:variable name="newDir" select="concat($test_dir, '/')"/>
 <xsl:param name="file_dir" select="'filedir'"/>
-<xsl:variable name="newFileDir" select="concat('../',$file_dir)"/>
 <xsl:variable name="css" select="concat('css/',$css_file)"/> 
 
 <!-- ================================================================================== -->
@@ -38,6 +38,16 @@ extension-element-prefixes="redirect">
 <!-- Template for the root element. Calls: 'comment' template, 'testgroup' template	-->
 <!-- ================================================================================== -->
 <xsl:template match ="testsuite">
+<xsl:param name="testsuitenode"/>
+<xsl:choose>
+	<xsl:when test="$testsuitenode">
+		<xsl:apply-templates select="comment"/>
+		<xsl:apply-templates select="testgroup">
+			<xsl:with-param name="author" select="@author"/>
+			<xsl:with-param name="testsuitenode" select="$testsuitenode"/>
+		</xsl:apply-templates>
+	</xsl:when>
+<xsl:otherwise>
 <html>
 	<head>
 		<link><xsl:attribute name="rel">stylesheet</xsl:attribute><xsl:attribute name="href"><xsl:value-of select="$css"/></xsl:attribute><xsl:attribute name="type">text/css</xsl:attribute></link>
@@ -61,6 +71,8 @@ extension-element-prefixes="redirect">
 		</div>
 	</body>
 </html>
+</xsl:otherwise>
+</xsl:choose>
 </xsl:template>
 
 <!-- ================================================================================== -->
@@ -70,6 +82,8 @@ extension-element-prefixes="redirect">
 <!-- ================================================================================== -->
 <xsl:template match="testgroup">
 	<xsl:param name="author"/>
+	<xsl:param name="testgroupname"/>
+	<xsl:param name="testsuitenode"/>
 	<xsl:variable name="defaultFileName" select="@defaultData"/>
 	<xsl:variable name="defaultnode" select="document($defaultFileName)"/>
 	<xsl:variable name="testname" select="@name"/>
@@ -79,27 +93,23 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="outputnamewithposition" select="concat($position, $outputname)"/>
 	<xsl:variable name="outputnamewithDir" select="concat($newDir, $outputnamewithposition)"/>
 	<xsl:variable name="testsuiteDir" select="concat($base_dir, $outputname)"/>
-	
-	<xsl:if test="call/@testsuite">
-		<redirect:write file="{$outputname}">
-			<html>
-			<head>
-				<link><xsl:attribute name="rel">stylesheet</xsl:attribute><xsl:attribute name="href"><xsl:value-of select="$css"/></xsl:attribute><xsl:attribute name="type">text/css</xsl:attribute></link>
-			</head>
-			<body>
-				<div class="image"></div>
-				<div class="logo"></div>
+	<xsl:choose>
+		<xsl:when test="$testsuitenode">
 				<xsl:apply-templates select="call">
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="ubertestname" select="$testname"/>
 					<xsl:with-param name="author" select="$author"/> 
 				</xsl:apply-templates>
-			</body>
-		</html>	
-	</redirect:write>
-	</xsl:if>
-	
-	<redirect:write file="{$outputnamewithDir}">
+		</xsl:when>
+		<xsl:when test="$testgroupname">
+			<xsl:apply-templates select="call">
+					<xsl:with-param name="defaultnode" select="$defaultnode"/>
+					<xsl:with-param name="ubertestname" select="$testname"/>
+					<xsl:with-param name="author" select="$author"/> 
+				</xsl:apply-templates>
+		</xsl:when>
+		<xsl:otherwise>
+		<redirect:write file="{$outputnamewithDir}">
 		<html>
 			<head>
 				<link><xsl:attribute name="rel">stylesheet</xsl:attribute><xsl:attribute name="href"><xsl:value-of select="$css"/></xsl:attribute><xsl:attribute name="type">text/css</xsl:attribute></link>
@@ -115,6 +125,8 @@ extension-element-prefixes="redirect">
 			</body>
 		</html>	
 	</redirect:write>
+	</xsl:otherwise>
+	</xsl:choose>
  </xsl:template>
 
 
@@ -141,6 +153,7 @@ extension-element-prefixes="redirect">
 	<xsl:apply-templates select="$filenode/test/comment"/>
 	<xsl:apply-templates select="$filenode/test/call"/>
 		<xsl:variable name="datanode" select="document(@data)"/>
+		<xsl:if test="not(@testsuite) and not(@testgroup)">
 		<div class="main">
 		<div class="test">Testfile: <a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$input_dir"/>/<xsl:value-of select="$filename"/></xsl:attribute><xsl:value-of select="$filename"/></a>
 		<xsl:if test="@data">
@@ -149,15 +162,28 @@ extension-element-prefixes="redirect">
 		</div>
 		<div class="author">Author: <xsl:value-of select="$filenode/test/@author"/></div>	
 		</div>	
+		</xsl:if>
 			<xsl:choose>
 				<xsl:when test="@testsuite">
-					<xsl:apply-templates select="$filenode/testsuite"/>
+					<xsl:variable name="testsuitename" select="@testsuite"/>
+					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
+					<xsl:apply-templates select="$testsuitenode/testsuite">
+						<xsl:with-param name="testsuitenode" select="$testsuitenode"/>
+					</xsl:apply-templates>
+				</xsl:when>
+				<xsl:when test="@testgroup">
+					<xsl:variable name="testsuitename" select="@ref"/>
+					<xsl:variable name="testgroupname" select="@testgroup"/>
+					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
+					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]">
+						<xsl:with-param name="testgroupname" select="$testgroupname"/>
+					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:when test="$filenode/test/fixture[contains(@type, 'dbfit')]">
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
-						 <tr><td><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
+						 <tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
 							<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
@@ -187,11 +213,21 @@ extension-element-prefixes="redirect">
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
-							<tr><td><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
-							<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
+							<tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
+							<xsl:apply-templates select="$filenode/test/fixture/command">
+									<xsl:with-param name="datanode" select="$datanode"/>
+									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
+									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
+									<xsl:with-param name="loopmax" select="@loopmax"/> 
+									<xsl:with-param name="filename" select="$filename"/>
+									<xsl:with-param name="ubertestname" select="$ubertestname"/>
+								</xsl:apply-templates>
+							<xsl:if test="$filenode/test/fixture/columns">
+								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 								</xsl:apply-templates></tr>
+							</xsl:if>
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
 								<xsl:with-param name="loopnode" select="document(@loopdata)"/>
@@ -332,7 +368,7 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="tmp2" select="concat($tmp3, '_')"/>
 	<xsl:variable name="finalname" select="concat($tmp2, $htmlfile)"/>
 	<tr>
-		<td><a><xsl:attribute name="href"><xsl:value-of select="$newFileDir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="@name"/></a></td>
+		<td><a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="@name"/></a></td>
 			<xsl:apply-templates select="target">
 				<xsl:with-param name="ubertestname" select="$ubertestname"/>
 				<xsl:with-param name="datanode" select="$datanode"/>
@@ -484,7 +520,7 @@ extension-element-prefixes="redirect">
 <xsl:variable name="tmp2" select="concat($tmp3, '_')"/>
 <xsl:variable name="finalname" select="concat($tmp2, $htmlfile)"/>	
 	<td>
-	<a><xsl:attribute name="href"><xsl:value-of select="$newFileDir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="."/></a>
+	<a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="."/></a>
 	</td>
 </xsl:template>
 
