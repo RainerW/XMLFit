@@ -53,7 +53,6 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 	<xsl:variable name="newfilename" select="concat($testname, $tmp3)"/> 
 	<xsl:variable name="filename2" select="concat($file_dir, '/')"/>
 	<xsl:variable name="filenamewithDir" select="concat($filename2, $newfilename)"/>	
-	
 	<xsl:choose>
 	<xsl:when test="$testsuitenode/testsuite">
 		<xsl:apply-templates select="$testsuitenode/testsuite"/>
@@ -76,9 +75,9 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 				</body>
 			</html>
 		</redirect:write>
-		</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>	
+	</xsl:otherwise>
+</xsl:choose>
+</xsl:template>	
 	
 
 <!-- ================================================================================== -->
