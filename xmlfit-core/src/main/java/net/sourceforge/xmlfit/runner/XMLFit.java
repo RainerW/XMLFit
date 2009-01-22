@@ -37,8 +37,7 @@ public class XMLFit
   
  
   private List<String> tests = new ArrayList<String>();
-  private List<String> testsuites = new ArrayList<String>();
-  private List<String> outputnames = new ArrayList<String>();
+
  
   public XMLFit()
   {
@@ -97,15 +96,6 @@ public class XMLFit
     {
     
       List<Call> calls = testgroup.getCall();
-    
-      for(int i = 0; i <calls.size(); i++)
-      {
-        if(calls.get(i).getTestsuite() != null)
-        {
-          testsuites.add(inputDir +"/"+ calls.get(i).getTestsuite());
-          outputnames.add(calls.get(i).getTestsuite().replaceAll(".xml", ""));
-        }
-      }
      
       for (int i = 0; i < calls.size(); i++)
         {
@@ -142,16 +132,6 @@ public class XMLFit
      transformer.transform(new File(testsuite), transformFiles, 
      outputdir, testdir, filedir, inputDir, 1);
    
-     for(int i = 0; i < testsuites.size(); i++)
-     {
-       transformer.transform(new File(testsuites.get(i)), transformSuite, 
-       outputdir, testdir+"/"+outputnames.get(i), filedir, inputDir, 0);
-       transformer.transform(new File(testsuites.get(i)), transformFiles, 
-       outputdir, testdir, filedir, inputDir, 1);
-
-       new File(outputdir +"/"+ testdir +"/"+outputnames.get(i)+"/css/images").mkdirs();
-       util.copyOutOfJar("/css/suite.css", outputdir +"/"+ testdir +"/"+outputnames.get(i)+"/css/suite.css");
-     }
    
    new File(outputdir+"/css/images").mkdirs();
    new File(outputdir +"/"+ testdir +"/css/images").mkdirs();
