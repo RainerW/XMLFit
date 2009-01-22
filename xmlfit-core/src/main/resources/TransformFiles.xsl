@@ -46,6 +46,7 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 	<xsl:param name="filenode" select="document(@test)"/>
 	<xsl:param name="testname"/>
 	<xsl:variable name="filename" select="@test"/>
+	<xsl:variable name="testsuitenode" select="document(@testsuite)"/>
 	<xsl:variable name="tmp" select="substring-before($filename, '.')"/>
 	<xsl:variable name="tmp2" select="concat($tmp, '.html')"/>	
 	<xsl:variable name="tmp3" select="concat('_', $tmp2)"/>
@@ -54,8 +55,8 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 	<xsl:variable name="filenamewithDir" select="concat($filename2, $newfilename)"/>	
 	
 	<xsl:choose>
-	<xsl:when test="$filenode/testsuite">
-		<xsl:apply-templates select="$filenode/testsuite"/>
+	<xsl:when test="$testsuitenode/testsuite">
+		<xsl:apply-templates select="$testsuitenode/testsuite"/>
 	</xsl:when>
 	<xsl:otherwise>
 		<redirect:write file="{$filenamewithDir}">
