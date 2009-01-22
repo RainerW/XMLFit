@@ -32,13 +32,6 @@
       <version>4.4</version>
       <scope>test</scope>
     </dependency>
-	
-	 <dependency>
-        <groupId>org.fitnesse</groupId>
-        <artifactId>fitlibrary</artifactId>
-        <version>20080812</version>
-        <scope>test</scope>
-     </dependency> 
     
      <dependency>
         <groupId>xalan</groupId>
