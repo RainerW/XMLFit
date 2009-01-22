@@ -32,7 +32,7 @@ public class Transform
   
  private String cssfile;
   
- public void transform(File testsuite, URL xsltFile, String outputSrc, String testDir, 
+ public void transform(File testsuite, URL xsltFile, String outputDir, String testDir, 
      String fileDir, String inputDir, int choice) 
  {
    String method = "transform() : ";
@@ -49,6 +49,7 @@ public class Transform
    try
    {
    Transformer trans = transFact.newTransformer(xsltSource);
+   trans.setParameter("output_dir", outputDir);
    trans.setParameter("test_dir", testDir);
    trans.setParameter("base_dir", testDir);
    trans.setParameter("project_dir", baseDir);
@@ -61,18 +62,18 @@ public class Transform
    if(choice == 0)
    {
     logger.info("Processing " + testsuite.getName() + " with xslt file " + xsltFile.getFile());
-    trans.transform(xmlSource, new StreamResult(new File(outputSrc+"/"
+    trans.transform(xmlSource, new StreamResult(new File(outputDir+"/"
        +testsuite.getName().replaceAll(".xml", ".html"))));
    }
    else if(choice == 1)
    {
     logger.info("Processing " + testsuite.getName() + " with xslt file " + xsltFile.getFile());
-     trans.transform(xmlSource, new StreamResult(new File(outputSrc+"/"+ "allFiles"
+     trans.transform(xmlSource, new StreamResult(new File(outputDir+"/"+ "allFiles"
         +testsuite.getName().replaceAll(".xml", ".html"))));
     
-    logger.info("Deleting temporary File " + outputSrc+"/"+ "allFiles" 
+    logger.info("Deleting temporary File " + outputDir+"/"+ "allFiles" 
         +testsuite.getName().replaceAll(".xml", ".html"));
-     new File(outputSrc+"/"+ "allFiles"
+     new File(outputDir+"/"+ "allFiles"
         +testsuite.getName().replaceAll(".xml", ".html")).delete();
   
     }
