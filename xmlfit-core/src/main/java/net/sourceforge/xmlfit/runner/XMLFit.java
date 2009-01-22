@@ -37,6 +37,8 @@ public class XMLFit
   
  
   private List<String> tests = new ArrayList<String>();
+  private List<String> testsuites = new ArrayList<String>();
+  private List<String> outputnames = new ArrayList<String>();
  
   public XMLFit()
   {
@@ -82,9 +84,6 @@ public class XMLFit
       dir.mkdirs();
     }
     
-    File testfiledir = new File(outputdir + "/testfiles");
-    File[] files = testfiledir.listFiles();
-    
     JAXBContext jc = JAXBContext.newInstance("generated");
     Unmarshaller unmarshaller = jc.createUnmarshaller();
  
@@ -93,14 +92,28 @@ public class XMLFit
     
     Testsuite suite = el.getValue();
     List<Testgroup> testgroups = suite.getTestgroup();
+  
     for (Testgroup testgroup : testgroups)
     {
+    
       List<Call> calls = testgroup.getCall();
     
-        for (int i = 0; i < calls.size(); i++)
+      for(int i = 0; i <calls.size(); i++)
+      {
+        if(calls.get(i).getTestsuite() != null)
         {
-          tests.add(inputDir +"/"+ calls.get(i).getTest());
+          testsuites.add(inputDir +"/"+ calls.get(i).getTestsuite());
+          outputnames.add(calls.get(i).getTestsuite().replaceAll(".xml", ""));
         }
+      }
+     
+      for (int i = 0; i < calls.size(); i++)
+        {
+          if(calls.get(i).getTest() != null)
+          {
+          tests.add(inputDir +"/"+ calls.get(i).getTest());
+          }
+       }
     }
     
     validator.validate(testsuite, tests);
@@ -109,7 +122,6 @@ public class XMLFit
    //getting XSLT Files out of the jar
    URL transformSuite = this.getClass().getResource("/TransformSuite.xsl");
    URL transformFiles = this.getClass().getResource("/TransformFiles.xsl");
-   
    
 
    
@@ -125,12 +137,23 @@ public class XMLFit
      logger.info("Using default Stylesheet");
    }
    
-   transformer.transform(new File(testsuite), transformSuite, 
-        outputdir, testdir, filedir, inputDir, 0);
-   transformer.transform(new File(testsuite), transformFiles, 
-        outputdir, filedir, testdir, inputDir, 1);
+     transformer.transform(new File(testsuite), transformSuite, 
+     outputdir, testdir, filedir, inputDir, 0);
+     transformer.transform(new File(testsuite), transformFiles, 
+     outputdir, filedir, testdir, inputDir, 1);
    
-  
+     for(int i = 0; i < testsuites.size(); i++)
+     {
+       transformer.transform(new File(testsuites.get(i)), transformSuite, 
+       outputdir, testdir+"/"+outputnames.get(i), filedir, inputDir, 0);
+       transformer.transform(new File(testsuites.get(i)), transformFiles, 
+       outputdir, filedir+ "/"+ outputnames.get(i), testdir, inputDir, 1);
+       new File(outputdir +"/"+ testdir +"/"+outputnames.get(i)+"/css/images").mkdirs();
+       new File(outputdir +"/"+ filedir + "/"+ outputnames.get(i) +"/css/images").mkdirs();
+       util.copyOutOfJar("/css/suite.css", outputdir +"/"+ testdir +"/"+outputnames.get(i)+"/css/suite.css");
+       util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir+ "/"+ outputnames.get(i) +"/css/design.css");
+     }
+   
    new File(outputdir+"/css/images").mkdirs();
    new File(outputdir +"/"+ testdir +"/css/images").mkdirs();
    new File(outputdir +"/"+ filedir +"/css/images").mkdirs();
