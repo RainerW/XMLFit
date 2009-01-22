@@ -140,18 +140,17 @@ public class XMLFit
      transformer.transform(new File(testsuite), transformSuite, 
      outputdir, testdir, filedir, inputDir, 0);
      transformer.transform(new File(testsuite), transformFiles, 
-     outputdir, filedir, testdir, inputDir, 1);
+     outputdir, testdir, filedir, inputDir, 1);
    
      for(int i = 0; i < testsuites.size(); i++)
      {
        transformer.transform(new File(testsuites.get(i)), transformSuite, 
        outputdir, testdir+"/"+outputnames.get(i), filedir, inputDir, 0);
        transformer.transform(new File(testsuites.get(i)), transformFiles, 
-       outputdir, filedir+ "/"+ outputnames.get(i), testdir, inputDir, 1);
+       outputdir, testdir, filedir, inputDir, 1);
+
        new File(outputdir +"/"+ testdir +"/"+outputnames.get(i)+"/css/images").mkdirs();
-       new File(outputdir +"/"+ filedir + "/"+ outputnames.get(i) +"/css/images").mkdirs();
        util.copyOutOfJar("/css/suite.css", outputdir +"/"+ testdir +"/"+outputnames.get(i)+"/css/suite.css");
-       util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir+ "/"+ outputnames.get(i) +"/css/design.css");
      }
    
    new File(outputdir+"/css/images").mkdirs();
