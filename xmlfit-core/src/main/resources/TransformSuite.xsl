@@ -164,18 +164,27 @@ extension-element-prefixes="redirect">
 		</div>	
 		</xsl:if>
 			<xsl:choose>
-				<xsl:when test="@testsuite">
+				<xsl:when test="@testsuite and not(@testgroup)">
 					<xsl:variable name="testsuitename" select="@testsuite"/>
 					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
 					<xsl:apply-templates select="$testsuitenode/testsuite">
 						<xsl:with-param name="testsuitenode" select="$testsuitenode"/>
 					</xsl:apply-templates>
 				</xsl:when>
-				<xsl:when test="@testgroup">
-					<xsl:variable name="testsuitename" select="@ref"/>
+				<xsl:when test="@testgroup and not(@test)">
+					<xsl:variable name="testsuitename" select="@testsuite"/>
 					<xsl:variable name="testgroupname" select="@testgroup"/>
 					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
 					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]">
+						<xsl:with-param name="testgroupname" select="$testgroupname"/>
+					</xsl:apply-templates>
+				</xsl:when>
+				<xsl:when test="@testgroup and @test">
+					<xsl:variable name="testsuitename" select="@testsuite"/>
+					<xsl:variable name="testgroupname" select="@testgroup"/>
+					<xsl:variable name="exttestname" select="@test"/>
+					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
+					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]/call[@test=$exttestname]">
 						<xsl:with-param name="testgroupname" select="$testgroupname"/>
 					</xsl:apply-templates>
 				</xsl:when>
