@@ -185,62 +185,50 @@ public class XMLFit
     return testdir;
   }
 
-
   public String getFiledir()
   {
     return filedir;
   }
-
 
   public String getOutputDir()
   {
     return outputdir;
   }
 
-
   public void setTestdir(String testdir)
   {
     this.testdir = testdir;
   }
-
 
   public void setFiledir(String filedir)
   {
     this.filedir = filedir;
   }
 
-
   public void setOutputDir(String outputDir)
   {
     this.outputdir = outputDir;
   }
 
-
   public String getTestsuite()
   {
     return testsuite;
   }
-
-
+  
   public void setTestsuite(String testsuite)
   {
     this.testsuite = testsuite;
   }
 
-
-
   public String getInputDir()
   {
     return inputDir;
   }
-
-
-
+  
   public void setInputDir(String inputDir)
   {
     this.inputDir = inputDir;
   }
-
   
   public String getCssfile()
   {
