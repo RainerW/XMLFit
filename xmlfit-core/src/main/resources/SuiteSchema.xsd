@@ -24,6 +24,7 @@
  	<xsd:complexType>
  		<xsd:attribute name="test" use="optional"/>
  		<xsd:attribute name="testsuite" use="optional"/>
+ 		<xsd:attribute name="testgroup" use="optional"/>
  		<xsd:anyAttribute processContents="skip"/>
  	</xsd:complexType>
 </xsd:element>
