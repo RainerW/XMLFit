@@ -472,8 +472,15 @@ extension-element-prefixes="redirect">
 						<xsl:when test="$actualnode/child::*[name()=$value]">
 							 <td><xsl:value-of select="$actualnode/child::*[name()=$value]"/></td>
 						</xsl:when>
-						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$value]">
-							<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$value]"/></td>
+						<xsl:when test="$defaultnode">
+							<xsl:choose>
+								<xsl:when  test="$defaultnode/defaultdata/child::*[name()=$value]">
+									<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$value]"/></td>	
+								</xsl:when>
+								<xsl:otherwise>
+									<td><xsl:value-of select="."/></td>
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:when>
 						<xsl:when test="not(child::*)">
 							<td><xsl:value-of select="."/></td>
@@ -488,8 +495,15 @@ extension-element-prefixes="redirect">
 						<xsl:when test="$customdata[name()=$value]">
 							<td><xsl:value-of select="$customdata[name()=$value]"/></td>
 						</xsl:when>
-						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$value]">
-							<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$value]"/></td>
+						<xsl:when test="$defaultnode">
+							<xsl:choose>
+								<xsl:when  test="$defaultnode/defaultdata/child::*[name()=$value]">
+									<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$value]"/></td>	
+								</xsl:when>
+								<xsl:otherwise>
+									<td><xsl:value-of select="."/></td>
+								</xsl:otherwise>
+							</xsl:choose>
 						</xsl:when>
 						<xsl:when test="not(child::*)">
 							<td><xsl:value-of select="."/></td>
@@ -499,6 +513,9 @@ extension-element-prefixes="redirect">
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
+				<xsl:otherwise>
+					<td><xsl:value-of select="."/></td>
+				</xsl:otherwise>
 		</xsl:choose>
 </xsl:template>
 

@@ -54,9 +54,24 @@ xmlns:info="xalan://org.apache.xalan.lib.NodeInfo">
 	<xsl:variable name="filename2" select="concat($file_dir, '/')"/>
 	<xsl:variable name="filenamewithDir" select="concat($filename2, $newfilename)"/>	
 	<xsl:choose>
-	<xsl:when test="$testsuitenode/testsuite">
-		<xsl:apply-templates select="$testsuitenode/testsuite"/>
-	</xsl:when>
+		<xsl:when test="@testsuite and not(@testgroup)">
+					<xsl:variable name="testsuitename" select="@testsuite"/>
+					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
+					<xsl:apply-templates select="$testsuitenode/testsuite"/>
+				</xsl:when>
+				<xsl:when test="@testgroup and not(@test)">
+					<xsl:variable name="testsuitename" select="@testsuite"/>
+					<xsl:variable name="testgroupname" select="@testgroup"/>
+					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
+					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]"/>
+				</xsl:when>
+				<xsl:when test="@testgroup and @test">
+					<xsl:variable name="testsuitename" select="@testsuite"/>
+					<xsl:variable name="testgroupname" select="@testgroup"/>
+					<xsl:variable name="exttestname" select="@test"/>
+					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
+					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]/call[@test=$exttestname]"/>
+				</xsl:when>
 	<xsl:otherwise>
 		<redirect:write file="{$filenamewithDir}">
 			<html>
