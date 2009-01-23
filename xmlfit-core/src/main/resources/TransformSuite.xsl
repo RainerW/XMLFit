@@ -156,9 +156,9 @@ extension-element-prefixes="redirect">
 		<xsl:variable name="datanode" select="document(@data)"/>
 		<xsl:if test="not(@testsuite) and not(@testgroup)">
 		<div class="main">
-		<div class="test">Testfile: <a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$input_dir"/>/<xsl:value-of select="$filename"/></xsl:attribute><xsl:value-of select="$filename"/></a>
+		<div class="test">Testfile: <a><xsl:attribute name="href">file://<xsl:value-of select="$project_dir"/>/<xsl:value-of select="$input_dir"/>/<xsl:value-of select="$filename"/></xsl:attribute><xsl:value-of select="$filename"/></a>
 		<xsl:if test="@data">
-			Testdata: <a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$input_dir"/>/<xsl:value-of select="@data"/></xsl:attribute><xsl:value-of select="@data"/></a><br/>
+			Testdata: <a><xsl:attribute name="href">file://<xsl:value-of select="$project_dir"/>/<xsl:value-of select="$input_dir"/>/<xsl:value-of select="@data"/></xsl:attribute><xsl:value-of select="@data"/></a><br/>
 		</xsl:if>
 		</div>
 		<div class="author">Author: <xsl:value-of select="$filenode/test/@author"/></div>	
@@ -368,7 +368,7 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="tmp2" select="concat($tmp3, '_')"/>
 	<xsl:variable name="finalname" select="concat($tmp2, $htmlfile)"/>
 	<tr>
-		<td><a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="@name"/></a></td>
+		<td><a><xsl:attribute name="href">file://<xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="@name"/></a></td>
 			<xsl:apply-templates select="target">
 				<xsl:with-param name="ubertestname" select="$ubertestname"/>
 				<xsl:with-param name="datanode" select="$datanode"/>
@@ -535,7 +535,7 @@ extension-element-prefixes="redirect">
 <xsl:variable name="tmp2" select="concat($tmp3, '_')"/>
 <xsl:variable name="finalname" select="concat($tmp2, $htmlfile)"/>	
 	<td>
-	<a><xsl:attribute name="href"><xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="."/></a>
+	<a><xsl:attribute name="href">file://<xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="."/></a>
 	</td>
 </xsl:template>
 
