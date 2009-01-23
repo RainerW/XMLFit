@@ -2,7 +2,7 @@
 
 - Cmd extract in own project
 - add maven parnet project
-- extensions points of xmlfit xsl transforming ...
+- extensions points of xmlfit xsl transforming ... http://www.ibm.com/developerworks/xml/library/x-styless1/
 - Schema location on SF
 - Build auto with mvn release plugin
 - xmlfit filehandling refactoring 
