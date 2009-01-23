@@ -10,9 +10,6 @@ extension-element-prefixes="redirect">
     	Date: 19.11.2008 
     	________________________________________________________
     --> 
-  
-
-
 
 <!-- ================================================================================== -->
 <!--  Definition of  global Variables	-->
@@ -78,7 +75,11 @@ extension-element-prefixes="redirect">
 <!-- ================================================================================== -->
 <!-- Template for the 'test' element. Calls: 'call' template	-->
 <!-- Param List: 
-	 defaultnode - Node for the DefaultData Document -->
+	 defaultnode - Node for the DefaultData Document 
+	 author - name of the test author
+	 testgroupname - name of the called testgroup
+	 testsuitnode - position of the called testsuite
+	-->
 <!-- ================================================================================== -->
 <xsl:template match="testgroup">
 	<xsl:param name="author"/>
@@ -133,9 +134,9 @@ extension-element-prefixes="redirect">
 <!-- ================================================================================== -->
 <!-- Template for the 'call' element. Calls: 'command' template, 'column' template, 'row' template	-->
 <!-- Param List: 
+	 author - name of the test author
 	 defaultnode - node for the Default Data Document 
 	 customdata - node for the Attributelist given by user
-	 loopmax - max. value for the loop
 	 filenode - node for the Fixture Document 
 	 datanode - node for the Data Document
 	 ubertestname - name of the test
@@ -197,7 +198,6 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-									<xsl:with-param name="loopmax" select="@loopmax"/> 
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 								</xsl:apply-templates>
@@ -209,10 +209,8 @@ extension-element-prefixes="redirect">
 							</xsl:if>
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
-								<xsl:with-param name="loopnode" select="document(@loopdata)"/>
 								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
 								<xsl:with-param name="customdata" select="@*"/>
-								<xsl:with-param name="loopmax" select="@loopmax"/> 
 								<xsl:with-param name="filenode" select="document($filename)"/>
 							</xsl:apply-templates>
 						</tbody>
@@ -227,7 +225,6 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-									<xsl:with-param name="loopmax" select="@loopmax"/> 
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 								</xsl:apply-templates>
@@ -239,10 +236,8 @@ extension-element-prefixes="redirect">
 							</xsl:if>
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
-								<xsl:with-param name="loopnode" select="document(@loopdata)"/>
 								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
 								<xsl:with-param name="customdata" select="@*"/>
-								<xsl:with-param name="loopmax" select="@loopmax"/> 
 								<xsl:with-param name="filenode" select="document($filename)"/>
 							</xsl:apply-templates>
 						</tbody>
@@ -269,7 +264,6 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-									<xsl:with-param name="loopmax" select="@loopmax"/> 
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 									<xsl:with-param name="actualnode" select="$actualnode"/>
@@ -287,7 +281,6 @@ extension-element-prefixes="redirect">
 										<xsl:with-param name="datanode" select="$datanode"/>
 										<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 										<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-										<xsl:with-param name="loopmax" select="@loopmax"/> 
 										<xsl:with-param name="filename" select="$filename"/>
 										<xsl:with-param name="ubertestname" select="$ubertestname"/>
 									</xsl:apply-templates>
@@ -319,7 +312,6 @@ extension-element-prefixes="redirect">
 														<xsl:with-param name="datanode" select="$datanode"/>
 														<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 														<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-														<xsl:with-param name="loopmax" select="@loopmax"/> 
 														<xsl:with-param name="actualnode" select="$actualnode"/>
 														<xsl:with-param name="filename" select="$filename"/>
 														<xsl:with-param name="ubertestname" select="$ubertestname"/>
@@ -340,7 +332,6 @@ extension-element-prefixes="redirect">
 												<xsl:with-param name="datanode" select="$datanode"/>
 												<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 												<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-												<xsl:with-param name="loopmax" select="@loopmax"/> 
 												<xsl:with-param name="filename" select="$filename"/>
 											</xsl:apply-templates>
 									</tbody>
@@ -383,7 +374,6 @@ extension-element-prefixes="redirect">
 				<xsl:with-param name="datanode" select="$datanode"/>
 				<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 				<xsl:with-param name="customdata" select="$customdata"/>
-				<xsl:with-param name="loopmax" select="@loopmax"/> 
 				<xsl:with-param name="filename" select="$filename"/>
 				<xsl:with-param name="actualnode" select="$actualnode"/>
 			</xsl:apply-templates>
@@ -392,7 +382,6 @@ extension-element-prefixes="redirect">
 				<xsl:with-param name="datanode" select="$datanode"/>
 				<xsl:with-param name="defaultnode" select= "$defaultnode"/>
 				<xsl:with-param name="customdata" select="$customdata"/>
-				<xsl:with-param name="loopmax" select="@loopmax"/> 
 				<xsl:with-param name="filename" select="$filename"/>
 				<xsl:with-param name="actualnode" select="$actualnode"/>
 			</xsl:apply-templates>
@@ -494,7 +483,7 @@ extension-element-prefixes="redirect">
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
-				<xsl:when test="not($actualnode)">
+				<xsl:when test="not($actualnode) and $defaultnode">
 					<xsl:choose>
 						<xsl:when test="$customdata[name()=$value]">
 							<td><xsl:value-of select="$customdata[name()=$value]"/></td>
@@ -510,6 +499,9 @@ extension-element-prefixes="redirect">
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
+				<xsl:otherwise>
+					<td><xsl:value-of select="."/></td>
+				</xsl:otherwise>
 		</xsl:choose>
 </xsl:template>
 
@@ -538,16 +530,12 @@ extension-element-prefixes="redirect">
 <!-- Template for the 'row' element. Calls: 'child::*' template	-->
 <!-- Param List: 
 	 defaultnode - node for the Default Data Document 
-	 customdata - node for the Attributelist given by user
-	 loopmax - max. value for the loop
 	 filenode - node for the Fixture Document 
 	 datanode - node for the Data Document
 	 actualnode - node for the actual position in Data Document
 	 -->
 <!-- ================================================================================== -->
 <xsl:template match = "test/fixture/rows/row">
-	<xsl:param name="loopmax"/>
-	<xsl:param name="loopnode"/>
 	<xsl:param name="datanode"/>
 	<xsl:param name="defaultnode"/>
 	<xsl:param name="filenode"/>
@@ -559,8 +547,6 @@ extension-element-prefixes="redirect">
 					<xsl:apply-templates select="$filenode/test/fixture/rows/row/child::*">
 						<xsl:with-param name="datanode" select="$datanode"/>
 						<xsl:with-param name="defaultnode" select="$defaultnode"/>
-						<xsl:with-param name="loopmax" select="$loopmax"/>
-						<xsl:with-param name="loopnode" select="$loopnode"/>
 						<xsl:with-param name="actualnode" select="$actualnode"/>
 					</xsl:apply-templates>
 				</tr>
@@ -571,8 +557,6 @@ extension-element-prefixes="redirect">
 				<xsl:apply-templates select="child::*">
 					<xsl:with-param name="datanode" select="$datanode"/>
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
-					<xsl:with-param name="loopmax" select="$loopmax"/>
-					<xsl:with-param name="loopnode" select="$loopnode"/>
 				</xsl:apply-templates>
 			</tr>
 		</xsl:otherwise>
@@ -581,11 +565,9 @@ extension-element-prefixes="redirect">
 
 
 <!-- ================================================================================== -->
-<!-- Template for the 'child::*' element. Calls: 'loop' template	-->
+<!-- Template for the 'child::*' element.-->
 <!-- Param List: 
 	 defaultnode - node for the Default Data Document 
-	 customdata - node for the Attributelist given by user
-	 loopmax - max. value for the loop
 	 filenode - node for the Fixture Document 
 	 datanode - node for the Data Document
 	 actualnode - node for the actual position in Data Document
@@ -594,9 +576,6 @@ extension-element-prefixes="redirect">
 <xsl:template match = "child::*">
 <xsl:param name="datanode"/>
 <xsl:param name="defaultnode"/>
-<xsl:param name="maxrows"/>
-<xsl:param name="loopmax"/>
-<xsl:param name="loopnode"/>
 <xsl:param name="actualnode"/>
 <xsl:variable name="varname" select="var/@*"/>
 <xsl:variable name="value" select="self::*"/>
@@ -619,49 +598,6 @@ extension-element-prefixes="redirect">
 	</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
-
-
-<!-- ================================================================================== -->
-<!--Template for the 'loop' element. Calls: 'loop' template	-->
-<!--Param List: 
-	index - index value
-	loopmax - max. value for the loop
-	loopnode - node for the loop
-	defaultnode - node for the Default Data Document 
-	customdata - node for the Attributelist given by user
-	loopmax - max. value for the loop
-	filenode - node for the Fixture Document 
-	datanode - node for the Data Document
-	actualnode - node for the actual position in Data Document
-	-->
-<!-- ================================================================================== -->
-<xsl:template name="loop">
-<xsl:param name="index"/>
-<xsl:param name="loopmax"/>
-<xsl:param name="loopnode"/>
-<xsl:param name="defaultnode"/>
-<xsl:param name="datanode"/>
-<xsl:param name="customdata"/>
-<xsl:param name="actualnode"/>
-<xsl:param name="filename"/>
-<xsl:param name="filenode"/>
-<xsl:param name="commandnode"/>
-<xsl:value-of select="$commandnode"/>
-<tr>
-<xsl:if test="$index &lt; $loopmax">
-	<table cellpadding="1" cellspacing="1" border="1">
-			<tbody>
-			<tr><td>fit.ActionFixture</td></tr>
-		</tbody>
-	</table>
-	<xsl:call-template name="loop">
-			<xsl:with-param name="index"><xsl:value-of select="$index + 1"/></xsl:with-param>
-			<xsl:with-param name="loopmax" select="$loopmax"/>
-	</xsl:call-template>
-</xsl:if>
-</tr>
-</xsl:template>
-
 
 	
 <!-- ================================================================================== -->
