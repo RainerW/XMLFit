@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 
@@ -34,8 +35,6 @@ public class XMLFit
   private String inputDir;
   private String testsuite;
   private String cssfile;
-  
- 
   private List<String> tests = new ArrayList<String>();
 
  
@@ -69,7 +68,7 @@ public class XMLFit
     logger.debug(method + "End");
   }
   
-  @SuppressWarnings("unchecked")
+  
   public void generate() throws Exception 
   {
    net.sourceforge.xmlfit.xslt.Validate validator = new net.sourceforge.xmlfit.xslt.Validate();
@@ -83,28 +82,7 @@ public class XMLFit
       dir.mkdirs();
     }
     
-    JAXBContext jc = JAXBContext.newInstance("generated");
-    Unmarshaller unmarshaller = jc.createUnmarshaller();
- 
-    Object unmarshal = unmarshaller.unmarshal(new File(testsuite));
-    JAXBElement<Testsuite> el = new JAXBElement(new QName("generated"), this.getClass(), unmarshal);
-    
-    Testsuite suite = el.getValue();
-    List<Testgroup> testgroups = suite.getTestgroup();
-  
-    for (Testgroup testgroup : testgroups)
-    {
-    
-      List<Call> calls = testgroup.getCall();
-     
-      for (int i = 0; i < calls.size(); i++)
-        {
-          if(calls.get(i).getTest() != null)
-          {
-          tests.add(inputDir +"/"+ calls.get(i).getTest());
-          }
-       }
-    }
+    this.getTestcasesToValidate(testsuite);
     
     validator.validate(testsuite, tests);
     
@@ -157,6 +135,35 @@ public class XMLFit
    }
 }
 
+  @SuppressWarnings("unchecked")
+  public void getTestcasesToValidate(String testsuite) throws JAXBException
+  {
+    JAXBContext jc = JAXBContext.newInstance("generated");
+    Unmarshaller unmarshaller = jc.createUnmarshaller();
+    Object unmarshal = unmarshaller.unmarshal(new File(testsuite));
+    JAXBElement<Testsuite> el = new JAXBElement(new QName("generated"), this.getClass(), unmarshal);
+    Testsuite suite = el.getValue();
+    List<Testgroup> testgroups = suite.getTestgroup();
+    
+    for (Testgroup testgroup : testgroups)
+    {
+      List<Call> calls = testgroup.getCall();
+     
+      for (int i = 0; i < calls.size(); i++)
+        {
+          if(calls.get(i).getTestsuite() != null && calls.get(i).getTestgroup() == null)
+          {
+            this.getTestcasesToValidate(inputDir + "/"+calls.get(i).getTestsuite());
+          }
+          
+          if(calls.get(i).getTest() != null)
+          {
+          tests.add(inputDir +"/"+ calls.get(i).getTest());
+          }
+       }
+    }
+}
+   
   //Getter and Setter
   
   public String getTestdir()
