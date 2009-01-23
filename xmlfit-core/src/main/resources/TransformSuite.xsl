@@ -483,7 +483,7 @@ extension-element-prefixes="redirect">
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
-				<xsl:when test="not($actualnode) and $defaultnode">
+				<xsl:when test="not($actualnode)">
 					<xsl:choose>
 						<xsl:when test="$customdata[name()=$value]">
 							<td><xsl:value-of select="$customdata[name()=$value]"/></td>
@@ -499,9 +499,6 @@ extension-element-prefixes="redirect">
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
-				<xsl:otherwise>
-					<td><xsl:value-of select="."/></td>
-				</xsl:otherwise>
 		</xsl:choose>
 </xsl:template>
 
