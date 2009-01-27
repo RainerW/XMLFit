@@ -189,61 +189,7 @@ extension-element-prefixes="redirect">
 						<xsl:with-param name="testgroupname" select="$testgroupname"/>
 					</xsl:apply-templates>
 				</xsl:when>
-				<xsl:when test="$filenode/test/fixture[contains(@type, 'dbfit')]">
-					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
-					<table cellpadding="0" cellspacing="0" border="1">
-						<tbody>
-						 <tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
-							<xsl:apply-templates select="$filenode/test/fixture/command">
-									<xsl:with-param name="datanode" select="$datanode"/>
-									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
-									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-									<xsl:with-param name="filename" select="$filename"/>
-									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-								</xsl:apply-templates>
-							<xsl:if test="$filenode/test/fixture/columns">
-							<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
-									<xsl:with-param name="filename" select="$filename"/>
-									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-								</xsl:apply-templates></tr>
-							</xsl:if>
-							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
-								<xsl:with-param name="datanode" select="$datanode"/>
-								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="@*"/>
-								<xsl:with-param name="filenode" select="document($filename)"/>
-							</xsl:apply-templates>
-						</tbody>
-					</table>
-				</xsl:when>
-				<xsl:when test="$filenode/test/fixture[@type!='Selenium']">
-					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
-					<table cellpadding="0" cellspacing="0" border="1">
-						<tbody>
-							<tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
-							<xsl:apply-templates select="$filenode/test/fixture/command">
-									<xsl:with-param name="datanode" select="$datanode"/>
-									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
-									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
-									<xsl:with-param name="filename" select="$filename"/>
-									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-								</xsl:apply-templates>
-							<xsl:if test="$filenode/test/fixture/columns">
-								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
-									<xsl:with-param name="filename" select="$filename"/>
-									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-								</xsl:apply-templates></tr>
-							</xsl:if>
-							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
-								<xsl:with-param name="datanode" select="$datanode"/>
-								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="@*"/>
-								<xsl:with-param name="filenode" select="document($filename)"/>
-							</xsl:apply-templates>
-						</tbody>
-					</table>
-				</xsl:when>
-				<xsl:when test="$filenode/test/fixture[@type='Selenium']">
+				<xsl:when test="$filenode/test/fixture/@type">
 				<xsl:choose>
 				<xsl:when test="$datanode">
 				<xsl:for-each select="$datanode/testdata/dataset">
@@ -259,7 +205,7 @@ extension-element-prefixes="redirect">
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
-							<tr><td colspan="3">selenium.SeleniumFixture</td></tr>
+							<tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
 								<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
@@ -268,6 +214,18 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 									<xsl:with-param name="actualnode" select="$actualnode"/>
 								</xsl:apply-templates>
+							<xsl:if test="$filenode/test/fixture/columns">
+								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
+									<xsl:with-param name="filename" select="$filename"/>
+									<xsl:with-param name="ubertestname" select="$ubertestname"/>
+								</xsl:apply-templates></tr>
+							</xsl:if>
+							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
+								<xsl:with-param name="datanode" select="$datanode"/>
+								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
+								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="filenode" select="document($filename)"/>
+							</xsl:apply-templates>
 						</tbody>
 					</table>
 					</xsl:for-each>
@@ -276,7 +234,7 @@ extension-element-prefixes="redirect">
 						<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 						<table cellpadding="0" cellspacing="0" border="1">
 							<tbody>
-								<tr><td colspan="3">selenium.SeleniumFixture</td></tr>
+								<tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
 									<xsl:apply-templates select="$filenode/test/fixture/command">
 										<xsl:with-param name="datanode" select="$datanode"/>
 										<xsl:with-param name="defaultnode" select= "$defaultnode"/>
