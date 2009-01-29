@@ -165,7 +165,6 @@ public class XMLFit
 }
    
   //Getter and Setter
-  
   public String getTestdir()
   {
     return testdir;
