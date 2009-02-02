@@ -41,7 +41,7 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
   private String stylesheet;
 
   @Option(
-      name="-xslt",
+      name="-xsltfile",
       required=false,
       usage="Customized XSLT File")
   private String xsltfile;
