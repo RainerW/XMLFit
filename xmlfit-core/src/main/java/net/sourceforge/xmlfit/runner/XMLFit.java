@@ -91,7 +91,7 @@ public class XMLFit
     
     if(xsltfile != null)
     {
-       transformSuite = new URL(xsltfile);
+       transformSuite = new URL("file:\\"+new File(xsltfile).getAbsolutePath());
        transformFiles = this.getClass().getResource("/TransformFiles.xsl");
     }
     else {
