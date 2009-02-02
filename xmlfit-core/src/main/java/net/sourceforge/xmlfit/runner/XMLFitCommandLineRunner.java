@@ -40,6 +40,13 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
       usage="The CSS stylesheet for the HTML FIT tests, for own skin in the generated FIT tests.")
   private String stylesheet;
 
+  @Option(
+      name="-xslt",
+      required=false,
+      usage="Customized XSLT File")
+  private String xsltfile;
+  
+  
   private XMLFitCommandLineRunner() 
   {
   
@@ -53,7 +60,21 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
     }
     return null;
   }
+  
+  public String getXsltFile()
+  {
+    if(!(xsltfile == null))
+    {
+      return xsltfile;
+    }
+    return null;
+  }
 
+  public void  setXsltFile(String xsltfile)
+  {
+    this.xsltfile = xsltfile;
+  }
+ 
   public void setStylesheet(String stylesheet)
   {
     this.stylesheet = stylesheet;

@@ -35,9 +35,10 @@ public class XMLFit
   private String inputDir;
   private String testsuite;
   private String cssfile;
+  private String xsltfile;
   private List<String> tests = new ArrayList<String>();
-
- 
+  private URL transformSuite;
+  private URL transformFiles;
   public XMLFit()
   {
   }
@@ -55,6 +56,8 @@ public class XMLFit
     xmlfit.setTestsuite(runner.getTestsuite());
     logger.info("Setting testsuite file to: " + runner.getTestsuite());
     xmlfit.setCssfile(runner.getStylesheet());
+    xmlfit.setXsltfile(runner.getXsltFile());
+   
     try
     {
       xmlfit.generate();
@@ -86,12 +89,17 @@ public class XMLFit
     
     validator.validate(testsuite, tests);
     
+    if(xsltfile != null)
+    {
+       transformSuite = new URL(xsltfile);
+       transformFiles = this.getClass().getResource("/TransformFiles.xsl");
+    }
+    else {
+      
+       transformSuite = this.getClass().getResource("/TransformSuite.xsl");
+       transformFiles = this.getClass().getResource("/TransformFiles.xsl");
     
-   //getting XSLT Files out of the jar
-   URL transformSuite = this.getClass().getResource("/TransformSuite.xsl");
-   URL transformFiles = this.getClass().getResource("/TransformFiles.xsl");
-   
-
+    }
    
    if(cssfile != null) 
    {
@@ -224,6 +232,19 @@ public class XMLFit
   {
     this.cssfile = cssfile;
   }
+
+  public String getXsltfile()
+  {
+    return xsltfile;
+  }
+
+  public void setXsltfile(String xsltfile)
+  {
+    this.xsltfile = xsltfile;
+  }
+  
+ 
+
 }
    
 
