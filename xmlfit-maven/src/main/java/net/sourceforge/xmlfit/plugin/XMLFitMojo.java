@@ -43,6 +43,13 @@ public class XMLFitMojo extends AbstractMojo implements XMLFitRunner
    */
   private String stylesheet;
   
+  /**
+   * The custom CSS File.
+   *
+   * @parameter xsltfile
+   */
+  private String xsltfile;
+  
   private static final int DELAY = 6000;
   private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
   
@@ -68,6 +75,20 @@ public class XMLFitMojo extends AbstractMojo implements XMLFitRunner
       return stylesheet;
     }
     return null;
+  }
+  
+  public String getXsltFile()
+  {
+    if(!(xsltfile == null))
+    {
+      return xsltfile;
+    }
+    return null;
+  }
+  
+  public void setXsltFile(String xsltfile)
+  {
+    this.xsltfile = xsltfile;
   }
   
   public void setStylesheet(String stylesheet)
