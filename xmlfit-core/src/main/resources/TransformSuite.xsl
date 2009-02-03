@@ -546,24 +546,28 @@ extension-element-prefixes="redirect">
 	<xsl:param name="filenode"/>
 	<xsl:param name="customdata"/>
 	<xsl:choose>
-		<xsl:when test="$datanode">
+		<xsl:when test="$datanode and child::*/var">
+			<xsl:variable name="actualfilenode" select="self::*"/>
 			<xsl:for-each select="$datanode/testdata/dataset">
 				<xsl:variable name="actualnode" select="self::*"/>
 					<tr>
-					<xsl:apply-templates select="$filenode/test/fixture/rows/row/child::*">
+						<xsl:apply-templates select="$actualfilenode/child::*">
 						<xsl:with-param name="datanode" select="$datanode"/>
 						<xsl:with-param name="defaultnode" select="$defaultnode"/>
 						<xsl:with-param name="actualnode" select="$actualnode"/>
+						<xsl:with-param name="actualfilenode" select="$actualfilenode"/>
 					</xsl:apply-templates>
 				</tr>
 			</xsl:for-each>
 		</xsl:when>
 		<xsl:otherwise>
 			<tr>
+				<xsl:variable name="actualfilenode" select="self::*"/>
 				<xsl:apply-templates select="child::*">
 					<xsl:with-param name="datanode" select="$datanode"/>
 					<xsl:with-param name="customdata" select="$customdata"/>
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
+					<xsl:with-param name="actualfilenode" select="$actualfilenode"/>
 				</xsl:apply-templates>
 			</tr>
 		</xsl:otherwise>
@@ -584,25 +588,37 @@ extension-element-prefixes="redirect">
 <xsl:param name="datanode"/>
 <xsl:param name="defaultnode"/>
 <xsl:param name="actualnode"/>
+<xsl:param name="actualfilenode"/>
 <xsl:param name="customdata"/>
 <xsl:variable name="varname" select="var/@*"/>
 <xsl:variable name="value" select="self::*"/>
 <xsl:choose>
-	<xsl:when test="$varname">
+	<xsl:when test="var">
 		<xsl:choose>
-			<xsl:when test="$customdata[name()=$varname]">
-				<td><xsl:value-of select="$customdata[name()=$varname]"/></td>
-			</xsl:when>	
+			<xsl:when test="$customdata">
+			<xsl:choose>
+				<xsl:when test="$customdata[name()=$varname]">
+					<td><xsl:value-of select="$customdata[name()=$varname]"/></td>
+				</xsl:when>	
+				<xsl:otherwise>
+					<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varname]"/></td>
+				</xsl:otherwise>
+			</xsl:choose>
+			</xsl:when>
 			<xsl:when test="$actualnode/child::*[name()=$varname]">
 				<td><xsl:value-of select="$actualnode/child::*[name()=$varname]"/></td>
 			</xsl:when>
 			<xsl:when test="$defaultnode/defaultdata/child::*[name()=$varname]">
 				<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varname]"/></td>
 			</xsl:when>
+		
 			<xsl:otherwise>
 				<td><xsl:value-of select="."/></td>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:when>
+	<xsl:when test="self::*=''">
+		<td>&#160;</td>	
 	</xsl:when>
 	<xsl:otherwise>
 		<td><xsl:value-of select="."/></td>
