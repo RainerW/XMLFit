@@ -242,6 +242,18 @@ extension-element-prefixes="redirect">
 										<xsl:with-param name="filename" select="$filename"/>
 										<xsl:with-param name="ubertestname" select="$ubertestname"/>
 									</xsl:apply-templates>
+									<xsl:if test="$filenode/test/fixture/columns">
+								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
+									<xsl:with-param name="filename" select="$filename"/>
+									<xsl:with-param name="ubertestname" select="$ubertestname"/>
+								</xsl:apply-templates></tr>
+							</xsl:if>
+							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
+								<xsl:with-param name="datanode" select="$datanode"/>
+								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
+								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="filenode" select="document($filename)"/>
+							</xsl:apply-templates>
 								</tbody>
 							</table>
 						</xsl:otherwise>
@@ -511,6 +523,7 @@ extension-element-prefixes="redirect">
 	<xsl:param name="datanode"/>
 	<xsl:param name="defaultnode"/>
 	<xsl:param name="filenode"/>
+	<xsl:param name="customdata"/>
 	<xsl:choose>
 		<xsl:when test="$datanode">
 			<xsl:for-each select="$datanode/testdata/dataset">
@@ -528,6 +541,7 @@ extension-element-prefixes="redirect">
 			<tr>
 				<xsl:apply-templates select="child::*">
 					<xsl:with-param name="datanode" select="$datanode"/>
+					<xsl:with-param name="customdata" select="$customdata"/>
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 				</xsl:apply-templates>
 			</tr>
@@ -549,11 +563,15 @@ extension-element-prefixes="redirect">
 <xsl:param name="datanode"/>
 <xsl:param name="defaultnode"/>
 <xsl:param name="actualnode"/>
+<xsl:param name="customdata"/>
 <xsl:variable name="varname" select="var/@*"/>
 <xsl:variable name="value" select="self::*"/>
 <xsl:choose>
 	<xsl:when test="$varname">
 		<xsl:choose>
+			<xsl:when test="$customdata[name()=$varname]">
+				<td><xsl:value-of select="$customdata[name()=$varname]"/></td>
+			</xsl:when>	
 			<xsl:when test="$actualnode/child::*[name()=$varname]">
 				<td><xsl:value-of select="$actualnode/child::*[name()=$varname]"/></td>
 			</xsl:when>
