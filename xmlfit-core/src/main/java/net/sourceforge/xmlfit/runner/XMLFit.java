@@ -39,6 +39,7 @@ public class XMLFit
   private List<String> tests = new ArrayList<String>();
   private URL transformSuite;
   private URL transformFiles;
+  
   public XMLFit()
   {
   }
@@ -93,6 +94,7 @@ public class XMLFit
     {
        transformSuite = new URL("file:\\"+new File(xsltfile).getAbsolutePath());
        transformFiles = this.getClass().getResource("/TransformFiles.xsl");
+       logger.info("Setting XSLT File to " +xsltfile);
     }
     else {
       
