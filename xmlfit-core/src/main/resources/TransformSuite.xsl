@@ -191,7 +191,7 @@ extension-element-prefixes="redirect">
 				</xsl:when>
 				<xsl:when test="$filenode/test/fixture/@type">
 				<xsl:choose>
-				<xsl:when test="$datanode">
+				<xsl:when test="$datanode and $filenode/test/fixture/command">
 				<xsl:for-each select="$datanode/testdata/dataset">
 					<xsl:choose>
 						<xsl:when test="$testname">
@@ -229,6 +229,27 @@ extension-element-prefixes="redirect">
 						</tbody>
 					</table>
 					</xsl:for-each>
+					</xsl:when>
+					<xsl:when test="$datanode and not($filenode/test/fixture/command)">
+					<xsl:variable name="actualnode" select="self::*"/>
+					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
+					<table cellpadding="0" cellspacing="0" border="1">
+						<tbody>
+							<tr><td colspan="3"><xsl:value-of select="$filenode/test/fixture/@type"/></td></tr>
+							<xsl:if test="$filenode/test/fixture/columns">
+								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
+									<xsl:with-param name="filename" select="$filename"/>
+									<xsl:with-param name="ubertestname" select="$ubertestname"/>
+								</xsl:apply-templates></tr>
+							</xsl:if>
+							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
+								<xsl:with-param name="datanode" select="$datanode"/>
+								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
+								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="filenode" select="document($filename)"/>
+							</xsl:apply-templates>
+						</tbody>
+					</table>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:apply-templates select="$filenode/test/fixture/comment"/>
