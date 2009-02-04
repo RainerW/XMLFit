@@ -30,14 +30,14 @@
   			<xsd:element ref="value"/>
   	    </xsd:choice>
 		<xsd:attribute name="name" use="required">
-             <xsd:simpleType>
-                <xsd:restriction base="xsd:NMTOKEN">
-                	<!--Action Fixture Commands -->
+             <!--  <xsd:simpleType>
+               <xsd:restriction base="xsd:NMTOKEN">
+                	
                 	<xsd:enumeration value="start"/>
        				<xsd:enumeration value="press"/>
         			<xsd:enumeration value="check"/>
         			<xsd:enumeration value="enter"/>
-        			<!--Selenium Fixture Commands -->
+        			
         			<xsd:enumeration value="startBrowser"/>
         			<xsd:enumeration value="shutdownBrowser"/>
         			<xsd:enumeration value="pause"/>
@@ -65,32 +65,16 @@
         			<xsd:enumeration value="assertSelectOptions"/>
         			<xsd:enumeration value="assertElementPresent"/>
         			<xsd:enumeration value="captureEntirePageScreenshot"/>
-        			<!--DBFit Fixture Commands -->
+        			
         			<xsd:enumeration value="connect"/>
         			<xsd:enumeration value="query"/>
         			<xsd:enumeration value="insert"/>
         			<xsd:enumeration value="update"/>
         			<xsd:enumeration value="execute"/>
-        			<!--PDF Fixture Commands -->
-        			<xsd:enumeration value="openPDF"/>
-        			<xsd:enumeration value="openPDFLocal"/>
-        			<xsd:enumeration value="assertTextInPdfPresent"/>
-        			<xsd:enumeration value="assertTextInPdfNotPresent"/>
-        			<xsd:enumeration value="assertAuthorsNameEquals"/>
-        			<xsd:enumeration value="assertAuthorsNameNotEquals"/>
-        			<xsd:enumeration value="assertCreationDateEquals"/>
-        			<xsd:enumeration value="asserDocumentTitleEquals"/>
-        			<xsd:enumeration value="assertCreatorEquals"/>
-        			<xsd:enumeration value="assertBookmarkExists"/>
-        			<xsd:enumeration value="assertDocumentIsEncrypted"/>
-        			<xsd:enumeration value="assertTextOnPage"/>
-        			<xsd:enumeration value="assertIsOwnerPasswd"/>
-        			<xsd:enumeration value="assertIsUserPasswd"/>
-        			<xsd:enumeration value="assertNumberOfBookmarks"/>
-        			<xsd:enumeration value="assertEncryptionLength"/>
-        			<xsd:enumeration value="assertPageCountEquals"/>
+        		
+
         		</xsd:restriction>
-           </xsd:simpleType>
+           </xsd:simpleType> -->
        </xsd:attribute> 
 	</xsd:complexType>
  </xsd:element>
