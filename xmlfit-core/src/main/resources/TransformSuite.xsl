@@ -443,6 +443,11 @@ extension-element-prefixes="redirect">
 						<xsl:when test="not(child::*)">
 							<xsl:value-of select="."/>
 						</xsl:when>
+						
+						<xsl:when test="var/@default">
+							<xsl:value-of select="var/@default"/>
+						</xsl:when>
+						
 						<xsl:otherwise>
 							&#160;
 						</xsl:otherwise>
@@ -460,9 +465,15 @@ extension-element-prefixes="redirect">
 						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$varnamenode]">
 							<xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varnamenode]"/>
 						</xsl:when>
+						
 						<xsl:when test="not(child::*)">
 							<xsl:value-of select="."/>
 						</xsl:when>
+						
+						<xsl:when test="var/@default">
+							<xsl:value-of select="var/@default"/>
+						</xsl:when>
+						
 						<xsl:otherwise>
 							&#160;
 						</xsl:otherwise>
