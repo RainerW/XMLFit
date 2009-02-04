@@ -191,7 +191,7 @@ extension-element-prefixes="redirect">
 				</xsl:when>
 				<xsl:when test="$filenode/test/fixture/@type">
 				<xsl:choose>
-				<xsl:when test="$datanode and $filenode/test/fixture/command">
+				<xsl:when test="$datanode and $filenode/test/fixture/command and not($filenode/test/fixture/columns)">
 				<xsl:for-each select="$datanode/testdata/dataset">
 					<xsl:choose>
 						<xsl:when test="$testname">
