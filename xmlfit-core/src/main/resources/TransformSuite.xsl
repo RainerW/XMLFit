@@ -582,38 +582,40 @@ extension-element-prefixes="redirect">
 	 actualnode - node for the actual position in Data Document
 	 -->
  <!-- ================================================================================== -->
-<xsl:template match = "child::*">
+<xsl:template match ="child::*">
 <xsl:param name="datanode"/>
 <xsl:param name="defaultnode"/>
 <xsl:param name="actualnode"/>
 <xsl:param name="actualfilenode"/>
 <xsl:param name="customdata"/>
-<xsl:variable name="varname" select="var/@*"/>
+<xsl:variable name="varname" select="var/@name"/>
 <xsl:variable name="value" select="self::*"/>
 <xsl:choose>
 	<xsl:when test="var">
+		<td><xsl:value-of select="var/@prefix"/> 
 		<xsl:choose>
 			<xsl:when test="$customdata">
 			<xsl:choose>
 				<xsl:when test="$customdata[name()=$varname]">
-					<td><xsl:value-of select="$customdata[name()=$varname]"/></td>
+					<xsl:value-of select="$customdata[name()=$varname]"/>
 				</xsl:when>	
 				<xsl:otherwise>
-					<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varname]"/></td>
+					<xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varname]"/>
 				</xsl:otherwise>
 			</xsl:choose>
 			</xsl:when>
 			<xsl:when test="$actualnode/child::*[name()=$varname]">
-				<td><xsl:value-of select="$actualnode/child::*[name()=$varname]"/></td>
+			<xsl:value-of select="$actualnode/child::*[name()=$varname]"/>
 			</xsl:when>
 			<xsl:when test="$defaultnode/defaultdata/child::*[name()=$varname]">
-				<td><xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varname]"/></td>
+				<xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varname]"/>
 			</xsl:when>
-		
-			<xsl:otherwise>
-				<td><xsl:value-of select="."/></td>
+	          <xsl:otherwise>
+				<xsl:value-of select="."/>
 			</xsl:otherwise>
 		</xsl:choose>
+	   <xsl:value-of select="var/@suffix"/>
+	   </td>
 	</xsl:when>
 	<xsl:when test="self::*=''">
 		<td>&#160;</td>	
