@@ -1,5 +1,5 @@
 <?xml version = "1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:date="xalan://java.util.Date" xmlns:redirect="http://xml.apache.org/xalan/redirect" 
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:date="xalan://java.util.Date" xmlns:redirect="http://xml.apache.org/xalan/redirect" xmlns:common="http://exslt.org/common"
 extension-element-prefixes="redirect">
 <xsl:output method="html" version ="1.0" encoding="ISO-8859-1" indent="yes"/>
 
@@ -498,11 +498,11 @@ extension-element-prefixes="redirect">
 				<xsl:when test="not($actualnode)">
 					<xsl:choose>
 				
-						<xsl:when test="$customdata[name()=$varnamenode]">
+						<xsl:when test="common:node-set($customdata)[name()=$varnamenode]">
 							<xsl:value-of select="$customdata[name()=$varnamenode]"/>
 						</xsl:when>
 						
-						<xsl:when test="$actualcustomdata[name()=$varnamenode]">
+						<xsl:when test="common:node-set($actualcustomdata)[name()=$varnamenode]">
 							<xsl:value-of select="$actualcustomdata[name()=$varnamenode]"/>
 						</xsl:when>
 							
