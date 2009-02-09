@@ -35,6 +35,7 @@ extension-element-prefixes="redirect">
 <!-- Template for the root element. Calls: 'comment' template, 'testgroup' template	-->
 <!-- ================================================================================== -->
 <xsl:template match ="testsuite">
+<xsl:param name="customdata"/>
 <xsl:param name="testsuitenode"/>
 <xsl:choose>
 	<xsl:when test="$testsuitenode">
@@ -42,6 +43,7 @@ extension-element-prefixes="redirect">
 		<xsl:apply-templates select="testgroup">
 			<xsl:with-param name="author" select="@author"/>
 			<xsl:with-param name="testsuitenode" select="$testsuitenode"/>
+			<xsl:with-param name="customdata" select="$customdata"/>
 		</xsl:apply-templates>
 	</xsl:when>
 <xsl:otherwise>
@@ -57,6 +59,7 @@ extension-element-prefixes="redirect">
 		<xsl:apply-templates select="comment"/>
 		<xsl:apply-templates select="testgroup">
 			<xsl:with-param name="author" select="@author"/>
+			<xsl:with-param name="customdata" select="$customdata"/>
 		</xsl:apply-templates>
 		<xsl:for-each select="testgroup">
 			<xsl:variable name="position" select="concat(position(),'-')"/>
@@ -82,6 +85,7 @@ extension-element-prefixes="redirect">
 	-->
 <!-- ================================================================================== -->
 <xsl:template match="testgroup">
+	<xsl:param name="customdata"/>
 	<xsl:param name="author"/>
 	<xsl:param name="testgroupname"/>
 	<xsl:param name="testsuitenode"/>
@@ -100,6 +104,7 @@ extension-element-prefixes="redirect">
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="ubertestname" select="$testname"/>
 					<xsl:with-param name="author" select="$author"/> 
+					<xsl:with-param name="customdata" select="$customdata"/>
 				</xsl:apply-templates>
 		</xsl:when>
 		<xsl:when test="$testgroupname">
@@ -107,6 +112,7 @@ extension-element-prefixes="redirect">
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="ubertestname" select="$testname"/>
 					<xsl:with-param name="author" select="$author"/> 
+					<xsl:with-param name="customdata" select="$customdata"/>
 				</xsl:apply-templates>
 		</xsl:when>
 		<xsl:otherwise>
@@ -122,6 +128,7 @@ extension-element-prefixes="redirect">
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="ubertestname" select="$testname"/>
 					<xsl:with-param name="author" select="$author"/> 
+					<xsl:with-param name="customdata" select="$customdata"/>
 				</xsl:apply-templates>
 			</body>
 		</html>	
@@ -147,12 +154,19 @@ extension-element-prefixes="redirect">
 	<xsl:param name="ubertestname"/>
 	<xsl:param name="defaultnode"/>
 	<xsl:param name="customdata"/>
+	<xsl:variable name="actualcustomdata" select="@*"/>
 	<xsl:variable name="filename" select="@test"/>
 	<xsl:variable name="testname" select="@name"/>
 	<xsl:variable name="choosevalue" select="'testsuite'"/>
 	<xsl:variable name="filenode" select="document($filename)"/>
+	
 	<xsl:apply-templates select="$filenode/test/comment"/>
-	<xsl:apply-templates select="$filenode/test/call"/>
+	
+	<xsl:apply-templates select="$filenode/test/call">
+		<xsl:with-param name="customdata" select="@*[name() != 'test' and name() != 'data']"/>
+	</xsl:apply-templates>
+		
+	
 		<xsl:variable name="datanode" select="document(@data)"/>
 		<xsl:if test="not(@testsuite) and not(@testgroup)">
 		<div class="main">
@@ -170,6 +184,7 @@ extension-element-prefixes="redirect">
 					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
 					<xsl:apply-templates select="$testsuitenode/testsuite">
 						<xsl:with-param name="testsuitenode" select="$testsuitenode"/>
+						<xsl:with-param name="customdata" select="@*[name() != 'test' and name() != 'data']"/>
 					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:when test="@testgroup and not(@test)">
@@ -178,6 +193,7 @@ extension-element-prefixes="redirect">
 					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
 					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]">
 						<xsl:with-param name="testgroupname" select="$testgroupname"/>
+						<xsl:with-param name="customdata" select="@*[name() != 'test' and name() != 'data']"/>
 					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:when test="@testgroup and @test">
@@ -187,6 +203,7 @@ extension-element-prefixes="redirect">
 					<xsl:variable name="testsuitenode" select="document($testsuitename)"/>
 					<xsl:apply-templates select="$testsuitenode/testsuite/testgroup[@name=$testgroupname]/call[@test=$exttestname]">
 						<xsl:with-param name="testgroupname" select="$testgroupname"/>
+						<xsl:with-param name="customdata" select="@*[name() != 'test' and name() != 'data']"/>
 					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:when test="$filenode/test/fixture/@type">
@@ -209,10 +226,11 @@ extension-element-prefixes="redirect">
 								<xsl:apply-templates select="$filenode/test/fixture/command">
 									<xsl:with-param name="datanode" select="$datanode"/>
 									<xsl:with-param name="defaultnode" select= "$defaultnode"/>
-									<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
+									<xsl:with-param name="customdata" select="$customdata"/>
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
 									<xsl:with-param name="actualnode" select="$actualnode"/>
+									<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 								</xsl:apply-templates>
 							<xsl:if test="$filenode/test/fixture/columns">
 								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
@@ -223,8 +241,9 @@ extension-element-prefixes="redirect">
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
 								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="customdata" select="$customdata"/>
 								<xsl:with-param name="filenode" select="document($filename)"/>
+								<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 							</xsl:apply-templates>
 						</tbody>
 					</table>
@@ -245,8 +264,9 @@ extension-element-prefixes="redirect">
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
 								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="customdata" select="$customdata"/>
 								<xsl:with-param name="filenode" select="document($filename)"/>
+								<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 							</xsl:apply-templates>
 						</tbody>
 					</table>
@@ -259,9 +279,10 @@ extension-element-prefixes="redirect">
 									<xsl:apply-templates select="$filenode/test/fixture/command">
 										<xsl:with-param name="datanode" select="$datanode"/>
 										<xsl:with-param name="defaultnode" select= "$defaultnode"/>
-										<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
+										<xsl:with-param name="customdata" select="$customdata"/>
 										<xsl:with-param name="filename" select="$filename"/>
 										<xsl:with-param name="ubertestname" select="$ubertestname"/>
+										<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 									</xsl:apply-templates>
 									<xsl:if test="$filenode/test/fixture/columns">
 								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
@@ -272,8 +293,9 @@ extension-element-prefixes="redirect">
 							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
 								<xsl:with-param name="datanode" select="$datanode"/>
 								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="@*"/>
+								<xsl:with-param name="customdata" select="$customdata"/>
 								<xsl:with-param name="filenode" select="document($filename)"/>
+								<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 							</xsl:apply-templates>
 								</tbody>
 							</table>
@@ -302,10 +324,11 @@ extension-element-prefixes="redirect">
 													<xsl:apply-templates select="$filenode/test/fixture/command">
 														<xsl:with-param name="datanode" select="$datanode"/>
 														<xsl:with-param name="defaultnode" select= "$defaultnode"/>
-														<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
+														<xsl:with-param name="customdata" select="$customdata"/>
 														<xsl:with-param name="actualnode" select="$actualnode"/>
 														<xsl:with-param name="filename" select="$filename"/>
 														<xsl:with-param name="ubertestname" select="$ubertestname"/>
+														<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 													</xsl:apply-templates>
 												</tbody>
 											</table>
@@ -314,6 +337,7 @@ extension-element-prefixes="redirect">
 								</xsl:for-each>
 						</xsl:when>
 						<xsl:otherwise>
+							<xsl:if test="$filenode/test/fixture">
 							<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 							<table cellpadding="0" cellspacing="0" border="1">
 										<tbody>
@@ -322,15 +346,24 @@ extension-element-prefixes="redirect">
 												<xsl:with-param name="ubertestname" select="$ubertestname"/>
 												<xsl:with-param name="datanode" select="$datanode"/>
 												<xsl:with-param name="defaultnode" select= "$defaultnode"/>
-												<xsl:with-param name="customdata" select="@*[name()!='test' and name()!='data']"/>
+												<xsl:with-param name="customdata" select="$customdata"/>
 												<xsl:with-param name="filename" select="$filename"/>
+												<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 											</xsl:apply-templates>
 									</tbody>
 								</table>
-						</xsl:otherwise>
+							</xsl:if>
+							<xsl:if test="not($filenode/test/fixture)">
+							<table cellpadding="0" cellspacing="0" border="1">
+										<tbody>
+											<tr><td class="warning">Warning: No Fixture in Testcase</td></tr>
+										</tbody>
+								</table>
+							</xsl:if>
+					</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
-		 </xsl:choose>
+		 </xsl:choose>	
 </xsl:template>
 
 
@@ -350,6 +383,7 @@ extension-element-prefixes="redirect">
 	<xsl:param name="defaultnode"/>
 	<xsl:param name="datanode"/>
 	<xsl:param name="customdata"/>
+	<xsl:param name="actualcustomdata"/>
 	<xsl:param name="actualnode"/>
 	<xsl:param name="filename"/>
 	<xsl:variable name="commandnode" select="self::*"/>
@@ -367,6 +401,7 @@ extension-element-prefixes="redirect">
 				<xsl:with-param name="customdata" select="$customdata"/>
 				<xsl:with-param name="filename" select="$filename"/>
 				<xsl:with-param name="actualnode" select="$actualnode"/>
+				<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 			</xsl:apply-templates>
 			<xsl:apply-templates select="value">
 				<xsl:with-param name="ubertestname" select="$ubertestname"/>
@@ -375,6 +410,7 @@ extension-element-prefixes="redirect">
 				<xsl:with-param name="customdata" select="$customdata"/>
 				<xsl:with-param name="filename" select="$filename"/>
 				<xsl:with-param name="actualnode" select="$actualnode"/>
+				<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 			</xsl:apply-templates>
 		</tr>
 </xsl:template>
@@ -398,6 +434,7 @@ extension-element-prefixes="redirect">
 	<xsl:param name="customdata"/>
 	<xsl:param name="actualnode"/>
 	<xsl:param name="filename"/>
+	<xsl:param name="actualcustomdata"/>
 	<xsl:variable name="target" select="var/@name"/>
 	<xsl:call-template name="var" >
 		<xsl:with-param name="ubertestname" select="$ubertestname" />
@@ -407,6 +444,7 @@ extension-element-prefixes="redirect">
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="filename" select="$filename" />
 		<xsl:with-param name="varnamenode" select="$target" />
+		<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 	</xsl:call-template>	
 </xsl:template>
 
@@ -420,7 +458,7 @@ extension-element-prefixes="redirect">
 	<xsl:param name="actualnode"/>
 	<xsl:param name="filename"/>
 	<xsl:param name="varnamenode" />
-	
+	<xsl:param name="actualcustomdata"/>
 	
 	<xsl:variable name="prefixText" select="var/@prefixText"/>
 	<xsl:variable name="suffixText" select="var/@suffixText"/>
@@ -459,9 +497,15 @@ extension-element-prefixes="redirect">
 				<!-- VAR Data from Attribute -->
 				<xsl:when test="not($actualnode)">
 					<xsl:choose>
+				
 						<xsl:when test="$customdata[name()=$varnamenode]">
 							<xsl:value-of select="$customdata[name()=$varnamenode]"/>
 						</xsl:when>
+						
+						<xsl:when test="$actualcustomdata[name()=$varnamenode]">
+							<xsl:value-of select="$actualcustomdata[name()=$varnamenode]"/>
+						</xsl:when>
+							
 						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$varnamenode]">
 							<xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varnamenode]"/>
 						</xsl:when>
@@ -499,7 +543,7 @@ extension-element-prefixes="redirect">
 	 -->
 <!-- ================================================================================== -->
 <xsl:template match="value">
-	
+	<xsl:param name="actualcustomdata"/>
 	<xsl:param name="ubertestname"/>
 	<xsl:param name="defaultnode"/>
 	<xsl:param name="datanode"/>
@@ -515,6 +559,7 @@ extension-element-prefixes="redirect">
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="filename" select="$filename" />
 		<xsl:with-param name="varnamenode" select="$value" />
+		<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 	</xsl:call-template>	
 	
 </xsl:template>
@@ -554,6 +599,7 @@ extension-element-prefixes="redirect">
 	<xsl:param name="defaultnode"/>
 	<xsl:param name="filenode"/>
 	<xsl:param name="customdata"/>
+	<xsl:param name="actualcustomdata"/>
 	<xsl:choose>
 		<xsl:when test="$datanode and child::*/var">
 			<xsl:variable name="actualfilenode" select="self::*"/>
@@ -577,6 +623,7 @@ extension-element-prefixes="redirect">
 					<xsl:with-param name="customdata" select="$customdata"/>
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="actualfilenode" select="$actualfilenode"/>
+					<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 				</xsl:apply-templates>
 			</tr>
 		</xsl:otherwise>
@@ -598,6 +645,7 @@ extension-element-prefixes="redirect">
 <xsl:param name="defaultnode"/>
 <xsl:param name="actualnode"/>
 <xsl:param name="customdata"/>
+<xsl:param name="actualcustomdata"/>
 <xsl:variable name="varnamenode" select="var/@name"/>
 <xsl:variable name="value" select="self::*"/>
 	<xsl:call-template name="var" >
@@ -606,6 +654,7 @@ extension-element-prefixes="redirect">
 		<xsl:with-param name="customdata" select="$customdata" />
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="varnamenode" select="$varnamenode" />
+		<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 	</xsl:call-template>	
 </xsl:template>
 
