@@ -231,25 +231,11 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="actualnode" select="$actualnode"/>
 									<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 								</xsl:apply-templates>
-							<xsl:if test="$filenode/test/fixture/columns">
-								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
-									<xsl:with-param name="filename" select="$filename"/>
-									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-								</xsl:apply-templates></tr>
-							</xsl:if>
-							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
-								<xsl:with-param name="datanode" select="$datanode"/>
-								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="$customdata"/>
-								<xsl:with-param name="filenode" select="document($filename)"/>
-								<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
-							</xsl:apply-templates>
 						</tbody>
 					</table>
 					</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:variable name="actualnode" select="self::*"/>
 					<xsl:apply-templates select="$filenode/test/fixture/comment"/>
 					<table cellpadding="0" cellspacing="0" border="1">
 						<tbody>
@@ -259,22 +245,8 @@ extension-element-prefixes="redirect">
 									<xsl:with-param name="customdata" select="$customdata"/>
 									<xsl:with-param name="filename" select="$filename"/>
 									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-									<xsl:with-param name="actualnode" select="$actualnode"/>
 									<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
 								</xsl:apply-templates>
-							<xsl:if test="$filenode/test/fixture/columns">
-								<tr><xsl:apply-templates select="$filenode/test/fixture/columns/column">
-									<xsl:with-param name="filename" select="$filename"/>
-									<xsl:with-param name="ubertestname" select="$ubertestname"/>
-								</xsl:apply-templates></tr>
-							</xsl:if>
-							<xsl:apply-templates select ="$filenode/test/fixture/rows/row">
-								<xsl:with-param name="datanode" select="$datanode"/>
-								<xsl:with-param name="defaultnode" select= "$defaultnode"/> 
-								<xsl:with-param name="customdata" select="$customdata"/>
-								<xsl:with-param name="filenode" select="document($filename)"/>
-								<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
-							</xsl:apply-templates>
 						</tbody>
 					</table>
 					</xsl:otherwise>
