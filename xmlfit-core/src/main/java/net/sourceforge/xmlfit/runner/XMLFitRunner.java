@@ -15,8 +15,6 @@ public interface XMLFitRunner
   
   public String getStylesheet();
   
-  public String getXsltFile();
-  
   public String getMode();
 
 }

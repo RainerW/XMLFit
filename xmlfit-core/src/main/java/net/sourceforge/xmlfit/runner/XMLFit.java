@@ -35,7 +35,6 @@ public class XMLFit
   private String inputDir;
   private String testsuite;
   private String cssfile;
-  private String xsltfile;
   private String mode;
   private List<String> tests = new ArrayList<String>();
   private URL transformSuite;
@@ -58,7 +57,6 @@ public class XMLFit
     xmlfit.setTestsuite(runner.getTestsuite());
     logger.info("Setting testsuite file to: " + runner.getTestsuite());
     xmlfit.setCssfile(runner.getStylesheet());
-    xmlfit.setXsltfile(runner.getXsltFile());
     xmlfit.setMode(runner.getMode());
    
     try
@@ -238,16 +236,6 @@ public class XMLFit
     this.cssfile = cssfile;
   }
 
-  public String getXsltfile()
-  {
-    return xsltfile;
-  }
-
-  public void setXsltfile(String xsltfile)
-  {
-    this.xsltfile = xsltfile;
-  }
-  
   public void setMode(String mode)
   {
     this.mode = mode;

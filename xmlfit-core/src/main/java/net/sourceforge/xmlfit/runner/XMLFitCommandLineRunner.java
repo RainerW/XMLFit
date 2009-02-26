@@ -41,12 +41,6 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
   private String stylesheet;
 
   @Option(
-      name="-xsltfile",
-      required=false,
-      usage="Customized XSLT File")
-  private String xsltfile;
-  
-  @Option(
       name="-mode",
       required=false,
       usage="Transformation Mode")
@@ -67,15 +61,6 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
     return null;
   }
   
-  public String getXsltFile()
-  {
-    if(!(xsltfile == null))
-    {
-      return xsltfile;
-    }
-    return null;
-  }
-  
   public String getMode()
   {
     if(!(mode == null))
@@ -88,11 +73,6 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
   public void setMode(String mode)
   {
     this.mode = mode;
-  }
-
-  public void  setXsltFile(String xsltfile)
-  {
-    this.xsltfile = xsltfile;
   }
  
   public void setStylesheet(String stylesheet)
