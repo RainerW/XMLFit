@@ -77,7 +77,7 @@ public class XMLFitMojo extends AbstractMojo implements XMLFitRunner
     return null;
   }
   
-  public String getXsltFile()
+  public String getMode()
   {
     if(!(mode == null))
     {
@@ -86,7 +86,7 @@ public class XMLFitMojo extends AbstractMojo implements XMLFitRunner
     return null;
   }
   
-  public void setXsltFile(String mode)
+  public void setMode(String mode)
   {
     this.mode = mode;
   }
@@ -127,10 +127,5 @@ public class XMLFitMojo extends AbstractMojo implements XMLFitRunner
     this.outputDir = outputDir;
   }
   
-  @Override
-  public String getMode() 
-  {
-	return mode;
-  }
   
 }
