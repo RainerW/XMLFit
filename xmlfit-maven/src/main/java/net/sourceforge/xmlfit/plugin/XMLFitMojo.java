@@ -126,4 +126,11 @@ public class XMLFitMojo extends AbstractMojo implements XMLFitRunner
   {
     this.outputDir = outputDir;
   }
+  
+  @Override
+  public String getMode() 
+  {
+	return mode;
+  }
+  
 }
