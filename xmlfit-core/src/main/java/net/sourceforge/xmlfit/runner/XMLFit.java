@@ -36,6 +36,7 @@ public class XMLFit
   private String testsuite;
   private String cssfile;
   private String xsltfile;
+  private String mode;
   private List<String> tests = new ArrayList<String>();
   private URL transformSuite;
   private URL transformFiles;
@@ -58,6 +59,7 @@ public class XMLFit
     logger.info("Setting testsuite file to: " + runner.getTestsuite());
     xmlfit.setCssfile(runner.getStylesheet());
     xmlfit.setXsltfile(runner.getXsltFile());
+    xmlfit.setMode(runner.getMode());
    
     try
     {
@@ -90,18 +92,19 @@ public class XMLFit
     
     validator.validate(testsuite, tests);
     
-    if(xsltfile != null)
-    {
-       transformSuite = new URL("file:\\"+new File(xsltfile).getAbsolutePath());
-       transformFiles = this.getClass().getResource("/TransformFiles.xsl");
-       logger.info("Setting XSLT File to " +xsltfile);
-    }
-    else {
-      
-       transformSuite = this.getClass().getResource("/TransformSuite.xsl");
-       transformFiles = this.getClass().getResource("/TransformFiles.xsl");
     
+    
+    if(mode != null)
+    {
+     transformSuite = this.getClass().getResource("/" + mode+"/Transform.xsl");
+     transformFiles = this.getClass().getResource("/base/TransformFiles.xsl");
     }
+    else 
+    {
+     transformSuite = this.getClass().getResource("/fit/Transform.xsl");
+     transformFiles = this.getClass().getResource("/base/TransformFiles.xsl");
+  
+  }
    
    if(cssfile != null) 
    {
@@ -128,20 +131,20 @@ public class XMLFit
    
    if(cssfile == null)
    {
-     util.copyOutOfJar("/css/suite.css", outputdir+ "/css/suite.css"); 
-     util.copyOutOfJar("/css/suite.css", outputdir +"/"+ testdir +"/css/suite.css");
-     util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
-     util.copyOutOfJar("/css/images/logo2.jpg", outputdir+ "/css/images/logo.jpg"); 
-     util.copyOutOfJar("/css/images/XMLFitLogo.jpg", outputdir+ "/css/images/XMLFitLogo.jpg");
-     util.copyOutOfJar("/css/images/logo2.jpg", outputdir+ "/"+ testdir +"/css/images/logo.jpg"); 
-     util.copyOutOfJar("/css/images/XMLFitLogo.jpg", outputdir+ "/"+ testdir +"/css/images/XMLFitLogo.jpg"); 
+     util.copyOutOfJar("/base/css/suite.css", outputdir+ "/css/suite.css"); 
+     util.copyOutOfJar("/base/css/suite.css", outputdir +"/"+ testdir +"/css/suite.css");
+     util.copyOutOfJar("/base/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
+     util.copyOutOfJar("/base/css/images/logo.jpg", outputdir+ "/css/images/logo.jpg"); 
+     util.copyOutOfJar("/base/css/images/XMLFitLogo.jpg", outputdir+ "/css/images/XMLFitLogo.jpg");
+     util.copyOutOfJar("/base/css/images/logo.jpg", outputdir+ "/"+ testdir +"/css/images/logo.jpg"); 
+     util.copyOutOfJar("/base/css/images/XMLFitLogo.jpg", outputdir+ "/"+ testdir +"/css/images/XMLFitLogo.jpg"); 
    }
    else
    {
      String filename = new File(cssfile).getName();
      util.copy(new File(cssfile), new File(outputdir+"/css/"+filename));
      util.copy(new File(cssfile), new File(outputdir+ "/"+ testdir+ "/css/"+filename));
-     util.copyOutOfJar("/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
+     util.copyOutOfJar("/base/css/design.css", outputdir +"/"+ filedir +"/css/design.css");
    }
 }
 
@@ -243,6 +246,11 @@ public class XMLFit
   public void setXsltfile(String xsltfile)
   {
     this.xsltfile = xsltfile;
+  }
+  
+  public void setMode(String mode)
+  {
+    this.mode = mode;
   }
   
  

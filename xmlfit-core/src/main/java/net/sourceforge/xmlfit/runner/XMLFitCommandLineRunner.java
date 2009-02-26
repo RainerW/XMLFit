@@ -13,7 +13,7 @@ import org.kohsuke.args4j.Option;
  */
 public final class XMLFitCommandLineRunner implements XMLFitRunner
 {
-  
+
   private static Logger logger = Logger.getLogger(XMLFitCommandLineRunner.class);
   
   @Option(
@@ -46,6 +46,12 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
       usage="Customized XSLT File")
   private String xsltfile;
   
+  @Option(
+      name="-mode",
+      required=false,
+      usage="Transformation Mode")
+  private String mode;
+  
   
   private XMLFitCommandLineRunner() 
   {
@@ -68,6 +74,20 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
       return xsltfile;
     }
     return null;
+  }
+  
+  public String getMode()
+  {
+    if(!(mode == null))
+    {
+      return mode;
+    }
+    return null;
+  }
+  
+  public void setMode(String mode)
+  {
+    this.mode = mode;
   }
 
   public void  setXsltFile(String xsltfile)
@@ -118,7 +138,6 @@ public final class XMLFitCommandLineRunner implements XMLFitRunner
  
   public static void main(String[] args) throws Exception
   { 
-    new net.sourceforge.xmlfit.util.Util().configureLog4j();
     XMLFitCommandLineRunner runner = new XMLFitCommandLineRunner();
     CmdLineParser parser = new CmdLineParser(runner);
     try 

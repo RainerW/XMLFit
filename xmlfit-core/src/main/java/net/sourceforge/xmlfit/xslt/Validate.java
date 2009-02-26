@@ -30,8 +30,8 @@ public class Validate
   logger.debug(method + "Start");
    
   SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-  URL suiteSchemaLocation = this.getClass().getResource("/SuiteSchema.xsd");
-  URL fileSchemaLocation = this.getClass().getResource("/FileSchema.xsd");
+  URL suiteSchemaLocation = this.getClass().getResource("/net/sourceforge/xmlfit/schema/SuiteSchema.xsd");
+  URL fileSchemaLocation = this.getClass().getResource("/net/sourceforge/xmlfit/schema/FileSchema.xsd");
   Schema suiteSchema = factory.newSchema(suiteSchemaLocation);
   Schema fileSchema = factory.newSchema(fileSchemaLocation);
   Validator fileValidator = fileSchema.newValidator();
