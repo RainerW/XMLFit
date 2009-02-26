@@ -118,7 +118,47 @@
          <source>
  -style <i>custom CSS file</i><br/><b>optional</b>
        </source>
+       <source>
+ -mode <i>mode of the transformation (e.g. selenium). default is fit mode</i><br/><b>optional</b>
+       </source>
       </p>
+     </subsection>
+     <subsection name="Other features of XMLFit">
+        There are some features in XMLFit that you dont need in every case, but they can be handy in some testing situation. 
+        <subsection name="pre and suffix of variables">
+           In the variable element you can define two more attributes to give a pre and a suffix to the variable. Following example shows this:
+           <source>
+        ...
+        &lt;command name="enter"&gt;
+            &lt;target&gt;select&lt;/target&gt;
+            &lt;value&gt;&lt;var prefixText="pre" name="trackNumber" suffixText="suf"/&gt;&lt;/value&gt;            
+        &lt;/command&gt;
+        ...
+           </source>
+         This is useful when you need a variable with just a simple change in a specific testcase.
+        </subsection>
+        <subsection name="Complex structures of Tests ">
+        In XMLFit testsuites and testgroups are handled just the same way like simple tests. This makes it possible to define complex structures of tests, 
+        like a testsuite of testuites, or a testsuite referencing to a testgroup. The reference to a testsuite or a testgroup in a testsuite is quit the same as a reference to a test. Just use the call element in a testgroup of a testsuite. 
+        To much testsuite, testgroup and test thing? Ok, here is an example:
+        <source>
+&lt;testsuite author="faigle"&gt;
+  &lt;testgroup name="ExampleTest" id="1" defaultData="data/defaultData.xml"&gt;
+  
+      &lt;call test="testMusic.xml" data="data/musicData.xml"/&gt; <i>// simple reference to a test</i>
+      &lt;call testsuite="testSuite.xml" /&gt; <i>//reference to a testsuite called "testSuite.xml".</i>
+      &lt;call testsuite="testSuite.xml"  testgroup="testgroup1"/&gt; <i>// reference to a testgroup in the testsuite. </i>
+      &lt;call testsuite="testSuite.xml"  testgroup="testgroup1" test="test1.xml"/&gt;<i> // reference to a test in a testgroup</i>
+    &lt;/testgroup&gt;
+&lt;/testsuite&gt;
+        </source>
+       
+                       
+        </subsection>
+         <subsection name="Overwrite Variables">
+                       
+        </subsection>
+        
      </subsection>
     </section>
   </body>
