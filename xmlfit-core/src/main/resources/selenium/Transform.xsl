@@ -277,7 +277,6 @@ extension-element-prefixes="redirect">
 							</xsl:apply-templates>
 						</tbody>
 					</table>
-					
 					</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
@@ -366,6 +365,39 @@ extension-element-prefixes="redirect">
 	</xsl:call-template>	
 </xsl:template>
 
+
+<!-- ================================================================================== -->
+<!--Template for the 'value' element.	-->
+<!-- Param List: 
+	 defaultnode - node for the Default Data Document 
+	 customdata - node for the Attributelist given by user
+	 datanode - node for the Data Document
+	 actualnode - node for the actual position in Data Document
+	 filename - the name of the fixture document
+	 ubertestname - name of the test
+	 -->
+<!-- ================================================================================== -->
+<xsl:template match="value">
+	<xsl:param name="actualcustomdata"/>
+	<xsl:param name="ubertestname"/>
+	<xsl:param name="defaultnode"/>
+	<xsl:param name="datanode"/>
+	<xsl:param name="customdata"/>
+	<xsl:param name="actualnode"/>
+	<xsl:param name="filename"/>
+	<xsl:variable name="value" select="var/@name"/>
+	<xsl:call-template name="var" >
+		<xsl:with-param name="ubertestname" select="$ubertestname" />
+		<xsl:with-param name="defaultnode" select="defaultnode" />
+		<xsl:with-param name="datanode" select="datanode" />
+		<xsl:with-param name="customdata" select="$customdata" />
+		<xsl:with-param name="actualnode" select="$actualnode" />
+		<xsl:with-param name="filename" select="$filename" />
+		<xsl:with-param name="varnamenode" select="$value" />
+		<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
+	</xsl:call-template>	
+	
+</xsl:template>
 <!-- Template for VAR -->
 <xsl:template name="var">
 	
@@ -447,135 +479,6 @@ extension-element-prefixes="redirect">
 		</td>
 
 </xsl:template>
-
-
-<!-- ================================================================================== -->
-<!--Template for the 'value' element.	-->
-<!-- Param List: 
-	 defaultnode - node for the Default Data Document 
-	 customdata - node for the Attributelist given by user
-	 datanode - node for the Data Document
-	 actualnode - node for the actual position in Data Document
-	 filename - the name of the fixture document
-	 ubertestname - name of the test
-	 -->
-<!-- ================================================================================== -->
-<xsl:template match="value">
-	<xsl:param name="actualcustomdata"/>
-	<xsl:param name="ubertestname"/>
-	<xsl:param name="defaultnode"/>
-	<xsl:param name="datanode"/>
-	<xsl:param name="customdata"/>
-	<xsl:param name="actualnode"/>
-	<xsl:param name="filename"/>
-	<xsl:variable name="value" select="var/@name"/>
-	<xsl:call-template name="var" >
-		<xsl:with-param name="ubertestname" select="$ubertestname" />
-		<xsl:with-param name="defaultnode" select="defaultnode" />
-		<xsl:with-param name="datanode" select="datanode" />
-		<xsl:with-param name="customdata" select="$customdata" />
-		<xsl:with-param name="actualnode" select="$actualnode" />
-		<xsl:with-param name="filename" select="$filename" />
-		<xsl:with-param name="varnamenode" select="$value" />
-		<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
-	</xsl:call-template>	
-	
-</xsl:template>
-
-
-<!-- ================================================================================== -->
-<!--Template for the 'column' element.	-->
-<!--Param list:
-	filename - the name of the fixture document 
-	ubertestname - name of the test -->
-<!-- ================================================================================== -->
-<xsl:template match="test/fixture/columns/column">
-<xsl:param name="ubertestname"/>
-<xsl:param name="filename"/>
-<xsl:variable name="tmp" select="substring-before($filename, '.')"/>
-<xsl:variable name="htmlfile" select="concat($tmp, '.html')"/>
-<xsl:variable name="tmp3" select="$ubertestname"/>
-<xsl:variable name="tmp2" select="concat($tmp3, '_')"/>
-<xsl:variable name="finalname" select="concat($tmp2, $htmlfile)"/>	
-	<td>
-	<a><xsl:attribute name="href">file://<xsl:value-of select="$project_dir"/>/<xsl:value-of select="$output_dir"/>/<xsl:value-of select="$file_dir"/>/<xsl:value-of select="$finalname"/>#<xsl:value-of select="position()"/></xsl:attribute><xsl:value-of select="."/></a>
-	</td>
-</xsl:template>
-
-
-<!-- ================================================================================== -->
-<!-- Template for the 'row' element. Calls: 'child::*' template	-->
-<!-- Param List: 
-	 defaultnode - node for the Default Data Document 
-	 filenode - node for the Fixture Document 
-	 datanode - node for the Data Document
-	 actualnode - node for the actual position in Data Document
-	 -->
-<!-- ================================================================================== -->
-<xsl:template match = "test/fixture/rows/row">
-	<xsl:param name="datanode"/>
-	<xsl:param name="defaultnode"/>
-	<xsl:param name="filenode"/>
-	<xsl:param name="customdata"/>
-	<xsl:param name="actualcustomdata"/>
-	<xsl:choose>
-		<xsl:when test="$datanode and child::*/var">
-			<xsl:variable name="actualfilenode" select="self::*"/>
-			<xsl:for-each select="$datanode/testdata/dataset">
-				<xsl:variable name="actualnode" select="self::*"/>
-					<tr>
-						<xsl:apply-templates select="$actualfilenode/child::*">
-						<xsl:with-param name="datanode" select="$datanode"/>
-						<xsl:with-param name="defaultnode" select="$defaultnode"/>
-						<xsl:with-param name="actualnode" select="$actualnode"/>
-						<xsl:with-param name="actualfilenode" select="$actualfilenode"/>
-					</xsl:apply-templates>
-				</tr>
-			</xsl:for-each>
-		</xsl:when>
-		<xsl:otherwise>
-			<tr>
-				<xsl:variable name="actualfilenode" select="self::*"/>
-				<xsl:apply-templates select="child::*">
-					<xsl:with-param name="datanode" select="$datanode"/>
-					<xsl:with-param name="customdata" select="$customdata"/>
-					<xsl:with-param name="defaultnode" select="$defaultnode"/>
-					<xsl:with-param name="actualfilenode" select="$actualfilenode"/>
-					<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
-				</xsl:apply-templates>
-			</tr>
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:template>
-
-
-<!-- ================================================================================== -->
-<!-- Template for the 'child::*' element.-->
-<!-- Param List: 
-	 defaultnode - node for the Default Data Document 
-	 filenode - node for the Fixture Document 
-	 datanode - node for the Data Document
-	 actualnode - node for the actual position in Data Document
-	 -->
- <!-- ================================================================================== -->
-<xsl:template match ="child::*">
-<xsl:param name="datanode"/>
-<xsl:param name="defaultnode"/>
-<xsl:param name="actualnode"/>
-<xsl:param name="customdata"/>
-<xsl:param name="actualcustomdata"/>
-<xsl:variable name="varnamenode" select="var/@name"/>
-<xsl:variable name="value" select="self::*"/>
-	<xsl:call-template name="var" >
-		<xsl:with-param name="defaultnode" select="defaultnode" />
-		<xsl:with-param name="datanode" select="datanode" />
-		<xsl:with-param name="customdata" select="$customdata" />
-		<xsl:with-param name="actualnode" select="$actualnode" />
-		<xsl:with-param name="varnamenode" select="$varnamenode" />
-		<xsl:with-param name="actualcustomdata" select="$actualcustomdata"/>
-	</xsl:call-template>	
-</xsl:template>
-
 	
 <!-- ================================================================================== -->
 <!-- Template for the 'comment' element. -->
