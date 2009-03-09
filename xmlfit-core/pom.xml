@@ -5,7 +5,7 @@
   <artifactId>xmlfit-core</artifactId>
   <packaging>jar</packaging>
   <name>xmlfit-core</name>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   
   <!-- 
    <parent>
@@ -201,7 +201,7 @@
                 <configuration>
                   <generateDirectory>${project.build.directory}/generated-jaxb-sources</generateDirectory>
                   <includeSchemas>
-                    <includeSchema>SuiteSchema.xsd</includeSchema>
+                    <includeSchema>net/sourceforge/xmlfit/schema/SuiteSchema.xsd</includeSchema>
                   </includeSchemas>
                 </configuration>
               </execution>
