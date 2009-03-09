@@ -327,8 +327,8 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="target" select="var/@name"/>
 	<xsl:call-template name="var" >
 		<xsl:with-param name="ubertestname" select="$ubertestname" />
-		<xsl:with-param name="defaultnode" select="defaultnode" />
-		<xsl:with-param name="datanode" select="datanode" />
+		<xsl:with-param name="defaultnode" select="$defaultnode" />
+		<xsl:with-param name="datanode" select="$datanode" />
 		<xsl:with-param name="customdata" select="$customdata" />
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="filename" select="$filename" />
@@ -360,8 +360,8 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="value" select="var/@name"/>
 	<xsl:call-template name="var" >
 		<xsl:with-param name="ubertestname" select="$ubertestname" />
-		<xsl:with-param name="defaultnode" select="defaultnode" />
-		<xsl:with-param name="datanode" select="datanode" />
+		<xsl:with-param name="defaultnode" select="$defaultnode" />
+		<xsl:with-param name="datanode" select="$datanode" />
 		<xsl:with-param name="customdata" select="$customdata" />
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="filename" select="$filename" />
@@ -449,7 +449,6 @@ extension-element-prefixes="redirect">
 		</xsl:choose>
 		<xsl:value-of select="$suffixText" />
 		</td>
-
 </xsl:template>
 	
 <!-- ================================================================================== -->
