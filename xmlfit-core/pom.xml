@@ -5,16 +5,16 @@
   <artifactId>xmlfit-core</artifactId>
   <packaging>jar</packaging>
   <name>xmlfit-core</name>
-  <version>0.0.1</version>
-  
-  <!-- 
+  <version>${applicationVersion}</version>
+
+
    <parent>
     <groupId>net.sourceforge.xmlfit</groupId>
     <artifactId>xmlfit-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../xmlfit-parent</relativePath>
   </parent>
-   -->
+ 
    
   <repositories>
     <repository>
@@ -139,7 +139,7 @@
               <content><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <fileset-config file-format-version="1.2.0" simple-config="true">
-    <local-check-config name="Seitenbau" location="/XMLFit/src/main/plugin/checkstyle/sb.xml" type="project" description="">
+    <local-check-config name="Seitenbau" location="src/main/plugin/checkstyle/sb.xml" type="project" description="">
         <additional-data name="protect-config-file" value="false"/>
     </local-check-config>
      <fileset name="Alle" enabled="true" check-config-name="Seitenbau" local="true">
@@ -320,7 +320,7 @@
                 <version>2.1</version>
                 <configuration>
                     <configLocation>
-                        ${basedir}/src/main/plugin/checkstyle/sb.xml
+                        src/main/plugin/checkstyle/sb.xml
                     </configLocation>
                 </configuration>
             </plugin>
