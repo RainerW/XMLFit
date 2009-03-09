@@ -88,7 +88,7 @@ public class XMLFit
     
     this.getTestcasesToValidate(testsuite);
     
-    validator.validate(testsuite, tests);
+    //validator.validate(testsuite, tests);
     
     
     
