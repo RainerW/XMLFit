@@ -438,8 +438,8 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="target" select="var/@name"/>
 	<xsl:call-template name="var" >
 		<xsl:with-param name="ubertestname" select="$ubertestname" />
-		<xsl:with-param name="defaultnode" select="defaultnode" />
-		<xsl:with-param name="datanode" select="datanode" />
+		<xsl:with-param name="defaultnode" select="$defaultnode" />
+		<xsl:with-param name="datanode" select="$datanode" />
 		<xsl:with-param name="customdata" select="$customdata" />
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="filename" select="$filename" />
@@ -497,28 +497,33 @@ extension-element-prefixes="redirect">
 				<!-- VAR Data from Attribute -->
 				<xsl:when test="not($actualnode)">
 					<xsl:choose>
-				
 						<xsl:when test="common:node-set($customdata)[name()=$varnamenode]">
+						
 							<xsl:value-of select="$customdata[name()=$varnamenode]"/>
 						</xsl:when>
 						
 						<xsl:when test="common:node-set($actualcustomdata)[name()=$varnamenode]">
+						
 							<xsl:value-of select="$actualcustomdata[name()=$varnamenode]"/>
 						</xsl:when>
 							
 						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$varnamenode]">
+						
 							<xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varnamenode]"/>
 						</xsl:when>
 						
 						<xsl:when test="not(child::*)">
+						
 							<xsl:value-of select="."/>
 						</xsl:when>
 						
 						<xsl:when test="var/@default">
+							
 							<xsl:value-of select="var/@default"/>
 						</xsl:when>
 						
 						<xsl:otherwise>
+						
 							&#160;
 						</xsl:otherwise>
 					</xsl:choose>
@@ -553,8 +558,8 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="value" select="var/@name"/>
 	<xsl:call-template name="var" >
 		<xsl:with-param name="ubertestname" select="$ubertestname" />
-		<xsl:with-param name="defaultnode" select="defaultnode" />
-		<xsl:with-param name="datanode" select="datanode" />
+		<xsl:with-param name="defaultnode" select="$defaultnode" />
+		<xsl:with-param name="datanode" select="$datanode" />
 		<xsl:with-param name="customdata" select="$customdata" />
 		<xsl:with-param name="actualnode" select="$actualnode" />
 		<xsl:with-param name="filename" select="$filename" />
