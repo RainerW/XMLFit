@@ -419,33 +419,26 @@ extension-element-prefixes="redirect">
 				<!-- VAR Data from Attribute -->
 				<xsl:when test="not($actualnode)">
 					<xsl:choose>
-				
 						<xsl:when test="common:node-set($customdata)[name()=$varnamenode]">
 							<xsl:value-of select="$customdata[name()=$varnamenode]"/>
 						</xsl:when>
-						
 						<xsl:when test="common:node-set($actualcustomdata)[name()=$varnamenode]">
 							<xsl:value-of select="$actualcustomdata[name()=$varnamenode]"/>
 						</xsl:when>
-							
 						<xsl:when test="$defaultnode/defaultdata/child::*[name()=$varnamenode]">
 							<xsl:value-of select="$defaultnode/defaultdata/child::*[name()=$varnamenode]"/>
 						</xsl:when>
-						
 						<xsl:when test="not(child::*)">
 							<xsl:value-of select="."/>
 						</xsl:when>
-						
 						<xsl:when test="var/@default">
 							<xsl:value-of select="var/@default"/>
 						</xsl:when>
-						
 						<xsl:otherwise>
 							&#160;
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:when>
-				
 		</xsl:choose>
 		<xsl:value-of select="$suffixText" />
 		</td>
