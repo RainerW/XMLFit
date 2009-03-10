@@ -37,6 +37,12 @@
     width:100px;
 }
 
+.testgroup{
+    width:400px;
+    font:bold;	
+    padding-bottom:10px;
+}
+
 table {
  margin:2px;
  border-collapse: collapse;
