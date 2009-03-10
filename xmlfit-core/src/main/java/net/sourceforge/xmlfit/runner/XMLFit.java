@@ -8,6 +8,7 @@ import generated.Testsuite;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class XMLFit
     
     this.getTestcasesToValidate(testsuite);
     
-    //validator.validate(testsuite, tests);
+    validator.validate(testsuite, tests);
     
     
     
@@ -147,8 +148,9 @@ public class XMLFit
 }
 
   @SuppressWarnings("unchecked")
-  public void getTestcasesToValidate(String testsuite) throws JAXBException
+  public void getTestcasesToValidate(String testsuite) throws JAXBException, IOException
   {
+    String actualFolder = new File(testsuite).getAbsolutePath().replace(new File(testsuite).getName(), "");
     JAXBContext jc = JAXBContext.newInstance("generated");
     Unmarshaller unmarshaller = jc.createUnmarshaller();
     Object unmarshal = unmarshaller.unmarshal(new File(testsuite));
@@ -164,12 +166,12 @@ public class XMLFit
         {
           if(calls.get(i).getTestsuite() != null && calls.get(i).getTestgroup() == null)
           {
-            this.getTestcasesToValidate(inputDir + "/"+calls.get(i).getTestsuite());
+            this.getTestcasesToValidate(actualFolder + "/"+calls.get(i).getTestsuite());
           }
           
           if(calls.get(i).getTest() != null)
           {
-          tests.add(inputDir +"/"+ calls.get(i).getTest());
+          tests.add(actualFolder +"/"+ calls.get(i).getTest());
           }
        }
     }
