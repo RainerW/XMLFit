@@ -99,7 +99,7 @@ extension-element-prefixes="redirect">
 	<xsl:variable name="testname" select="@name"/>
 	<xsl:variable name="testID" select="@id"/>
 	<xsl:variable name="outputname" select="concat($testname, '.html')"/>
-	<xsl:variable name="position" select="concat(position(),'-')"/>
+	<xsl:variable name="position" select="concat($testID,'-')"/>
 	<xsl:variable name="outputnamewithposition" select="concat($position, $outputname)"/>
 	<xsl:variable name="outputnamewithDir" select="concat($newDir, $outputnamewithposition)"/>
 	<xsl:variable name="testsuiteDir" select="concat($base_dir, $outputname)"/>
@@ -113,6 +113,10 @@ extension-element-prefixes="redirect">
 				</xsl:apply-templates>
 		</xsl:when>
 		<xsl:when test="$testgroupname">
+			<div class="testgroup">
+                Testgroupname: <xsl:value-of select="$testname"/><br/>
+                TestID: <xsl:value-of select="$testID"/>
+            </div>
 			<xsl:apply-templates select="call">
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="ubertestname" select="$testname"/>
@@ -129,6 +133,10 @@ extension-element-prefixes="redirect">
 			<body>
 				<div class="image"></div>
 				<div class="logo"></div>
+				<div class="testgroup">
+                Testgroupname: <xsl:value-of select="$testname"/><br/>
+                TestID: <xsl:value-of select="$testID"/>
+                </div>
 				<xsl:apply-templates select="call">
 					<xsl:with-param name="defaultnode" select="$defaultnode"/>
 					<xsl:with-param name="ubertestname" select="$testname"/>
