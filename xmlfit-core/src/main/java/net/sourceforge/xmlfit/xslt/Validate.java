@@ -28,7 +28,7 @@ public class Validate
  { 
   String method = "validate() : ";
   logger.debug(method + "Start");
-   
+
   SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
   URL suiteSchemaLocation = this.getClass().getResource("/net/sourceforge/xmlfit/schema/SuiteSchema.xsd");
   URL fileSchemaLocation = this.getClass().getResource("/net/sourceforge/xmlfit/schema/FileSchema.xsd");
