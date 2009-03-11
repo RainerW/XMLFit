@@ -96,6 +96,7 @@
 		<xsd:attribute name="name" use="required"/>
 		<xsd:attribute name="suffixText" use="optional"/>
 		<xsd:attribute name="prefixText" use="optional"/>
+        <xsd:attribute name="default" use="optional"/>
 	</xsd:complexType>
 </xsd:element> 
  
