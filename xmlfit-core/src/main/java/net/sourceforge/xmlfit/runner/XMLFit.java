@@ -188,9 +188,9 @@ public class XMLFit
           tests.add(actualFolder +"/"+ call.getTest());
         }
       }
-      
-    }
+   }
 }
+  
   @SuppressWarnings("unchecked")
   public List<String> getTestsuites(String testsuite) throws JAXBException
   {
@@ -208,6 +208,8 @@ public class XMLFit
   return testsuitenames;
   }
    
+ 
+  
   //Getter and Setter
   public String getTestdir()
   {
