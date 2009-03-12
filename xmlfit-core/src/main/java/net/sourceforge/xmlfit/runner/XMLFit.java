@@ -117,10 +117,25 @@ public class XMLFit
      logger.info("Using default Stylesheet");
    }
    
+   if(this.getTestsuites(testsuite).isEmpty()) 
+   {
      transformer.transform(new File(testsuite), transformSuite, 
      outputdir, testdir, filedir, inputDir, 0);
      transformer.transform(new File(testsuite), transformFiles, 
      outputdir, testdir, filedir, inputDir, 1);
+    }
+   else 
+   {
+     for(String name : this.getTestsuites(testsuite)) 
+     {
+       transformer.transform(new File(name), transformSuite, outputdir, testdir, filedir, inputDir, 0);
+       transformer.transform(new File(name), transformFiles, outputdir, testdir, filedir, inputDir, 1);
+     }
+  }
+   
+   
+   
+  
    
    
    new File(outputdir+"/css/images").mkdirs();
@@ -161,21 +176,37 @@ public class XMLFit
     for (Testgroup testgroup : testgroups)
     {
       List<Call> calls = testgroup.getCall();
-     
-      for (int i = 0; i < calls.size(); i++)
+      for (Call call : calls)
+      {
+        if(call.getTestsuite() != null && call.getTestgroup() == null)
         {
-          if(calls.get(i).getTestsuite() != null && calls.get(i).getTestgroup() == null)
-          {
-            this.getTestcasesToValidate(actualFolder + "/"+calls.get(i).getTestsuite());
-          }
-          
-          if(calls.get(i).getTest() != null)
-          {
-          tests.add(actualFolder +"/"+ calls.get(i).getTest());
-          }
-       }
+          this.getTestcasesToValidate(actualFolder + "/"+call.getTestsuite());
+        }
+        
+        if(call.getTest() != null)
+        {
+          tests.add(actualFolder +"/"+ call.getTest());
+        }
+      }
+      
     }
 }
+  @SuppressWarnings("unchecked")
+  public List<String> getTestsuites(String testsuite) throws JAXBException
+  {
+    JAXBContext jc = JAXBContext.newInstance("generated");
+    Unmarshaller unmarshaller = jc.createUnmarshaller();
+    Object unmarshal = unmarshaller.unmarshal(new File(testsuite));
+    JAXBElement<Testsuite> el = new JAXBElement(new QName("generated"), this.getClass(), unmarshal);
+    Testsuite suite = el.getValue();
+    List<Call> testsuites = suite.getCall();
+    List<String> testsuitenames = new ArrayList();
+    for(Call call : testsuites)
+    {
+     testsuitenames.add(inputDir+"/"+call.getTestsuite());
+    }
+  return testsuitenames;
+  }
    
   //Getter and Setter
   public String getTestdir()
