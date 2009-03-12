@@ -2,6 +2,7 @@
 <xsd:element name = "testsuite">
 	<xsd:complexType>
 		<xsd:sequence>
+			<xsd:element ref ="call" minOccurs="0" maxOccurs="unbounded"/>
 			<xsd:element ref ="testgroup" minOccurs="0" maxOccurs="unbounded"/>
 			</xsd:sequence>
 		<xsd:attribute name="author" use="optional"/>
