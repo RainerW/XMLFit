@@ -62,7 +62,8 @@ extension-element-prefixes="redirect">
 			<xsl:with-param name="customdata" select="$customdata"/>
 		</xsl:apply-templates>
 		<xsl:for-each select="testgroup">
-			<xsl:variable name="position" select="concat(position(),'-')"/>
+			<xsl:variable name="id" select="@id"/>
+			<xsl:variable name="position" select="concat($id ,'-')"/>
 			<xsl:variable name="testname" select="@name"/>
 			<xsl:variable name="linkname" select="concat($testname, '.html')"/>
 			<div class="test">Test: <a><xsl:attribute name="href"><xsl:value-of select="$base_dir"/>/<xsl:value-of select="$position"/><xsl:value-of select="$linkname"/></xsl:attribute><xsl:value-of select="$testname"/></a>
