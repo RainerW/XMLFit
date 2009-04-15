@@ -30,7 +30,7 @@ public class XMLFitMojo extends AbstractMojo
   /**
    * The output folder.
    * 
-   * @parameter expression="${project.build.directory}/xmlfit"
+   * @parameter expression="${project.build.directory}/fit"
    */
   private String outputDirectory;
 

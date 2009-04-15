@@ -13,7 +13,7 @@
     <version>0.0.2</version>
     <configuration>
       <!-- by default target/fit -->
-      <outputDirectory>target/xmlfit</outputDirectory>
+      <outputDirectory>target/fit</outputDirectory>
       <!-- by default src/test/xmlfit -->
       <sourceDirectory>src/test/xmlfit</sourceDirectory>
       <!-- by default **/Test*.xml , **/*Test.xml , **/*TestCase.xml -->
