@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>XMLFit Maven Plugin - Usage</title>
+  </properties>
+  <body>
+
+    <section name="Maven XMLFit Plugin usage">
+        <source><![CDATA[
+  <plugin>
+    <groupId>net.sourceforge.xmlfit</groupId>
+    <artifactId>xmlfit-maven-plugin</artifactId>
+    <version>0.0.2</version>
+    <configuration>
+      <!-- by default target/fit -->
+      <outputDirectory>target/xmlfit</outputDirectory>
+      <!-- by default src/test/xmlfit -->
+      <sourceDirectory>src/test/xmlfit</sourceDirectory>
+      <!-- by default **/Test*.xml , **/*Test.xml , **/*TestCase.xml -->
+      <includes>
+        <include>**/*Test.xml</include>
+      </includes>
+      <excludes>
+        <exclude>**/*IntegrationTest.xml</exclude>
+      </excludes>
+    </configuration>
+  </plugin>
+        ]]></source>
+    </section>
+
+  </body>
+</document>

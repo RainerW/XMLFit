@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<faqs id="FAQ" title="Frequently Asked Questions">
+  <part id="General">
+    <faq id="exclude-files">
+      <question>How can I exclude XMLFit files?</question>
+      <answer>
+        <p>
+          see exclude pattern
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

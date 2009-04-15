@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>XMLFit Maven Plugin</title>
+  </properties>
+  <body>
+
+    <section name="Maven XMLFit Plugin overview">
+      <ul>
+        <li><a href="usage.html">Usage</a></li>
+      </ul>
+    </section>
+
+  </body>
+</document>
