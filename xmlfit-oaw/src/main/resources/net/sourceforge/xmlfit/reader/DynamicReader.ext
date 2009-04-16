@@ -1,0 +1,3 @@
+
+Object loadModelFromXmlFile(String fileName) : 
+	JAVA net.sourceforge.xmlfit.reader.DynamicXMLReader.loadModelFromXmlFile(java.lang.String);

@@ -1,0 +1,41 @@
+«IMPORT test»
+«IMPORT component»
+
+«EXTENSION net::sourceforge::xmlfit::reader::DynamicReader»
+«EXTENSION net::sourceforge::xmlfit::property::Helper»
+«EXTENSION net::sourceforge::xmlfit::data::Helper»
+
+«DEFINE Root FOR test::Tests»
+ «EXPAND test FOREACH test»
+«ENDDEFINE»
+
+«DEFINE test FOR Test»
+ «FILE id+"-"+name+".html"»
+   <html>
+   <head>
+      <title>«id+"--"+name»</title>
+   </head>
+   <body>
+   «EXPAND testStep FOREACH testStep»		
+   </body>
+   </html>	
+ «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE testStep FOR Step»
+	«clearProperties()»
+	«EXPAND property FOREACH property»	
+	«IF data != null»
+		«FOREACH createDataSource(data) AS dataSet»
+			«addPropertiesFromDataSet(dataSet)»
+			«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
+		«ENDFOREACH»
+	«ENDIF»
+	«IF data == null»
+		«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE property FOR Property»
+	«addProperty(name, value)»
+«ENDDEFINE»

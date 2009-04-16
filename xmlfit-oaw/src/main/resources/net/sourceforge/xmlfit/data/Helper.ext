@@ -1,0 +1,3 @@
+
+Collection createDataSource(String fileName) :
+	JAVA net.sourceforge.xmlfit.data.DataHelper.createDataSource(java.lang.String);

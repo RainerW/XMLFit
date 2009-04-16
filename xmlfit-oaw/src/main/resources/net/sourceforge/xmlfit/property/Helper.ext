@@ -1,0 +1,12 @@
+
+String clearProperties() :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.clearProperties();
+
+String addProperty(String name, String value) :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addProperty(java.lang.String,java.lang.String);
+
+String extractProperties(String value) :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.extractProperties(java.lang.String);
+	
+String addPropertiesFromDataSet(Object dataSet) :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addPropertiesFromDataSet(net.sourceforge.xmlfit.data.DataSet);

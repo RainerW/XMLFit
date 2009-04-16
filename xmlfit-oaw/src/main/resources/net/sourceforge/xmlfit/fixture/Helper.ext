@@ -1,0 +1,3 @@
+
+String maxCellCount(Object table) :
+    JAVA net.sourceforge.xmlfit.fixture.TableHelper.maxCellCount(org.eclipse.emf.ecore.EObject); 

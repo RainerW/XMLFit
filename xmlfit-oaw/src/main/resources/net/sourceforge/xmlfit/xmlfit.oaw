@@ -1,0 +1,31 @@
+<workflow>
+	
+	<bean id="testMetaModel" class="org.openarchitectureware.xsd.XSDMetaModel"> 
+        <schemaFile value="net/sourceforge/xmlfit/model/test.xsd" /> 
+    </bean> 
+    
+    <bean id="componentMetaModel" class="org.openarchitectureware.xsd.XSDMetaModel"> 
+        <schemaFile value="net/sourceforge/xmlfit/model/component.xsd" /> 
+    </bean> 
+    
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="model" />
+		<uri value="${testFile}" />
+		<metaModel idRef="testMetaModel" /> 
+	</component>
+	
+	<component class="net.sourceforge.xmlfit.reader.DynamicXMLReader">
+        <metaModel idRef="componentMetaModel" />
+    </component>
+	
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="testMetaModel" />
+		<metaModel idRef="componentMetaModel" />
+		
+		<expand value="net::sourceforge::xmlfit::transform::test::Root FOR model" />
+
+		<outlet path="${outputDir}" />
+		
+	</component>
+	
+</workflow>

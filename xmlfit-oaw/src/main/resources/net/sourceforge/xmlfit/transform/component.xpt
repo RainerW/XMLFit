@@ -1,0 +1,76 @@
+«IMPORT component»
+
+«EXTENSION net::sourceforge::xmlfit::property::Helper»
+«EXTENSION net::sourceforge::xmlfit::fixture::Helper»
+
+«DEFINE Root FOR Object»
+«ENDDEFINE»
+
+«DEFINE Root FOR Component»
+  «FOREACH eContents AS content»
+   <p>
+     «EXPAND fixture FOR content»
+   </p>
+   «ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE fixture FOR Object»
+«ENDDEFINE»
+
+«DEFINE fixture FOR CommentFixture»
+  «EXPAND heading FOR heading»
+  «EXPAND description FOR description»
+«ENDDEFINE»
+
+«DEFINE heading FOR String»
+<h1>«extractProperties(this)»</h1>
+«ENDDEFINE»
+
+«DEFINE description FOR String»
+<p>«extractProperties(this)»</p>
+«ENDDEFINE»
+
+«DEFINE fixture FOR ActionFixture»
+<table border="1">
+<tr>
+<td colspan="99">«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»</td>
+</tr>
+«EXPAND command FOREACH command»
+</table>
+«ENDDEFINE»
+
+«DEFINE fixture FOR ColumnFixture»
+<table border="1">
+<tr>
+<td>«extractProperties(type)»</td>
+</tr>
+<tr>
+«FOREACH column AS column»
+«EXPAND column FOR column»
+«ENDFOREACH»
+</tr>
+«FOREACH row AS row»
+<tr>
+«FOREACH row.value AS value»
+«EXPAND value FOR value»
+«ENDFOREACH»
+</tr>
+«ENDFOREACH»
+</table>
+«ENDDEFINE»
+
+«DEFINE command FOR Command»
+<tr>
+<td>«extractProperties(name)»</td>
+«IF target!=null»<td>«extractProperties(target)»</td>«ENDIF»
+«FOREACH value AS value»<td>«extractProperties(value)»</td>«ENDFOREACH»
+</tr>
+«ENDDEFINE»
+
+«DEFINE column FOR Column»
+<td>«name»</td>
+«ENDDEFINE»
+
+«DEFINE value FOR String»
+<td>«extractProperties(this)»</td>
+«ENDDEFINE»
