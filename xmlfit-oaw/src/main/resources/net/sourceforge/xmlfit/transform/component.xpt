@@ -42,7 +42,7 @@
 «DEFINE fixture FOR ColumnFixture»
 <table border="1">
 <tr>
-<td>«extractProperties(type)»</td>
+<td colspan="«column.size»">«extractProperties(type)»</td>
 </tr>
 <tr>
 «FOREACH column AS column»
