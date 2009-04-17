@@ -2,6 +2,8 @@ package net.sourceforge.xmlfit.reader;
 
 import java.util.HashMap;
 
+import net.sourceforge.xmlfit.runner.TestSuiteRunner;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openarchitectureware.type.MetaModel;
@@ -30,6 +32,8 @@ public class DynamicXMLReader implements WorkflowComponent
 	
 	private static XSDMetaModel metaModel;
 	
+	public static String inputDirectory = "";
+	
 	public XSDMetaModel getMetaModel() {
 		return metaModel;
 	}
@@ -41,7 +45,7 @@ public class DynamicXMLReader implements WorkflowComponent
 	public static EObject loadModelFromXmlFile(String fileName)
 	{
 		XMLReaderImpl reader = new XMLReaderImpl(new ResourceSetImpl(), metaModel);
-		reader.setUri(fileName);
+		reader.setUri(inputDirectory + fileName);
 		reader.setUseDocumentRoot(false);
 		reader.getOptions().putAll(new HashMap<String, Object>());
 		EObject model = reader.readXML();

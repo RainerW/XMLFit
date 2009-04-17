@@ -1,0 +1,11 @@
+«IMPORT suite»
+
+«EXTENSION net::sourceforge::xmlfit::runner::Helper»
+
+«DEFINE Root FOR suite::Suite»
+	«EXPAND test FOREACH test»
+«ENDDEFINE»
+
+«DEFINE test FOR Test»
+«runTest(file)»
+«ENDDEFINE»

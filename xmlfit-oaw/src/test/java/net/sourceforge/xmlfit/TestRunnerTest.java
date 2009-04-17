@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
+import net.sourceforge.xmlfit.runner.TestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 

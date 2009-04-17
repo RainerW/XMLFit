@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests
+ 	xmlns="http://xmlfit.sourceforge.net/test" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://xmlfit.sourceforge.net/test test.xsd ">
+	
+	<test id="002" name="LoginTest">
+		
+		<testStep file="example-component.xml">
+			<property name="username" value="user01"/>
+			<property name="password" value="pwd"/>
+		</testStep>
+			
+	</test>
+  
+</tests>

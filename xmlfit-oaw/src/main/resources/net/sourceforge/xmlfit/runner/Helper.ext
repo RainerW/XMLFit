@@ -1,0 +1,2 @@
+String runTest(String testFile) :
+	JAVA net.sourceforge.xmlfit.runner.TestSuiteRunner.runTestFromSuite(java.lang.String);

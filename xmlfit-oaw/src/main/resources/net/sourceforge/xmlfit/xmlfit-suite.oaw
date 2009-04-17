@@ -1,0 +1,22 @@
+<workflow>
+	
+	<bean id="testSuiteMetaModel" class="org.openarchitectureware.xsd.XSDMetaModel"> 
+        <schemaFile value="net/sourceforge/xmlfit/model/suite.xsd" /> 
+    </bean> 
+     
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="model" />
+		<uri value="src/test/resources/example-suite.xml" />
+		<metaModel idRef="testSuiteMetaModel" /> 
+	</component>
+	
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="testSuiteMetaModel" />
+		
+		<expand value="net::sourceforge::xmlfit::transform::suite::Root FOR model" />
+
+		<outlet path="target" />
+		
+	</component>
+	
+</workflow>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite 
+	xmlns="http://xmlfit.sourceforge.net/suite" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://xmlfit.sourceforge.net/suite ../../main/resources/net/sourceforge/xmlfit/model/suite.xsd ">
+	
+	<test file="example-test.xml" />
+	<test file="example-test2.xml" />
+	
+</suite>
