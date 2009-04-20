@@ -15,8 +15,9 @@ public class DataSetTest {
 	@Before
 	public void setUp()
 	{
+		DataSourceFactory.inputDirectory = "src/test/resources/";
 		dataSet = 
-			DataSourceFactory.createDataSource("src/test/resources/example-data.xml").iterator().next();
+			DataSourceFactory.createDataSource("example-data.xml").iterator().next();
 	}
 	
 	@Test

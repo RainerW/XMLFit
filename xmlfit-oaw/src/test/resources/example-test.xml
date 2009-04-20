@@ -6,8 +6,8 @@
 	
 	<test id="001" name="LoginTest">
 		
-		<testStep file="example-component.xml" data="example-data.xml">
-			<property name="username" value="user01"/>
+		<testStep file="example-component.xml" data="example-data.xml" >
+			<property name="username" value="userXY Christian"/>
 		</testStep>
 			
 	</test>

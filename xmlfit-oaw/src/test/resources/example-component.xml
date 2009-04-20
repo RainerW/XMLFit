@@ -27,7 +27,7 @@
     
 		<actionFixture>
 			<command name="start">
-				<value>LoginFixture</value>
+				<target>LoginFixture</target>
 			</command>
 			<command name="enter">
 				<target>username</target>
@@ -36,6 +36,20 @@
 			<command name="enter">
 				<target>password</target>
 				<value>${password}</value>
+			</command>
+			<command name="special">
+				<target>test</target>
+				<value>01</value>
+				<value>02</value>
+				<value>03</value>
+			</command>
+			<command name="type">
+				<target>loginForm:username</target>
+				<value>Christian.Baranowski@pro-pix.de</value>
+			</command>
+			<command name="getAll">
+				<value>Test VALUE ONE</value>
+				<value>VALUE TWO</value>
 			</command>
 		</actionFixture>
 

@@ -25,6 +25,15 @@
 		<expand value="net::sourceforge::xmlfit::transform::test::Root FOR model" />
 
 		<outlet path="${outputDir}" />
+		<beautifier class="org.openarchitectureware.xsd.XMLBeautifier">
+			<maxLineWidth value="80" />
+			<formatComments value="true" />
+			<fileExtensions value=".xml, .html" />
+		</beautifier>
+		
+		<prSrcPaths value="${outputDir}"/>
+		<prDefaultExcludes value="false"/>
+		<prExcludes value="*.html"/>
 		
 	</component>
 	

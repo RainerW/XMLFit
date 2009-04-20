@@ -28,7 +28,7 @@ public class TestRunnerTest {
 	
 	@Test
 	public void testRun() {
-		TestRunner.run("example-test.xml", OUTPUT_DIR, "src/test/resources/");
+		TestRunner.INSTANCE.run("example-test.xml", OUTPUT_DIR, "src/test/resources/");
 		File testFile = new File(GENERATED_TESTFILE);
 		assertTrue(testFile.exists());
 	}

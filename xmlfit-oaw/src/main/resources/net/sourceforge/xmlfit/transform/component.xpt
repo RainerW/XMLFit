@@ -1,11 +1,17 @@
 «IMPORT component»
 
-«EXTENSION net::sourceforge::xmlfit::property::Helper»
 «EXTENSION net::sourceforge::xmlfit::fixture::Helper»
+«EXTENSION net::sourceforge::xmlfit::property::Helper»
 
+«REM»
+	Default root template should never be called.
+«ENDREM»
 «DEFINE Root FOR Object»
 «ENDDEFINE»
 
+«REM»
+	Template - for a Component (Comment, ActionFixture or ColumnFixture ...)
+«ENDREM»
 «DEFINE Root FOR Component»
   «FOREACH eContents AS content»
    <p>
@@ -14,63 +20,117 @@
    «ENDFOREACH»
 «ENDDEFINE»
 
+«REM»
+	Default fixture template should never be called.
+«ENDREM»
 «DEFINE fixture FOR Object»
 «ENDDEFINE»
 
+«REM»
+	Template for fixture comments.
+«ENDREM»
 «DEFINE fixture FOR CommentFixture»
-  «EXPAND heading FOR heading»
-  «EXPAND description FOR description»
+  «PROTECT CSTART '<!--' CEND '-->' ID heading.length»
+  	«EXPAND heading FOR heading»
+  	«EXPAND description FOR description»
+  «ENDPROTECT»
 «ENDDEFINE»
 
+«REM»
+	Template for fixture heading.
+«ENDREM»
 «DEFINE heading FOR String»
-<h1>«extractProperties(this)»</h1>
+	<h1>«extractProperties(this)»</h1>
 «ENDDEFINE»
 
+«REM»
+	Template for fixture describtion.
+«ENDREM»
 «DEFINE description FOR String»
-<p>«extractProperties(this)»</p>
+	<p>«extractProperties(this)»</p>
 «ENDDEFINE»
 
+«REM»
+	Template for a action fixture.
+«ENDREM»
 «DEFINE fixture FOR ActionFixture»
-<table border="1">
-<tr>
-<td colspan="99">«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»</td>
-</tr>
-«EXPAND command FOREACH command»
+	«resetCounter()»
+	«EXPAND countMaxActionCells FOREACH command»
+	<table border="1">
+	<tr>
+		<td colspan="«counterValue()»">
+			«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»
+		</td>
+	</tr>
+	«EXPAND command FOREACH command»
 </table>
+
 «ENDDEFINE»
 
+«REM»
+	Count the max cells of one row of a action fixture.
+«ENDREM»
+«DEFINE countMaxActionCells FOR Command»
+	«FOREACH this.value AS value»
+		«nextCount()»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«REM»
+	Template for the column fixture.
+«ENDREM»
 «DEFINE fixture FOR ColumnFixture»
-<table border="1">
-<tr>
-<td colspan="«column.size»">«extractProperties(type)»</td>
-</tr>
-<tr>
-«FOREACH column AS column»
-«EXPAND column FOR column»
-«ENDFOREACH»
-</tr>
-«FOREACH row AS row»
-<tr>
-«FOREACH row.value AS value»
-«EXPAND value FOR value»
-«ENDFOREACH»
-</tr>
-«ENDFOREACH»
-</table>
+	<table border="1">
+		<tr>
+			<td colspan="«column.size»">«extractProperties(type)»</td>
+		</tr>
+		<tr>
+			«EXPAND column FOREACH column»
+		</tr>
+		«FOREACH row AS row»
+			<tr>
+				«EXPAND value FOREACH row.value»
+			</tr>
+		«ENDFOREACH»
+	</table>
 «ENDDEFINE»
 
+«REM»
+	Template for action fixture command.
+«ENDREM»
 «DEFINE command FOR Command»
-<tr>
-<td>«extractProperties(name)»</td>
-«IF target!=null»<td>«extractProperties(target)»</td>«ENDIF»
-«FOREACH value AS value»<td>«extractProperties(value)»</td>«ENDFOREACH»
-</tr>
+	<tr>
+	<td colspan="1">«extractProperties(name)»</td>
+	«IF target!=null»
+		«IF value.size == 0»
+			<td colspan="«counterValue()-1»">
+		«ELSE»
+			<td colspan="1">
+		«ENDIF»
+		«extractProperties(target)»
+		</td>
+	«ENDIF»
+	«FOREACH value.select(e|e!=value.last()) AS textValue»
+		<td colspan="1">«extractProperties(textValue)»</td>
+	«ENDFOREACH»
+	«IF value != null && value.size > 0»
+		<td colspan="«counterValue() - (value.size +1) »">
+		«extractProperties(value.last())»
+		</td>
+	«ENDIF»
+	</tr>
 «ENDDEFINE»
 
+«REM»
+	Template for column of column fixture.
+«ENDREM»
 «DEFINE column FOR Column»
-<td>«name»</td>
+	<td>«name»</td>
 «ENDDEFINE»
 
+«REM»
+	Template for value of a column fixture row.
+«ENDREM»
 «DEFINE value FOR String»
-<td>«extractProperties(this)»</td>
+	<td>«extractProperties(this)»</td>
 «ENDDEFINE»

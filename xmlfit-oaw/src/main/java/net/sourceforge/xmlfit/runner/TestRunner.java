@@ -8,12 +8,14 @@ import net.sourceforge.xmlfit.reader.DynamicXMLReader;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.monitor.NullProgressMonitor;
 
-public class TestRunner 
+public enum TestRunner 
 {
+
+	INSTANCE;
 	
 	private static final String workFlowFile = "net/sourceforge/xmlfit/xmlfit.oaw";
 		
-	public static void run(String testFile, String outputDir, String inputDirectory)
+	public void run(String testFile, String outputDir, String inputDirectory)
 	{
 		DynamicXMLReader.inputDirectory = inputDirectory;
 		DataSourceFactory.inputDirectory = inputDirectory;

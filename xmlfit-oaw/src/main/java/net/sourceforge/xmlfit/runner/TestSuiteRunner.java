@@ -36,7 +36,7 @@ public enum TestSuiteRunner {
 	
 	public static void runTestFromSuite(String testFile)
 	{
-		TestRunner.run(
+		TestRunner.INSTANCE.run(
 				INSTANCE.inputDirectory+testFile, 
 				INSTANCE.outputDir, 
 				INSTANCE.inputDirectory);
