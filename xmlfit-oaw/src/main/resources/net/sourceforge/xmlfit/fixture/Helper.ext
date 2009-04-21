@@ -1,8 +1,0 @@
-String nextCount():
-	JAVA net.sourceforge.xmlfit.fixture.CounterHelper.next();
-	
-String resetCounter():
-	JAVA net.sourceforge.xmlfit.fixture.CounterHelper.reset();
-	
-Integer counterValue():
-	JAVA net.sourceforge.xmlfit.fixture.CounterHelper.getValue();

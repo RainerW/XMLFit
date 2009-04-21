@@ -1,6 +1,7 @@
 «IMPORT component»
 
-«EXTENSION net::sourceforge::xmlfit::fixture::Helper»
+
+«EXTENSION org::openarchitectureware::util::stdlib::counter»
 «EXTENSION net::sourceforge::xmlfit::property::Helper»
 
 «REM»
@@ -54,11 +55,11 @@
 	Template for a action fixture.
 «ENDREM»
 «DEFINE fixture FOR ActionFixture»
-	«resetCounter()»
+	«counterReset("MAX_ACTIONS_CELLS")»
 	«EXPAND countMaxActionCells FOREACH command»
 	<table border="1">
 	<tr>
-		<td colspan="«counterValue()»">
+		<td colspan="«counterGet("MAX_ACTIONS_CELLS")»">
 			«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»
 		</td>
 	</tr>
@@ -72,7 +73,7 @@
 «ENDREM»
 «DEFINE countMaxActionCells FOR Command»
 	«FOREACH this.value AS value»
-		«nextCount()»
+		«counterInc("MAX_ACTIONS_CELLS")»
 	«ENDFOREACH»
 «ENDDEFINE»
 
@@ -103,7 +104,7 @@
 	<td colspan="1">«extractProperties(name)»</td>
 	«IF target!=null»
 		«IF value.size == 0»
-			<td colspan="«counterValue()-1»">
+			<td colspan="«counterGet("MAX_ACTIONS_CELLS") -1»">
 		«ELSE»
 			<td colspan="1">
 		«ENDIF»
@@ -114,9 +115,13 @@
 		<td colspan="1">«extractProperties(textValue)»</td>
 	«ENDFOREACH»
 	«IF value != null && value.size > 0»
-		<td colspan="«counterValue() - (value.size +1) »">
-		«extractProperties(value.last())»
-		</td>
+			«IF target == null»
+				<td colspan="«counterGet("MAX_ACTIONS_CELLS") - value.size»">
+			«ELSE»
+				<td colspan="«counterGet("MAX_ACTIONS_CELLS") - (value.size+1)»">
+			«ENDIF»
+			«extractProperties(value.last())»
+			</td>
 	«ENDIF»
 	</tr>
 «ENDDEFINE»
