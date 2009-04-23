@@ -14,6 +14,8 @@ public class PropertyHelper {
 	
 	private static DataSet actualDataSet;
 	
+	private static DataSet defaultDataSet;
+	
 	public static void addPropertiesFromDataSet(DataSet dataSet)
 	{
 		actualDataSet = dataSet;

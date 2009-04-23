@@ -1,5 +1,5 @@
 <workflow>
-	
+
 	<bean id="testMetaModel" class="org.openarchitectureware.xsd.XSDMetaModel"> 
         <schemaFile value="net/sourceforge/xmlfit/model/test.xsd" /> 
     </bean> 
@@ -19,12 +19,15 @@
     </component>
 	
 	<component class="org.openarchitectureware.xpand2.Generator">
+	
 		<metaModel idRef="testMetaModel" />
 		<metaModel idRef="componentMetaModel" />
 		
 		<expand value="net::sourceforge::xmlfit::transform::test::Root FOR model" />
 
-		<outlet path="${outputDir}" />
+		<outlet path="${outputDir}">
+		</outlet>
+		
 		<beautifier class="org.openarchitectureware.xsd.XMLBeautifier">
 			<maxLineWidth value="80" />
 			<formatComments value="true" />
@@ -32,8 +35,7 @@
 		</beautifier>
 		
 		<prSrcPaths value="${outputDir}"/>
-		<prDefaultExcludes value="false"/>
-		<prExcludes value="*.html"/>
+		<prDefaultExcludes value="true"/>
 		
 	</component>
 	

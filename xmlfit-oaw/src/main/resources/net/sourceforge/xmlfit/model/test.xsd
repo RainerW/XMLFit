@@ -6,12 +6,14 @@
 
 	<import namespace="http://xmlfit.sourceforge.net/component" schemaLocation="component.xsd"></import>
 	<complexType name="Test">
-        <sequence>
-			<element name="testStep" type="test:Step" maxOccurs="unbounded" minOccurs="0">
+		<sequence>
+			<element name="testStep" type="test:Step"
+				maxOccurs="unbounded" minOccurs="0">
 			</element>
-        </sequence>
+		</sequence>
 		<attribute name="id" type="string" use="required"></attribute>
 		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="defaultdata" type="string"></attribute>
 	</complexType>
 
 	<complexType name="Step">

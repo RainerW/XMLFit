@@ -4,17 +4,30 @@
 «EXTENSION net::sourceforge::xmlfit::reader::DynamicReader»
 «EXTENSION net::sourceforge::xmlfit::property::Helper»
 «EXTENSION net::sourceforge::xmlfit::data::Helper»
+«EXTENSION org::openarchitectureware::util::stdlib::counter»
+«EXTENSION org::openarchitectureware::util::stdlib::globalvar»
 
+«REM»
+	Root template for test.
+«ENDREM»
 «DEFINE Root FOR test::Tests»
  «EXPAND test FOREACH test»
 «ENDDEFINE»
 
+«REM»
+	Template for a test.
+«ENDREM»
 «DEFINE test FOR Test»
  «FILE id+"-"+name+".html"»
+    «LET counterReset("COMMENT_ID") AS x»«ENDLET»
+	«LET storeGlobalVar("TESTNAME_ID", name + " " +id) AS x»«ENDLET»
    <html>
-   <head>
+    «PROTECT CSTART '<!--' CEND '-->' ID 
+  		"HEAD-"+getGlobalVar("TESTNAME_ID") + "-" + counterInc("COMMENT_ID")»
+     <head>
       <title>«id+"--"+name»</title>
    </head>
+   «ENDPROTECT»
    <body>
    «EXPAND testStep FOREACH testStep»		
    </body>
@@ -30,8 +43,7 @@
 			«addPropertiesFromDataSet(dataSet)»
 			«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
 		«ENDFOREACH»
-	«ENDIF»
-	«IF data == null»
+	«ELSE»
 		«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
 	«ENDIF»
 «ENDDEFINE»

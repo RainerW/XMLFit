@@ -12,9 +12,9 @@ import org.junit.Test;
 public class TestRunnerTest {
 
 	
-	private static final String OUTPUT_DIR = "target";
+	private static final String OUTPUT_DIR = "target/xmlfit/";
 	private static final String GENERATED_TESTFILE = 
-		OUTPUT_DIR + "/001-LoginTest.html";
+		OUTPUT_DIR + "001-LoginTest.html";
 
 	@Before
 	public void setUp()

@@ -1,8 +1,8 @@
 «IMPORT component»
 
-
-«EXTENSION org::openarchitectureware::util::stdlib::counter»
 «EXTENSION net::sourceforge::xmlfit::property::Helper»
+«EXTENSION org::openarchitectureware::util::stdlib::globalvar»
+«EXTENSION org::openarchitectureware::util::stdlib::counter»
 
 «REM»
 	Default root template should never be called.
@@ -15,9 +15,7 @@
 «ENDREM»
 «DEFINE Root FOR Component»
   «FOREACH eContents AS content»
-   <p>
-     «EXPAND fixture FOR content»
-   </p>
+  	<p>«EXPAND fixture FOR content»</p>
    «ENDFOREACH»
 «ENDDEFINE»
 
@@ -31,10 +29,8 @@
 	Template for fixture comments.
 «ENDREM»
 «DEFINE fixture FOR CommentFixture»
-  «PROTECT CSTART '<!--' CEND '-->' ID heading.length»
   	«EXPAND heading FOR heading»
   	«EXPAND description FOR description»
-  «ENDPROTECT»
 «ENDDEFINE»
 
 «REM»
@@ -55,7 +51,8 @@
 	Template for a action fixture.
 «ENDREM»
 «DEFINE fixture FOR ActionFixture»
-	«counterReset("MAX_ACTIONS_CELLS")»
+	«LET counterReset("MAX_ACTIONS_CELLS") AS e»
+	«ENDLET»
 	«EXPAND countMaxActionCells FOREACH command»
 	<table border="1">
 	<tr>
@@ -73,7 +70,8 @@
 «ENDREM»
 «DEFINE countMaxActionCells FOR Command»
 	«FOREACH this.value AS value»
-		«counterInc("MAX_ACTIONS_CELLS")»
+		«LET counterInc("MAX_ACTIONS_CELLS") AS e»
+		«ENDLET»
 	«ENDFOREACH»
 «ENDDEFINE»
 

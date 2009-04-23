@@ -23,6 +23,7 @@ public enum TestRunner
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("testFile", testFile);
 		params.put("outputDir", outputDir);
+		params.put("test", "none");
 		WorkflowRunner workflowRunner = new WorkflowRunner();
 		workflowRunner.run(
 				workFlowFile, 
