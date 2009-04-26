@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://xmlfit.sourceforge.net/component component.xsd ">
 
         <comment>
-            <heading>User DB Setup</heading>
+            <heading>${defaultData}User DB Setup</heading>
             <description>Setup the User DB for the Test.</description>
         </comment>
     

@@ -6,4 +6,10 @@ public class Counter {
 	
 	public int failed = 0;
 	
+	public void add(Counter counter)
+	{
+		success += counter.success;
+		failed += counter.failed;
+	}
+	
 }

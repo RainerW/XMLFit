@@ -6,7 +6,7 @@
      
 	<component class="org.openarchitectureware.xsd.XMLReader">
 		<modelSlot value="model" />
-		<uri value="src/test/resources/example-suite.xml" />
+		<uri value="${testSuiteFile}" />
 		<metaModel idRef="testSuiteMetaModel" /> 
 	</component>
 	
@@ -15,8 +15,7 @@
 		
 		<expand value="net::sourceforge::xmlfit::transform::suite::Root FOR model" />
 
-		<outlet path="target" />
-		
+		<outlet path="${outputDir}" />
 	</component>
 	
 </workflow>

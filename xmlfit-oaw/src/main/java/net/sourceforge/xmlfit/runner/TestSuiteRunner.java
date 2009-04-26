@@ -17,6 +17,8 @@ public enum TestSuiteRunner {
 	
 	public String inputDirectory = "src/test/resources/";
 	
+	public Counter counter = new Counter();
+	
 	public void run(String testSuite, String outputDir, String inputDirectory)
 	{
 		this.outputDir = outputDir;
@@ -24,7 +26,7 @@ public enum TestSuiteRunner {
 		
 		DataSourceFactory.inputDirectory = inputDirectory;
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("testSuiteFile", testSuite);
+		params.put("testSuiteFile", inputDirectory+testSuite);
 		params.put("outputDir", outputDir);
 		WorkflowRunner workflowRunner = new WorkflowRunner();
 		workflowRunner.run(
@@ -36,10 +38,18 @@ public enum TestSuiteRunner {
 	
 	public static void runTestFromSuite(String testFile)
 	{
-		TestRunner.INSTANCE.run(
-				INSTANCE.inputDirectory+testFile, 
-				INSTANCE.outputDir, 
-				INSTANCE.inputDirectory);
+		try
+		{
+			TestRunner.INSTANCE.run(
+					INSTANCE.inputDirectory+testFile, 
+					INSTANCE.outputDir, 
+					INSTANCE.inputDirectory);
+		}
+		catch(Throwable exp)
+		{
+			INSTANCE.counter.failed++;
+		}
+		INSTANCE.counter.success++;
 	}
 	
 }

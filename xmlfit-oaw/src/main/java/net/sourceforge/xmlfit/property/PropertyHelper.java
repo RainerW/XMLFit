@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.sourceforge.xmlfit.data.DataSet;
+import net.sourceforge.xmlfit.data.NullDataSet;
 
 
 public class PropertyHelper {
@@ -12,11 +13,16 @@ public class PropertyHelper {
 	private static HashMap<String, String> properties = 
 		new HashMap<String, String>();
 	
-	private static DataSet actualDataSet;
+	private static DataSet actualDataSet = new NullDataSet();
 	
-	private static DataSet defaultDataSet;
+	private static DataSet defaultDataSet = new NullDataSet();
 	
-	public static void addPropertiesFromDataSet(DataSet dataSet)
+	public static void addTestPropertiesFromDataSet(DataSet dataSet)
+	{
+		defaultDataSet = dataSet;
+	}
+	
+	public static void addTestStepPropertiesFromDataSet(DataSet dataSet)
 	{
 		actualDataSet = dataSet;
 	}
@@ -38,16 +44,25 @@ public class PropertyHelper {
 			value = properties.get(name);
 			if(value == null)
 			{
-				throw new PropertyNotFoundException(name);
+				value = defaultDataSet.getPropertyValue(name);
+				if(value == null)
+				{
+					throw new PropertyNotFoundException(name);
+				}
 			}
 		}
 		return value;
 	}
 	
-	public static void clearProperties()
+	public static void clearTestStepProperties()
 	{
 		properties = new HashMap<String, String>();
-		actualDataSet = null;
+		actualDataSet = new NullDataSet();
+	}
+	
+	public static void clearTestProperties()
+	{
+		defaultDataSet = new NullDataSet();
 	}
 	
 	public static String extractProperties(String value)

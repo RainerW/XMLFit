@@ -1,6 +1,6 @@
 
-String clearProperties() :
-	JAVA net.sourceforge.xmlfit.property.PropertyHelper.clearProperties();
+String clearTestStepProperties() :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.clearTestStepProperties();
 
 String addProperty(String name, String value) :
 	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addProperty(java.lang.String,java.lang.String);
@@ -8,5 +8,11 @@ String addProperty(String name, String value) :
 String extractProperties(String value) :
 	JAVA net.sourceforge.xmlfit.property.PropertyHelper.extractProperties(java.lang.String);
 	
-String addPropertiesFromDataSet(Object dataSet) :
-	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addPropertiesFromDataSet(net.sourceforge.xmlfit.data.DataSet);
+String addTestStepPropertiesFromDataSet(Object dataSet) :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addTestStepPropertiesFromDataSet(net.sourceforge.xmlfit.data.DataSet);
+	
+String addTestPropertiesFromDataSet(Object dataSet) :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addTestPropertiesFromDataSet(net.sourceforge.xmlfit.data.DataSet);
+
+String clearTestProperties() :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.clearTestProperties();

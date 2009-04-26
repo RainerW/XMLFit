@@ -1,4 +1,4 @@
-package net.sourceforge.xmlfit;
+package net.sourceforge.xmlfit.runner;
 
 import static org.junit.Assert.*;
 

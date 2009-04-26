@@ -13,7 +13,8 @@ public class PropertyHelperTest {
 	@Before
 	public void setUp()
 	{
-		PropertyHelper.clearProperties();
+		PropertyHelper.clearTestStepProperties();
+		PropertyHelper.clearTestProperties();
 		PropertyHelper.addProperty("username", "baranowski");
 		PropertyHelper.addProperty("password", "pwd");
 	}

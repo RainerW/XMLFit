@@ -19,28 +19,29 @@
 «ENDREM»
 «DEFINE test FOR Test»
  «FILE id+"-"+name+".html"»
-    «LET counterReset("COMMENT_ID") AS x»«ENDLET»
-	«LET storeGlobalVar("TESTNAME_ID", name + " " +id) AS x»«ENDLET»
+   «clearTestProperties()»
+   «IF defaultdata != null»
+   		«FOREACH createDataSource(defaultdata) AS dataSet»
+   			«addTestPropertiesFromDataSet(dataSet)»
+   		«ENDFOREACH»
+   «ENDIF»
    <html>
-    «PROTECT CSTART '<!--' CEND '-->' ID 
-  		"HEAD-"+getGlobalVar("TESTNAME_ID") + "-" + counterInc("COMMENT_ID")»
      <head>
       <title>«id+"--"+name»</title>
    </head>
-   «ENDPROTECT»
    <body>
-   «EXPAND testStep FOREACH testStep»		
+   	«EXPAND testStep FOREACH testStep»		
    </body>
    </html>	
  «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE testStep FOR Step»
-	«clearProperties()»
+	«clearTestStepProperties()»
 	«EXPAND property FOREACH property»	
 	«IF data != null»
 		«FOREACH createDataSource(data) AS dataSet»
-			«addPropertiesFromDataSet(dataSet)»
+			«addTestStepPropertiesFromDataSet(dataSet)»
 			«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
 		«ENDFOREACH»
 	«ELSE»

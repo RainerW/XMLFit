@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://xmlfit.sourceforge.net/test test.xsd ">
 	
-	<test id="001" name="LoginTest">
+	<test id="001" name="LoginTest" defaultdata="example-defaultdata.xml">
 		
 		<testStep file="example-component.xml" data="example-data.xml" >
 			<property name="username" value="userXY Christian"/>
