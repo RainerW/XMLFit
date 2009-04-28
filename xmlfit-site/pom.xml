@@ -4,7 +4,7 @@
   <groupId>net.sourceforge.xmlfit</groupId>
   <artifactId>xmlfit-site</artifactId>
   <packaging>jar</packaging>
-  <name>xmlfit-site</name>
+  <name>xmlfit</name>
   <version>0.0.2</version>
   
   <developers>
@@ -43,19 +43,7 @@
     </license>
   </licenses>
   
-    <reporting>
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <configuration>
-                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </reporting>
+    
   
   <distributionManagement>
     <site>
