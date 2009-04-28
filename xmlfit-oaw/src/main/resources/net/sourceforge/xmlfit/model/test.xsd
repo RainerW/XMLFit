@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="http://xmlfit.sourceforge.net/test"
-	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
-	xmlns:test="http://xmlfit.sourceforge.net/test"
-	xmlns:comp="http://xmlfit.sourceforge.net/component">
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/test"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:test="http://xmlfit.sourceforge.net/schema/1.0/test" xmlns:comp="http://xmlfit.sourceforge.net/component">
 
-	<import namespace="http://xmlfit.sourceforge.net/component" schemaLocation="component.xsd"></import>
 	<complexType name="Test">
 		<sequence>
 			<element name="testStep" type="test:Step"

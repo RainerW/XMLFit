@@ -6,12 +6,18 @@ import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner;
+
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class XMLDataSourceImpl implements DataSource, Iterator<DataSet> {
 
+	private static Logger logger = Logger
+	.getLogger(XMLDataSourceImpl.class);
+	
 	private int actualIndex = 0;
 	
 	private Document document;
@@ -27,6 +33,9 @@ public class XMLDataSourceImpl implements DataSource, Iterator<DataSet> {
 			dataSets = document.getElementsByTagName("dataSet");
 			
 		} catch (Exception e) {
+			logger.error("Error on loading data file with name: " +fileName);
+			logger.error(e);
+			throw new XmlLoadingException();
 		}
 	}
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="http://xmlfit.sourceforge.net/suite"
-	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
-	xmlns:suite="http://xmlfit.sourceforge.net/suite" xmlns:test="http://xmlfit.sourceforge.net/test">
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/suite"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:suite="http://xmlfit.sourceforge.net/schema/1.0/suite" xmlns:test="http://xmlfit.sourceforge.net/test">
 
 	<complexType name="Suite">
         <sequence maxOccurs="unbounded" minOccurs="0">

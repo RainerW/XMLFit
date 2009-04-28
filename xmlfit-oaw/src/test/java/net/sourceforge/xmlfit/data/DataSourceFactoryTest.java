@@ -11,8 +11,9 @@ public class DataSourceFactoryTest {
 
 	@Test
 	public void testCreateDataSource() {
+		DataSourceFactory.inputDirectory = "src/test/resources/";
 		DataSource dataSource = 
-			DataSourceFactory.createDataSource("src/test/resources/example-data.xml");
+			DataSourceFactory.createDataSource("example-data.xml");
 		assertNotNull(dataSource);
 	}
 

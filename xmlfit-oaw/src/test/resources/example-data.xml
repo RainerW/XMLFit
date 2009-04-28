@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://xmlfit.sourceforge.net/data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlfit.sourceforge.net/data data.xsd ">
+<data 
+	xmlns="http://xmlfit.sourceforge.net/schema/1.0/data" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/data/data.xsd" >
 
 	<dataSet>
 		<username>baranowsk01</username>

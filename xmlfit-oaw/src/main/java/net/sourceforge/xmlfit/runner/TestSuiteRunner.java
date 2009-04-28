@@ -51,5 +51,9 @@ public enum TestSuiteRunner {
 		}
 		INSTANCE.counter.success++;
 	}
+
+	public void reset() {
+		counter = new Counter();
+	}
 	
 }

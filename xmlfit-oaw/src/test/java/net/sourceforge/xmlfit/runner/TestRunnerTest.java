@@ -19,7 +19,7 @@ public class TestRunnerTest {
 	@Before
 	public void setUp()
 	{
-		File testFile = new File(GENERATED_TESTFILE);
+		File testFile = new File(OUTPUT_DIR);
 		if(testFile.exists())
 		{
 			testFile.delete();

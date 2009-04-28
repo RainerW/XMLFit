@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component
-	xmlns="http://xmlfit.sourceforge.net/component" 
+	xmlns="http://xmlfit.sourceforge.net/schema/1.0/component" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://xmlfit.sourceforge.net/component component.xsd ">
-
+	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/component/component.xsd"
+	>
+	
         <comment>
             <heading>${defaultData}User DB Setup</heading>
             <description>Setup the User DB for the Test.</description>

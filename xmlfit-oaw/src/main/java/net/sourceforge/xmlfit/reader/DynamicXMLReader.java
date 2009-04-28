@@ -2,22 +2,14 @@ package net.sourceforge.xmlfit.reader;
 
 import java.util.HashMap;
 
-import net.sourceforge.xmlfit.runner.TestSuiteRunner;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.openarchitectureware.type.MetaModel;
-import org.openarchitectureware.workflow.Workflow;
 import org.openarchitectureware.workflow.WorkflowComponent;
 import org.openarchitectureware.workflow.WorkflowContext;
-import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.ast.parser.Location;
-import org.openarchitectureware.workflow.ast.util.WorkflowContainer;
 import org.openarchitectureware.workflow.container.CompositeComponent;
 import org.openarchitectureware.workflow.issues.Issues;
-import org.openarchitectureware.workflow.monitor.NullProgressMonitor;
 import org.openarchitectureware.workflow.monitor.ProgressMonitor;
-import org.openarchitectureware.xsd.XMLReader;
 import org.openarchitectureware.xsd.XMLReaderImpl;
 import org.openarchitectureware.xsd.XSDMetaModel;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema targetNamespace="http://xmlfit.sourceforge.net/component" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:comp="http://xmlfit.sourceforge.net/component">
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/component" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:comp="http://xmlfit.sourceforge.net/schema/1.0/component">
 
 
     <complexType name="Fixture" abstract="true">
