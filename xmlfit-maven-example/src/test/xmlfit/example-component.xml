@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component
+	xmlns="http://xmlfit.sourceforge.net/schema/1.0/component" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/component/component.xsd"
+	>
+	
+        <comment>
+            <heading>User DB Setup</heading>
+            <description>Setup the User DB for the Test.</description>
+        </comment>
+    
+		<columnFixture type="UserDbFixture">
+			<column name="id" />
+			<column name="username" />
+			<column name="password" />
+			<row>
+				<value>1</value>
+				<value>${username}</value>
+				<value>${password}</value>
+			</row>
+		</columnFixture>
+		
+        <comment>
+            <heading>Login - for User ${username} and Password ${password}</heading>
+            <description>The Fixture doese the Login with Username and Password.</description>
+        </comment>
+    
+		<actionFixture>
+			<command name="start">
+				<target>LoginFixture</target>
+			</command>
+			<command name="enter">
+				<target>username</target>
+				<value>${username}</value>
+			</command>
+			<command name="enter">
+				<target>password</target>
+				<value>${password}</value>
+			</command>
+			<command name="special">
+				<target>test</target>
+				<value>01</value>
+				<value>02</value>
+				<value>03</value>
+			</command>
+			<command name="type">
+				<target>loginForm:username</target>
+				<value>Christian.Baranowski@pro-pix.de</value>
+			</command>
+			<command name="getAll">
+				<value>Test VALUE ONE</value>
+				<value>VALUE TWO</value>
+			</command>
+		</actionFixture>
+
+</component>
