@@ -5,7 +5,10 @@
 	<artifactId>xmlfit-oaw</artifactId>
 	<packaging>jar</packaging>
 	<version>0.0.2</version>
-	<name>oaw</name>
+	<name>xmlfit-oaw</name>
+
+	<description>The xmlfit oaw project with templates for the model transformation to Fit HTML.</description>
+
 	<url>http://maven.apache.org</url>
 
 	<repositories>
@@ -78,34 +81,21 @@
 						<manifest>
 							<mainClass>net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner</mainClass>
 							<packageName>net.sourceforge.xmlfit.runner</packageName>
-							<classpathPrefix>lib/</classpathPrefix> 
-            				<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
 
-			<!-- 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								<excludes>
-									<exclude>junit:junit</exclude>
-								</excludes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			 -->
+			<!--
+				<plugin> <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId> <executions> <execution>
+				<phase>package</phase> <goals> <goal>shade</goal> </goals>
+				<configuration> <artifactSet> <excludes>
+				<exclude>junit:junit</exclude> </excludes> </artifactSet>
+				</configuration> </execution> </executions> </plugin>
+			-->
 
 		</plugins>
 
@@ -180,5 +170,16 @@
 			<url>scp://shell.sourceforge.net//home/groups/x/xm/xmlfit/htdocs/xmlfit-oaw</url>
 		</site>
 	</distributionManagement>
+
+	<scm>
+		<connection> 
+              scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk/xmlfit-oaw
+          </connection>
+		<developerConnection> 
+              scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk/xmlfit-oaw
+        </developerConnection>
+		<tag>HEAD</tag>
+		<url>http://xmlfit.svn.sourceforge.net/viewvc/xmlfit/trunk/xmlfit-oaw</url>
+	</scm>
 
 </project>
