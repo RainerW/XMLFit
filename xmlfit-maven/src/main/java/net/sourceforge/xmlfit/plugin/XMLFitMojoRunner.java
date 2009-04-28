@@ -1,11 +1,9 @@
 package net.sourceforge.xmlfit.plugin;
 
-import net.sourceforge.xmlfit.runner.XMLFitRunner;
-
 /**
  * Parameter Object to run multiple XMLFit tests
  */
-public class XMLFitMojoRunner implements XMLFitRunner
+public class XMLFitMojoRunner
 {
 
   private String inputDir;

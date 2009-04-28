@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.sourceforge.xmlfit.runner.TestRunner;
+import net.sourceforge.xmlfit.runner.TestSuiteRunner;
+
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.maven.model.Resource;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
 import org.apache.tools.ant.DirectoryScanner;
-
-import net.sourceforge.xmlfit.runner.XMLFit;
 
 /**
  * Transform XML testfiles to HTML.
@@ -30,14 +31,14 @@ public class XMLFitMojo extends AbstractMojo
   /**
    * The output folder.
    * 
-   * @parameter expression="${project.build.directory}/fit"
+   * @parameter expression="${project.build.directory}/fit/"
    */
   private String outputDirectory;
 
   /**
    * The source directory containing the Fit fixtures
    * 
-   * @parameter expression="${basedir}/src/test/xmlfit"
+   * @parameter expression="${basedir}/src/test/xmlfit/"
    * @required
    */
   String inputDirectory;
@@ -209,11 +210,10 @@ public class XMLFitMojo extends AbstractMojo
     return files;
   }
 
-  private void runXmlFitOnFile(XMLFitMojoRunner runner, String suiteFileName)
+  private void runXmlFitOnFile(XMLFitMojoRunner runner, String testFile)
   {
-    getLog().info("Running XMLFit on file : " + suiteFileName);
-    runner.setTestsuite(suiteFileName);
-    XMLFit.run(runner);
+    getLog().info("Running XMLFit on file : " + testFile);
+    TestRunner.INSTANCE.run(testFile, outputDirectory, inputDirectory);
   }
 
   public String getStylesheet()
