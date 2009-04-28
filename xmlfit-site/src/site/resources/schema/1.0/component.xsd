@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/component" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:comp="http://xmlfit.sourceforge.net/schema/1.0/component">
+
+
+    <complexType name="Fixture" abstract="true">
+        <attribute name="type" type="string" use="required"></attribute>
+    </complexType>
+
+    <complexType name="ActionFixture">
+    	<complexContent>
+    		<extension base="comp:Fixture">
+    			<sequence>
+    				<element name="command" type="comp:Command"
+    					maxOccurs="unbounded" minOccurs="0">
+    				</element>
+    			</sequence>
+
+    			<attribute name="type" type="string" default="fit.ActionFixture"></attribute>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="ColumnFixture">
+    	<complexContent>
+    		<extension base="comp:Fixture">
+    			<sequence>
+    				<element name="column" type="comp:Column"
+    					maxOccurs="unbounded" minOccurs="1">
+    				</element>
+    				<element name="row" type="comp:Row" maxOccurs="unbounded" minOccurs="0"></element>
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
+
+    <complexType name="Command">
+    	<sequence>
+    		<element name="target" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="value" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    	<attribute name="name" type="string" use="required"></attribute>
+    </complexType>
+
+    <complexType name="Column">
+    	<attribute name="name" type="string" use="required"></attribute>
+    </complexType>
+    
+    <complexType name="Row">
+    	<sequence>
+    		<element name="value" type="string" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="Component">
+    	<sequence maxOccurs="unbounded" minOccurs="0">
+            <group ref="comp:Fixture"></group>
+    	</sequence>
+    </complexType>
+
+    <group name="Fixture">
+      <choice>
+        <element name="actionFixture" type="comp:ActionFixture"></element>
+        <element name="columnFixture" type="comp:ColumnFixture"></element>
+        <element name="comment" type="comp:CommentFixture"></element>
+      </choice>
+    </group>
+
+
+
+
+
+
+    <complexType name="Components">
+    	<sequence>
+    		<element name="component" type="comp:Component" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CommentFixture">
+        <sequence>
+        <element name="heading" type="string" maxOccurs="1" minOccurs="0">
+        </element>
+        <element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+      </sequence></complexType>
+
+
+    <element name="component" type="comp:Component"></element>
+</schema>

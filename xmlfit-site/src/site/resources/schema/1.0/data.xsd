@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/data" elementFormDefault="unqualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:data="http://xmlfit.sourceforge.net/schema/1.0/data">
+
+    <complexType name="Data">
+    	<sequence>
+    		<element name="dataSet" type="data:DataSet" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="DataSet">
+    	<sequence>
+    		<any minOccurs="0" maxOccurs="unbounded"></any>
+    	</sequence></complexType>
+
+    <element name="data" type="data:Data"></element>
+</schema>

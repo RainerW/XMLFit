@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+  <body>
+    <links>
+      <item name="Seitenbau Gmbh" href="http://www.seitenbau.de" />
+      <item name="XMLFit Sourceforge site" href="https://sourceforge.net/projects/xmlfit/" />
+    </links>
+    <menu name="Overview">
+      <item name="Introduction" href="index.html" />
+      <item name="Usage" href="usage.html" />
+      
+    </menu>
+    <menu name="Components">
+      <item name="XmlFit OAW" href="http://xmlfit.sourceforge.net/xmlfit-oaw/" />
+      <item name="XmlFit Maven Plugin" href="http://xmlfit.sourceforge.net/xmlfit-maven/" />
+    </menu>
+    <menu ref="reports"/>
+  </body>
+</project>

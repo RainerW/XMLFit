@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/test"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:test="http://xmlfit.sourceforge.net/schema/1.0/test" xmlns:comp="http://xmlfit.sourceforge.net/component">
+
+	<complexType name="Test">
+		<sequence>
+			<element name="testStep" type="test:Step"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="id" type="string" use="required"></attribute>
+		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="defaultdata" type="string"></attribute>
+	</complexType>
+
+	<complexType name="Step">
+		<sequence>
+			<element name="property" type="test:Property"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="file" type="string" use="required"></attribute>
+		<attribute name="data" type="string"></attribute>
+	</complexType>
+
+
+	<complexType name="Tests">
+		<sequence>
+			<element name="test" type="test:Test" maxOccurs="unbounded"
+				minOccurs="0">
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Property">
+		<attribute name="name" type="string" use="required"></attribute>
+		<attribute name="value" type="string" use="required"></attribute>
+	</complexType>
+
+	<element name="tests" type="test:Tests"></element>
+
+
+
+
+	<group name="NewGroupDefinition">
+		<sequence></sequence>
+	</group>
+</schema>

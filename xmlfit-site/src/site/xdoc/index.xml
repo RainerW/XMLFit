@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>Introduction XMLFit</title>
+  </properties>
+  <body>
+    <section name="Introduction">
+      <p>
+        XMLFit is a Java and XML based solution to convert testcases written in XML to the FIT HTML table structure.
+      </p>
+      <subsection name="Functional Overview">
+        <p>
+            This graphic shows the basic functionality of XMLFit. The input is defined in the XML notation and XMLFit transforms this input into 
+            the FIT HTML table notation. For more details, see chapter 'Usage'.
+        </p>
+        <p>
+             <img src="images/overview.jpg"/>
+        </p>
+       </subsection>
+      <subsection name="Structure of tests">
+        <p>
+        <img src="images/FeinkonzeptXMLFit.png"/>
+        </p>
+       </subsection>
+    </section>
+  </body>
+</document>
