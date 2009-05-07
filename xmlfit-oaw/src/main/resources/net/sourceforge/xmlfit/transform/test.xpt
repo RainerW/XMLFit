@@ -36,6 +36,9 @@
  «ENDFILE»
 «ENDDEFINE»
 
+«REM»
+	Template for a test step.
+«ENDREM»
 «DEFINE testStep FOR Step»
 	«clearTestStepProperties()»
 	«EXPAND property FOREACH property»	
@@ -49,6 +52,9 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«REM»
+	Template for a property.
+«ENDREM»
 «DEFINE property FOR Property»
 	«addProperty(name, value)»
 «ENDDEFINE»

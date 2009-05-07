@@ -5,6 +5,35 @@
 	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/component/component.xsd"
 	>
 	
+		<columnFixture>
+			<row>
+				<value>Testfall</value>
+				<value>ID-0001-1</value>
+			</row>
+			<row>
+				<value>//Befehl</value>
+				<value>Kontext</value>
+				<value>Selektor</value>
+				<value>Argumente</value>
+				<value>Bemerkung</value>
+			</row>
+			<row>
+				<value>Start</value>
+				<value>esta_xml</value>
+				<value>LoginXML</value>
+				<value></value>
+				<value></value>
+			</row>
+			<row>
+				<value>Enter</value>
+				<value>esta_kontext</value>
+				<value>ServiceURL</value>
+				<value>http://192.168.139.129</value>
+				<value>Test Step 01</value>
+			</row>
+		</columnFixture>
+	
+	
         <comment>
             <heading>${defaultData}User DB Setup</heading>
             <description>Setup the User DB for the Test.</description>

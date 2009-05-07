@@ -1,4 +1,6 @@
-package net.sourceforge.xmlfit.data;
+package net.sourceforge.xmlfit.data.impl;
+
+import net.sourceforge.xmlfit.data.DataSet;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

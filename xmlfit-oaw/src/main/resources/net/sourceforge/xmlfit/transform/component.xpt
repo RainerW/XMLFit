@@ -55,11 +55,13 @@
 	«ENDLET»
 	«EXPAND countMaxActionCells FOREACH command»
 	<table border="1">
-	<tr>
-		<td colspan="«counterGet("MAX_ACTIONS_CELLS")»">
-			«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»
-		</td>
-	</tr>
+	«IF type != null»
+		<tr>
+			<td colspan="«counterGet("MAX_ACTIONS_CELLS")»">
+				«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»
+			</td>
+		</tr>
+	«ENDIF»
 	«EXPAND command FOREACH command»
 </table>
 
@@ -80,9 +82,11 @@
 «ENDREM»
 «DEFINE fixture FOR ColumnFixture»
 	<table border="1">
+		«IF type != null»
 		<tr>
 			<td colspan="«column.size»">«extractProperties(type)»</td>
 		</tr>
+		«ENDIF»
 		<tr>
 			«EXPAND column FOREACH column»
 		</tr>

@@ -1,4 +1,4 @@
-package net.sourceforge.xmlfit.data;
+package net.sourceforge.xmlfit.data.impl;
 
 import java.io.File;
 import java.util.Iterator;
@@ -6,17 +6,20 @@ import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner;
+import net.sourceforge.xmlfit.data.DataSet;
+import net.sourceforge.xmlfit.data.DataSource;
+import net.sourceforge.xmlfit.data.DataSourceProvider;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+@DataSourceProvider(fileExtension="XML")
 public class XMLDataSourceImpl implements DataSource, Iterator<DataSet> {
 
-	private static Logger logger = Logger
-	.getLogger(XMLDataSourceImpl.class);
+	private static Logger logger = 
+		Logger.getLogger(XMLDataSourceImpl.class);
 	
 	private int actualIndex = 0;
 	
@@ -35,7 +38,7 @@ public class XMLDataSourceImpl implements DataSource, Iterator<DataSet> {
 		} catch (Exception e) {
 			logger.error("Error on loading data file with name: " +fileName);
 			logger.error(e);
-			throw new XmlLoadingException();
+			throw new XmlLoadingException(e);
 		}
 	}
 

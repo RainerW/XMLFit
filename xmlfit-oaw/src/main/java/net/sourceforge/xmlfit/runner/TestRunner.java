@@ -2,8 +2,7 @@ package net.sourceforge.xmlfit.runner;
 
 import java.util.HashMap;
 
-import net.sourceforge.xmlfit.data.DataSourceFactory;
-import net.sourceforge.xmlfit.reader.DynamicXMLReader;
+import net.sourceforge.xmlfit.configuration.Configuration;
 
 import org.apache.log4j.Logger;
 import org.openarchitectureware.workflow.WorkflowRunner;
@@ -17,7 +16,9 @@ public enum TestRunner
 	private static Logger logger = Logger.getLogger(TestRunner.class);
 	
 	private static final String workFlowFile = "net/sourceforge/xmlfit/xmlfit.oaw";
-		
+	
+	private Configuration configuration = Configuration.INSTANCE;
+	
 	public void run(String testFile, String outputDir, String inputDirectory)
 	{
 		logger.info("");
@@ -30,8 +31,7 @@ public enum TestRunner
 		logger.info("input Dir: "+ inputDirectory);
 		logger.info("");
 		
-		DynamicXMLReader.inputDirectory = inputDirectory;
-		DataSourceFactory.inputDirectory = inputDirectory;
+		configuration.setInputDirectory(inputDirectory);
 		
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("testFile", testFile);

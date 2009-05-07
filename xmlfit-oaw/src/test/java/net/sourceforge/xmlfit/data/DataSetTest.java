@@ -2,8 +2,9 @@ package net.sourceforge.xmlfit.data;
 
 import static org.junit.Assert.*;
 
+import net.sourceforge.xmlfit.configuration.Configuration;
 import net.sourceforge.xmlfit.data.DataSet;
-import net.sourceforge.xmlfit.data.DataSourceFactory;
+import net.sourceforge.xmlfit.data.impl.DataSourceFactoryImpl;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +16,9 @@ public class DataSetTest {
 	@Before
 	public void setUp()
 	{
-		DataSourceFactory.inputDirectory = "src/test/resources/";
+		Configuration.INSTANCE.setInputDirectory("src/test/resources/");
 		dataSet = 
-			DataSourceFactory.createDataSource("example-data.xml").iterator().next();
+			DataSourceFactory.INSTANCE.createDataSource("example-data.xml").iterator().next();
 	}
 	
 	@Test

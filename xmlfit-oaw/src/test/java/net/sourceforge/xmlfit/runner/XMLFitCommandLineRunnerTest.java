@@ -22,7 +22,6 @@ public class XMLFitCommandLineRunnerTest {
 		{
 			testFile.delete();
 		}
-		TestSuiteRunner.INSTANCE.reset();
 	}
 	
 	@Test

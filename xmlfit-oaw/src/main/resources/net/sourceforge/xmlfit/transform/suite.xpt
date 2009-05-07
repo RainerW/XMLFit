@@ -2,10 +2,17 @@
 
 «EXTENSION net::sourceforge::xmlfit::runner::Helper»
 
+«REM»
+	Root template for a test suite.
+«ENDREM»
 «DEFINE Root FOR suite::Suite»
 	«EXPAND test FOREACH test»
 «ENDDEFINE»
 
+«REM»
+	Run the test template for the file.
+	See also test.xpt
+«ENDREM»
 «DEFINE test FOR Test»
-«runTest(file)»
+	«runTest(file)»
 «ENDDEFINE»
