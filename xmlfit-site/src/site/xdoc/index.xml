@@ -4,6 +4,12 @@
     <title>Introduction XMLFit</title>
   </properties>
   <body>
+  	<section name="Test Tage 2009">
+  		<p>
+  			Here the presentation form the <a href="http://www.iste.uni-stuttgart.de/se/events/testtage2009/">Test Tage 2009</a>
+  			<p><a href="http://xmlfit.sourceforge.net/docu/ModellgetriebeneFITTests.pdf">Modell getriebene FIT Tests</a></p>
+  		</p>
+  	</section>
     <section name="Introduction">
       <p>
         XMLFit is a Java and XML based solution to convert testcases written in XML to the FIT HTML table structure.
@@ -15,11 +21,6 @@
         </p>
         <p>
              <img src="images/overview.jpg"/>
-        </p>
-       </subsection>
-      <subsection name="Structure of tests">
-        <p>
-        <img src="images/FeinkonzeptXMLFit.png"/>
         </p>
        </subsection>
     </section>

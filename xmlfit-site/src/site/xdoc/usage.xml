@@ -5,101 +5,10 @@
   </properties>
   <body>
     <section name="Usage">
-      <p>
-        The next four steps will explain the usage of XMLFit. To use XMLFit just follow these steps.
-      </p>
-    <subsection name="Step 1: Create a test">
-      <p>
-        First of all you have to define a valid test that XMLFit is able to understand. 
-        Here is an example of a valid XMLFit test:
-   <source>
-&lt;test author="cfaigle"&gt;
-     &lt;fixture&gt;
-        &lt;command name="enter"&gt;
-            &lt;target&gt;select&lt;/target&gt;
-            &lt;value&gt;&lt;var name="trackNumber"/&gt;&lt;/value&gt;            
-        &lt;/command&gt;
-        &lt;command name="check"&gt;
-            &lt;target&gt;title&lt;/target&gt;
-            &lt;value&gt;&lt;var name="title"/&gt;&lt;/value&gt;            
-        &lt;/command&gt;
-        &lt;command name="check"&gt;
-            &lt;target&gt;artist&lt;/target&gt;
-            &lt;value&gt;&lt;var name="artist"/&gt;&lt;/value&gt;            
-        &lt;/command&gt;
-        &lt;command name="check"&gt;
-            &lt;target&gt;album&lt;/target&gt;
-            &lt;value&gt;&lt;var name="album"/&gt;&lt;/value&gt;            
-        &lt;/command&gt;
-        &lt;command name="check"&gt;
-            &lt;target&gt;year&lt;/target&gt;
-            &lt;value&gt;&lt;var name="year"/&gt;&lt;/value&gt;            
-        &lt;/command&gt;
-     &lt;/fixture&gt;
-&lt;/test&gt;   
-    </source>
-    As you can see the XMLFit language is quit simple. The example shows the XMLFit Notation for an ActionFixture.
-    The command element has one required parameter 'name' and two child elements called 'target' and 'value'. The 'value' element is
-    optional. To split the test data from the test logic you can define variables in the test. Variables can be defined by using the element 
-    'var' with the required attribute 'name'. XMLFit will search for these variables in additional data files.
-      </p>
-     </subsection>
-    <subsection name="Step 2: Create testdata">
-     <p>
-      The following example shows how to define test data for tests:
-      <source>
-  &lt;testdata&gt;
-    &lt;dataset&gt;
-        &lt;trackNumber&gt;1&lt;/trackNumber&gt;
-        &lt;title&gt;Akila&lt;/title&gt;
-        &lt;artist&gt;Toure Kunda&lt;/artist&gt;
-    &lt;/dataset&gt;
-    &lt;dataset&gt;
-        &lt;trackNumber&gt;2&lt;/trackNumber&gt;
-        &lt;title&gt;American Tango&lt;/title&gt;
-        &lt;artist&gt;Weather Report&lt;/artist&gt;
-        &lt;album&gt;Mysterious Traveller&lt;/album&gt;
-        &lt;year&gt;1974&lt;/year&gt;
-    &lt;/dataset&gt;
-    &lt;dataset&gt;
-        &lt;trackNumber&gt;3&lt;/trackNumber&gt;
-        &lt;title&gt;Ananas&lt;/title&gt;
-        &lt;artist&gt;James Taylor&lt;/artist&gt;
-        &lt;album&gt;Hourglass&lt;/album&gt;
-        &lt;year&gt;1997&lt;/year&gt;
-    &lt;/dataset&gt;
-  &lt;/testdata&gt;
-      </source>
-      XMLFit will create a FIT table for each dataset. You can define each variable given in the test file but you don´t have to.
-      </p>
-    </subsection>
-    <subsection name="Step 3: Create testsuite">
-     <p>
-      Finally to connect the test logic with the test data you have to define a XML File called testsuite.
-      A sample testsuite is shown below:
-      <source>
-   &lt;testsuite author="faigle"&gt;
-        &lt;testgroup name="ExampleTest" id="1" defaultData="data/defaultData.xml"&gt;
-             &lt;call test="testMusic.xml" data="data/musicData.xml"/&gt;
-        &lt;/testgroup&gt;
-   &lt;/testsuite&gt;
-      </source>
-      The testsuite file contains several testgroups. The 'testgroup' element contains the call elements. There can be any number of testgroups in a testsuite and any number of calls in a testgroup.
-      In the second line you see the definition of the default data. The default data is stored in a separate XML file. If any variable is not defined in the testdata XMLFit will lookup this variable in the default data file.
-      Some Example:
-      <source>
-    &lt;defaultdata&gt;
-        &lt;startTarget&gt;eg.music.Browser&lt;/startTarget&gt;
-        &lt;libraryTarget&gt;library&lt;/libraryTarget&gt;
-        &lt;libraryValue&gt;D:/workspace/sb-fit-ng/src/eg/music/Music.txt&lt;/libraryValue&gt;
-        &lt;totalSongsTarget&gt;total songs&lt;/totalSongsTarget&gt;
-        &lt;totalSongs&gt;37&lt;/totalSongs&gt;
-        &lt;trackNumber&gt;66&lt;/trackNumber&gt;
-    &lt;/defaultdata&gt;
-      </source>
-      </p>
-     </subsection>
-    <subsection name="Step 4: Run XMLFit">
+    
+    TODO Doku for OAW Version ...
+    
+    <subsection name="Run XMLFit">
      <p>
  To run XMLFit just open a cmd window and type:
       <source>
@@ -115,51 +24,9 @@
         <source>
  -testsuite <i>testsuite file</i><br/><b>required</b>
        </source>
-         <source>
- -style <i>custom CSS file</i><br/><b>optional</b>
-       </source>
-       <source>
- -mode <i>mode of the transformation (e.g. selenium). default is fit mode</i><br/><b>optional</b>
-       </source>
       </p>
      </subsection>
-     <subsection name="Other features of XMLFit">
-        There are some features in XMLFit that you dont need in every case, but they can be handy in some testing situation. 
-        <subsection name="pre and suffix of variables">
-           In the variable element you can define two more attributes to give a pre and a suffix to the variable. Following example shows this:
-           <source>
-        ...
-        &lt;command name="enter"&gt;
-            &lt;target&gt;select&lt;/target&gt;
-            &lt;value&gt;&lt;var prefixText="pre" name="trackNumber" suffixText="suf"/&gt;&lt;/value&gt;            
-        &lt;/command&gt;
-        ...
-           </source>
-         This is useful when you need a variable with just a simple change in a specific testcase.
-        </subsection>
-        <subsection name="Complex structures of Tests ">
-        In XMLFit testsuites and testgroups are handled just the same way like simple tests. This makes it possible to define complex structures of tests, 
-        like a testsuite of testuites, or a testsuite referencing to a testgroup. The reference to a testsuite or a testgroup in a testsuite is quit the same as a reference to a test. Just use the call element in a testgroup of a testsuite. 
-        To much testsuite, testgroup and test thing? Ok, here is an example:
-        <source>
-&lt;testsuite author="faigle"&gt;
-  &lt;testgroup name="ExampleTest" id="1" defaultData="data/defaultData.xml"&gt;
-  
-      &lt;call test="testMusic.xml" data="data/musicData.xml"/&gt; <i>// simple reference to a test</i>
-      &lt;call testsuite="testSuite.xml" /&gt; <i>//reference to a testsuite called "testSuite.xml".</i>
-      &lt;call testsuite="testSuite.xml"  testgroup="testgroup1"/&gt; <i>// reference to a testgroup in the testsuite. </i>
-      &lt;call testsuite="testSuite.xml"  testgroup="testgroup1" test="test1.xml"/&gt;<i> // reference to a test in a testgroup</i>
-    &lt;/testgroup&gt;
-&lt;/testsuite&gt;
-        </source>
-       
-                       
-        </subsection>
-         <subsection name="Overwrite Variables">
-                       
-        </subsection>
-        
-     </subsection>
+    
     </section>
   </body>
 </document>
