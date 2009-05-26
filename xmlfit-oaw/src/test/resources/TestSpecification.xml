@@ -1,0 +1,67 @@
+<tests xmlns="http://xmlfit.sourceforge.net/schema/1.0/test" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/test ../../main/resources/net/sourceforge/xmlfit/model/test.xsd ">
+
+	<test id="TF-0001" name="Vorgang anlegen Test"  usecase="USECASE-0001">
+
+		<description>
+			Geprüft werden muss dass ein Vorgang mit Namen und Nachnamen angelegt werden kann.
+		</description>
+		
+		<precondition>
+			<description>
+				Datenbank Schema anlegen mit Testnutzern.
+			</description>
+		</precondition>
+		
+		<testStep title="Login">
+			<description>
+				Login mit einem Nutzer mit allen Rechten
+			</description>
+		</testStep>
+		
+		<testStep title="Vorgang anlegen">
+			<description>
+				Vorgang anlegen mit allen Beschreibungen für eine Vorlage.
+			</description>
+		</testStep>
+		
+		<postcondition>
+			<description>
+				Für den Benutzer ist ein Vorgang anleget mit Beschreibung.
+			</description>
+		</postcondition>
+		
+	</test>	
+	
+	<test id="TF-0002" name="Vorgang anlegen langer Text Text langer Test"  usecase="USECASE-0001">
+
+		<description>
+			Geprüft werden muss dass ein Vorgang mit Namen und Nachnamen angelegt werden kann.
+		</description>
+		
+		<precondition>
+			<description>
+				Datenbank Schema anlegen mit Testnutzern.
+			</description>
+		</precondition>
+		
+		<testStep title="Login">
+			<description>
+				Login mit einem Nutzer mit allen Rechten
+			</description>
+		</testStep>
+		
+		<testStep title="Vorgang anlegen">
+			<description>
+				Vorgang anlegen mit allen Beschreibungen für eine Vorlage.
+			</description>
+		</testStep>
+		
+		<postcondition>
+			<description>
+				Für den Benutzer ist ein Vorgang anleget mit Beschreibung.
+			</description>
+		</postcondition>
+		
+	</test>	
+
+</tests>

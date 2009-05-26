@@ -1,0 +1,21 @@
+<workflow>
+
+	<bean id="testMetaModel" class="org.openarchitectureware.xsd.XSDMetaModel"> 
+        <schemaFile value="net/sourceforge/xmlfit/model/test.xsd" /> 
+    </bean>
+    
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="model" />
+		<uri value="src/test/resources/TestSpecification.xml" />
+		<metaModel idRef="testMetaModel" /> 
+	</component>
+	
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="testMetaModel" />
+		
+		<expand value="net::sourceforge::xmlfit::transform::specification::Root FOR model" />
+		
+		<outlet path="target"></outlet>
+	</component>
+	
+</workflow>

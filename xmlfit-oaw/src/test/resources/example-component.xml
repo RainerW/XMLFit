@@ -58,6 +58,7 @@
 		<actionFixture>
 			<command name="start">
 				<target>LoginFixture</target>
+				<comment>Starte Applikation mit einem Login</comment>
 			</command>
 			<command name="enter">
 				<target>username</target>

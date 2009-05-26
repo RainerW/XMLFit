@@ -119,7 +119,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<doclet>gr.spinellis.umlgraph.doclet.UmlGraph</doclet>
+
+					<docletArtifact>
+						<groupId>gr.spinellis</groupId>
+						<artifactId>UmlGraph</artifactId>
+						<version>4.4</version>
+					</docletArtifact>
+
+				</configuration>
 			</plugin>
+
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

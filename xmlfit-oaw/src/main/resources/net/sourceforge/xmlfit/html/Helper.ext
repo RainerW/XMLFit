@@ -1,0 +1,3 @@
+
+String createHtmlText(String fileName) :
+	JAVA net.sourceforge.xmlfit.html.SpecialCharReplacer.createHtmlText(java.lang.String);

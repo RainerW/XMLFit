@@ -34,8 +34,13 @@
 
     <complexType name="Command">
     	<sequence>
-    		<element name="target" type="string" maxOccurs="1" minOccurs="0"></element>
-    		<element name="value" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    		<element name="target" type="string" maxOccurs="1"
+    			minOccurs="0">
+    		</element>
+    		<element name="value" type="string" maxOccurs="unbounded"
+    			minOccurs="0">
+    		</element>
+    		<element name="comment" type="string" maxOccurs="1" minOccurs="0"></element>
     	</sequence>
     	<attribute name="name" type="string" use="required"></attribute>
     </complexType>
@@ -46,10 +51,14 @@
     
     <complexType name="Row">
     	<sequence>
-    		<element name="value" type="string" maxOccurs="unbounded" minOccurs="1"></element>
+    		<element name="value" type="string" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
     	</sequence>
+    	<attribute name="name" type="string" use="optional"></attribute>
+    	<attribute name="comment" type="string" use="optional"></attribute>
     </complexType>
-    
+
 
     <complexType name="Component">
     	<sequence maxOccurs="unbounded" minOccurs="0">
@@ -79,4 +88,14 @@
       </sequence></complexType>
 
     <element name="component" type="comp:Component"></element>
+
+    <complexType name="TabelFixture">
+    	<complexContent>
+    		<extension base="comp:Fixture">
+    			<sequence>
+    				<element name="row" type="comp:Row" maxOccurs="unbounded" minOccurs="0"></element>
+    			</sequence>
+    		</extension>
+    	</complexContent>
+    </complexType>
 </schema>

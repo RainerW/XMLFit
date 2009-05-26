@@ -41,14 +41,16 @@
 «ENDREM»
 «DEFINE testStep FOR Step»
 	«clearTestStepProperties()»
-	«EXPAND property FOREACH property»	
-	«IF data != null»
-		«FOREACH createDataSource(data) AS dataSet»
-			«addTestStepPropertiesFromDataSet(dataSet)»
+	«IF file != null»
+		«EXPAND property FOREACH property»	
+		«IF data != null»
+			«FOREACH createDataSource(data) AS dataSet»
+				«addTestStepPropertiesFromDataSet(dataSet)»
+				«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
+			«ENDFOREACH»
+		«ELSE»
 			«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
-		«ENDFOREACH»
-	«ELSE»
-		«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 

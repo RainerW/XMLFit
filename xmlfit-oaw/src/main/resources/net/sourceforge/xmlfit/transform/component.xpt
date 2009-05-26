@@ -51,17 +51,20 @@
 	Template for a action fixture.
 «ENDREM»
 «DEFINE fixture FOR ActionFixture»
-	«LET counterReset("MAX_ACTIONS_CELLS") AS e»
-	«ENDLET»
+	«LET counterReset("MAX_ACTIONS_CELLS") AS e»«ENDLET»
+	«LET storeGlobalVar("IS_COMMENT_ENABLE", false) AS e»«ENDLET»
 	«EXPAND countMaxActionCells FOREACH command»
 	<table border="1">
-	«IF type != null»
 		<tr>
 			<td colspan="«counterGet("MAX_ACTIONS_CELLS")»">
 				«IF type==null»fit.ActionFixture«ENDIF»«extractProperties(type)»
 			</td>
+			«IF getGlobalVar("IS_COMMENT_ENABLE") == true»
+			<td>
+				Comments
+			</td>
+			«ENDIF»
 		</tr>
-	«ENDIF»
 	«EXPAND command FOREACH command»
 </table>
 
@@ -75,6 +78,10 @@
 		«LET counterInc("MAX_ACTIONS_CELLS") AS e»
 		«ENDLET»
 	«ENDFOREACH»
+	«IF comment != null»
+		«LET storeGlobalVar("IS_COMMENT_ENABLE", true) AS e»
+		«ENDLET»
+	«ENDIF»
 «ENDDEFINE»
 
 «REM»
@@ -125,6 +132,13 @@
 			«extractProperties(value.last())»
 			</td>
 	«ENDIF»
+	
+	«IF comment != null»
+		<td colspan="1">«extractProperties(comment)»</td>
+	«ELSEIF getGlobalVar("IS_COMMENT_ENABLE") == true»
+		<td colspan="1"></td>
+	«ENDIF»
+	
 	</tr>
 «ENDDEFINE»
 

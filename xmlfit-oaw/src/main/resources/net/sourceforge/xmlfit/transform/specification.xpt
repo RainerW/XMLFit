@@ -1,0 +1,101 @@
+«IMPORT test»
+
+«EXTENSION net::sourceforge::xmlfit::html::Helper»
+«EXTENSION org::openarchitectureware::util::stdlib::counter»
+
+«REM»
+	Root template for test.
+«ENDREM»
+«DEFINE Root FOR test::Tests»
+ «FILE "Testspecification.html"»
+ 	<html>
+ 	<head>
+ 		<title>Testspecification</title>
+ 		<style>
+ 			table {border-collapse:collapse;}
+ 			td {border: solid 1px;border-collapse:collapse;}
+ 		</style>
+ 	</head>
+ 	<body>
+ 		«EXPAND test FOREACH test»
+ 	</body>
+ 	</html>
+ «ENDFILE»
+«ENDDEFINE»
+
+«REM»
+	Template for a test.
+«ENDREM»
+«DEFINE test FOR Test»
+ <h1>«EXPAND text FOR id» - «EXPAND text FOR name»</h1>
+ <table>
+ 	<tr>
+ 		<td colspan="1"><b>ID:</b></td><td colspan="2">«EXPAND text FOR id»</td>
+ 	</tr>
+ 	<tr>
+ 		<td colspan="1"><b>Name:</b></td><td colspan="2">«EXPAND text FOR name»</td>
+ 	</tr>
+ 	«IF usecase != null»
+ 		<tr>
+ 			<td colspan="1"><b>UseCase:</b></td>
+ 			<td colspan="2">«EXPAND text FOR usecase»</td>
+ 		</tr>
+ 	«ENDIF»
+ 	<tr>
+ 		<td colspan="3"><b>Description:</b></td>
+ 	</tr>
+ 	<tr>
+ 		<td colspan="3">«EXPAND text FOR description»</td>
+ 	</tr>
+ 	
+ 	<tr>
+ 		<td colspan="3"><b>Pre-conditions:</b></td>
+ 	</tr>
+ 	«EXPAND testSteps FOR precondition»
+ 	
+ 	<tr>
+ 		<td colspan="3"><b>Test-Steps:</b></td>
+ 	</tr>
+ 	«EXPAND testSteps FOR testStep»
+ 	
+ 	<tr>
+ 		<td colspan="3"><b>Post-conditions:</b></td>
+ 	</tr>
+ 	«EXPAND testSteps FOR postcondition»
+ 	
+ 	«IF priority != null»
+ 	<tr>
+ 		<td colspan="1"><b>Priority:</b></td>
+ 		<td colspan="2">«priority»</td>
+ 	</tr>
+ 	«ENDIF»
+ </table>
+«ENDDEFINE»
+
+
+«DEFINE testSteps FOR List»
+	«LET counterReset("TEST_STEP_NUMBER") AS e»«ENDLET»
+	<tr>
+ 		<td>Nr.</td>
+ 		<td>Description:</td>
+ 		<td>Comment:</td>
+ 	</tr>
+ 	«EXPAND testStep FOREACH this»
+«ENDDEFINE»
+
+«DEFINE testStep FOR Object»
+«ENDDEFINE»
+
+«DEFINE testStep FOR Step»
+	<tr>
+		<td colspan="1">«counterInc("TEST_STEP_NUMBER")»</td>
+		<td colspan="1">«EXPAND text FOR description»</td>
+		<td colspan="1">
+			«EXPAND text FOR comment»
+		</td>
+	</tr>
+«ENDDEFINE»
+
+«DEFINE text FOR String»
+	«createHtmlText(this)»
+«ENDDEFINE»

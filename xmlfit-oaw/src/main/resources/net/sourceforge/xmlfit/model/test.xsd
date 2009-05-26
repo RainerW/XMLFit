@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/test"
-	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:test="http://xmlfit.sourceforge.net/schema/1.0/test" xmlns:comp="http://xmlfit.sourceforge.net/component">
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:test="http://xmlfit.sourceforge.net/schema/1.0/test"
+	xmlns:comp="http://xmlfit.sourceforge.net/component" xmlns:com="http://xmlfit.sourceforge.net/schema/1.0/component">
 
 	<complexType name="Test">
 		<sequence>
+			<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+			<element name="precondition" type="test:Step"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
 			<element name="testStep" type="test:Step"
+				maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="postcondition" type="test:Step"
 				maxOccurs="unbounded" minOccurs="0">
 			</element>
 		</sequence>
 		<attribute name="id" type="string" use="required"></attribute>
 		<attribute name="name" type="string" use="required"></attribute>
-		<attribute name="defaultdata" type="string"></attribute>
+		<attribute name="author" type="string" use="optional"></attribute>
+		<attribute name="defaultdata" type="string" use="optional"></attribute>
+		<attribute name="priority" type="int" use="optional"
+			default="1">
+		</attribute>
+		<attribute name="usecase" type="string" use="optional"></attribute>
 	</complexType>
 
 	<complexType name="Step">
-		<sequence>
-			<element name="property" type="test:Property"
-				maxOccurs="unbounded" minOccurs="0">
+        <sequence>
+            <element name="description" type="string" maxOccurs="1" minOccurs="0">
+			</element>
+            <element name="comment" type="string" maxOccurs="1" minOccurs="0">
+			</element>
+            <element name="property" type="test:Property" maxOccurs="unbounded" minOccurs="0">
 			</element>
 		</sequence>
-		<attribute name="file" type="string" use="required"></attribute>
+
+        <attribute name="title" type="string" use="optional"></attribute>
+        <attribute name="file" type="string" use="optional"></attribute>
 		<attribute name="data" type="string"></attribute>
 	</complexType>
 
@@ -42,7 +61,4 @@
 
 
 
-	<group name="NewGroupDefinition">
-		<sequence></sequence>
-	</group>
 </schema>
