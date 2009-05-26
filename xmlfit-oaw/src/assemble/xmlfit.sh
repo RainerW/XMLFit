@@ -1,0 +1,1 @@
+java $JVM_ARGS -jar `dirname $0`/xmlfit.jar "$@"

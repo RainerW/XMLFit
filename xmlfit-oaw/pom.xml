@@ -81,7 +81,7 @@
 						<manifest>
 							<mainClass>net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner</mainClass>
 							<packageName>net.sourceforge.xmlfit.runner</packageName>
-							<classpathPrefix>lib/</classpathPrefix>
+							<classpathPrefix>../lib/</classpathPrefix>
 							<addClasspath>true</addClasspath>
 						</manifest>
 					</archive>
@@ -90,13 +90,38 @@
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
+				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>copy-dependencies</id>
 						<phase>package</phase>
 						<goals>
-							<goal>shade</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/distribution.xml</descriptor>
+							</descriptors>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
