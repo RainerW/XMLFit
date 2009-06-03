@@ -6,16 +6,11 @@
 
 	<complexType name="Test">
 		<sequence>
-			<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
-			<element name="precondition" type="test:Step"
-				maxOccurs="unbounded" minOccurs="0">
-			</element>
-			<element name="testStep" type="test:Step"
-				maxOccurs="unbounded" minOccurs="0">
-			</element>
-			<element name="postcondition" type="test:Step"
-				maxOccurs="unbounded" minOccurs="0">
-			</element>
+		  <element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+		  <element name="precondition" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
+		  <element name="testStep" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
+		  <element name="postcondition" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
+		  <element name="rem" type="string" maxOccurs="unbounded" minOccurs="0"></element>
 		</sequence>
 		<attribute name="id" type="string" use="required"></attribute>
 		<attribute name="name" type="string" use="required"></attribute>

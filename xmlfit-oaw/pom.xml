@@ -4,7 +4,7 @@
 	<groupId>net.sourceforge.xmlfit</groupId>
 	<artifactId>xmlfit-oaw</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.2</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>xmlfit-oaw</name>
 
 	<description>The xmlfit oaw project with templates for the model transformation to Fit HTML.</description>
