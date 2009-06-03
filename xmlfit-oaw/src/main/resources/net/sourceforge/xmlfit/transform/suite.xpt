@@ -1,18 +1,18 @@
-«IMPORT suite»
+Â«IMPORT suiteÂ»
 
-«EXTENSION net::sourceforge::xmlfit::runner::Helper»
+Â«EXTENSION net::sourceforge::xmlfit::runner::HelperÂ»
 
-«REM»
+Â«REMÂ»
 	Root template for a test suite.
-«ENDREM»
-«DEFINE Root FOR suite::Suite»
-	«EXPAND test FOREACH test»
-«ENDDEFINE»
+Â«ENDREMÂ»
+Â«DEFINE Root FOR suite::SuiteÂ»
+	Â«EXPAND test FOREACH testÂ»
+Â«ENDDEFINEÂ»
 
-«REM»
+Â«REMÂ»
 	Run the test template for the file.
 	See also test.xpt
-«ENDREM»
-«DEFINE test FOR Test»
-	«runTest(file)»
-«ENDDEFINE»
+Â«ENDREMÂ»
+Â«DEFINE test FOR TestÂ»
+	Â«runTest(file)Â»
+Â«ENDDEFINEÂ»

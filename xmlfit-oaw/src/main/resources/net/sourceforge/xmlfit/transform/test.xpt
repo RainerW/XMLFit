@@ -1,62 +1,62 @@
-«IMPORT test»
-«IMPORT component»
+Â«IMPORT testÂ»
+Â«IMPORT componentÂ»
 
-«EXTENSION net::sourceforge::xmlfit::reader::DynamicReader»
-«EXTENSION net::sourceforge::xmlfit::property::Helper»
-«EXTENSION net::sourceforge::xmlfit::data::Helper»
-«EXTENSION org::openarchitectureware::util::stdlib::counter»
-«EXTENSION org::openarchitectureware::util::stdlib::globalvar»
+Â«EXTENSION net::sourceforge::xmlfit::reader::DynamicReaderÂ»
+Â«EXTENSION net::sourceforge::xmlfit::property::HelperÂ»
+Â«EXTENSION net::sourceforge::xmlfit::data::HelperÂ»
+Â«EXTENSION org::openarchitectureware::util::stdlib::counterÂ»
+Â«EXTENSION org::openarchitectureware::util::stdlib::globalvarÂ»
 
-«REM»
+Â«REMÂ»
 	Root template for test.
-«ENDREM»
-«DEFINE Root FOR test::Tests»
- «EXPAND test FOREACH test»
-«ENDDEFINE»
+Â«ENDREMÂ»
+Â«DEFINE Root FOR test::TestsÂ»
+ Â«EXPAND test FOREACH testÂ»
+Â«ENDDEFINEÂ»
 
-«REM»
+Â«REMÂ»
 	Template for a test.
-«ENDREM»
-«DEFINE test FOR Test»
- «FILE id+"-"+name+".html"»
-   «clearTestProperties()»
-   «IF defaultdata != null»
-   		«FOREACH createDataSource(defaultdata) AS dataSet»
-   			«addTestPropertiesFromDataSet(dataSet)»
-   		«ENDFOREACH»
-   «ENDIF»
+Â«ENDREMÂ»
+Â«DEFINE test FOR TestÂ»
+ Â«FILE id+"-"+name+".html"Â»
+   Â«clearTestProperties()Â»
+   Â«IF defaultdata != nullÂ»
+   		Â«FOREACH createDataSource(defaultdata) AS dataSetÂ»
+   			Â«addTestPropertiesFromDataSet(dataSet)Â»
+   		Â«ENDFOREACHÂ»
+   Â«ENDIFÂ»
    <html>
      <head>
-      <title>«id+"--"+name»</title>
+      <title>Â«id+"--"+nameÂ»</title>
    </head>
    <body>
-   	«EXPAND testStep FOREACH testStep»		
+   	Â«EXPAND testStep FOREACH testStepÂ»		
    </body>
    </html>	
- «ENDFILE»
-«ENDDEFINE»
+ Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«REM»
+Â«REMÂ»
 	Template for a test step.
-«ENDREM»
-«DEFINE testStep FOR Step»
-	«clearTestStepProperties()»
-	«IF file != null»
-		«EXPAND property FOREACH property»	
-		«IF data != null»
-			«FOREACH createDataSource(data) AS dataSet»
-				«addTestStepPropertiesFromDataSet(dataSet)»
-				«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
-			«ENDFOREACH»
-		«ELSE»
-			«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
-		«ENDIF»
-	«ENDIF»
-«ENDDEFINE»
+Â«ENDREMÂ»
+Â«DEFINE testStep FOR StepÂ»
+	Â«clearTestStepProperties()Â»
+	Â«IF file != nullÂ»
+		Â«EXPAND property FOREACH propertyÂ»	
+		Â«IF data != nullÂ»
+			Â«FOREACH createDataSource(data) AS dataSetÂ»
+				Â«addTestStepPropertiesFromDataSet(dataSet)Â»
+				Â«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)Â»
+			Â«ENDFOREACHÂ»
+		Â«ELSEÂ»
+			Â«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)Â»
+		Â«ENDIFÂ»
+	Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM»
+Â«REMÂ»
 	Template for a property.
-«ENDREM»
-«DEFINE property FOR Property»
-	«addProperty(name, value)»
-«ENDDEFINE»
+Â«ENDREMÂ»
+Â«DEFINE property FOR PropertyÂ»
+	Â«addProperty(name, value)Â»
+Â«ENDDEFINEÂ»

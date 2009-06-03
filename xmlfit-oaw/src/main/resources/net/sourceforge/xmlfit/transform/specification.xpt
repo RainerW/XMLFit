@@ -1,13 +1,13 @@
-«IMPORT test»
+Â«IMPORT testÂ»
 
-«EXTENSION net::sourceforge::xmlfit::html::Helper»
-«EXTENSION org::openarchitectureware::util::stdlib::counter»
+Â«EXTENSION net::sourceforge::xmlfit::html::HelperÂ»
+Â«EXTENSION org::openarchitectureware::util::stdlib::counterÂ»
 
-«REM»
+Â«REMÂ»
 	Root template for test.
-«ENDREM»
-«DEFINE Root FOR test::Tests»
- «FILE "Testspecification.html"»
+Â«ENDREMÂ»
+Â«DEFINE Root FOR test::TestsÂ»
+ Â«FILE "Testspecification.html"Â»
  	<html>
  	<head>
  		<title>Testspecification</title>
@@ -17,85 +17,85 @@
  		</style>
  	</head>
  	<body>
- 		«EXPAND test FOREACH test»
+ 		Â«EXPAND test FOREACH testÂ»
  	</body>
  	</html>
- «ENDFILE»
-«ENDDEFINE»
+ Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«REM»
+Â«REMÂ»
 	Template for a test.
-«ENDREM»
-«DEFINE test FOR Test»
- <h1>«EXPAND text FOR id» - «EXPAND text FOR name»</h1>
+Â«ENDREMÂ»
+Â«DEFINE test FOR TestÂ»
+ <h1>Â«EXPAND text FOR idÂ» - Â«EXPAND text FOR nameÂ»</h1>
  <table>
  	<tr>
- 		<td colspan="1"><b>ID:</b></td><td colspan="2">«EXPAND text FOR id»</td>
+ 		<td colspan="1"><b>ID:</b></td><td colspan="2">Â«EXPAND text FOR idÂ»</td>
  	</tr>
  	<tr>
- 		<td colspan="1"><b>Name:</b></td><td colspan="2">«EXPAND text FOR name»</td>
+ 		<td colspan="1"><b>Name:</b></td><td colspan="2">Â«EXPAND text FOR nameÂ»</td>
  	</tr>
- 	«IF usecase != null»
+ 	Â«IF usecase != nullÂ»
  		<tr>
  			<td colspan="1"><b>UseCase:</b></td>
- 			<td colspan="2">«EXPAND text FOR usecase»</td>
+ 			<td colspan="2">Â«EXPAND text FOR usecaseÂ»</td>
  		</tr>
- 	«ENDIF»
+ 	Â«ENDIFÂ»
  	<tr>
  		<td colspan="3"><b>Description:</b></td>
  	</tr>
  	<tr>
- 		<td colspan="3">«EXPAND text FOR description»</td>
+ 		<td colspan="3">Â«EXPAND text FOR descriptionÂ»</td>
  	</tr>
  	
  	<tr>
  		<td colspan="3"><b>Pre-conditions:</b></td>
  	</tr>
- 	«EXPAND testSteps FOR precondition»
+ 	Â«EXPAND testSteps FOR preconditionÂ»
  	
  	<tr>
  		<td colspan="3"><b>Test-Steps:</b></td>
  	</tr>
- 	«EXPAND testSteps FOR testStep»
+ 	Â«EXPAND testSteps FOR testStepÂ»
  	
  	<tr>
  		<td colspan="3"><b>Post-conditions:</b></td>
  	</tr>
- 	«EXPAND testSteps FOR postcondition»
+ 	Â«EXPAND testSteps FOR postconditionÂ»
  	
- 	«IF priority != null»
+ 	Â«IF priority != nullÂ»
  	<tr>
  		<td colspan="1"><b>Priority:</b></td>
- 		<td colspan="2">«priority»</td>
+ 		<td colspan="2">Â«priorityÂ»</td>
  	</tr>
- 	«ENDIF»
+ 	Â«ENDIFÂ»
  </table>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE testSteps FOR List»
-	«LET counterReset("TEST_STEP_NUMBER") AS e»«ENDLET»
+Â«DEFINE testSteps FOR ListÂ»
+	Â«LET counterReset("TEST_STEP_NUMBER") AS eÂ»Â«ENDLETÂ»
 	<tr>
  		<td>Nr.</td>
  		<td>Description:</td>
  		<td>Comment:</td>
  	</tr>
- 	«EXPAND testStep FOREACH this»
-«ENDDEFINE»
+ 	Â«EXPAND testStep FOREACH thisÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE testStep FOR Object»
-«ENDDEFINE»
+Â«DEFINE testStep FOR ObjectÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE testStep FOR Step»
+Â«DEFINE testStep FOR StepÂ»
 	<tr>
-		<td colspan="1">«counterInc("TEST_STEP_NUMBER")»</td>
-		<td colspan="1">«EXPAND text FOR description»</td>
+		<td colspan="1">Â«counterInc("TEST_STEP_NUMBER")Â»</td>
+		<td colspan="1">Â«EXPAND text FOR descriptionÂ»</td>
 		<td colspan="1">
-			«EXPAND text FOR comment»
+			Â«EXPAND text FOR commentÂ»
 		</td>
 	</tr>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE text FOR String»
-	«createHtmlText(this)»
-«ENDDEFINE»
+Â«DEFINE text FOR StringÂ»
+	Â«createHtmlText(this)Â»
+Â«ENDDEFINEÂ»

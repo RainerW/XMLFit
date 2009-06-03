@@ -24,12 +24,6 @@
 		<metaModel idRef="componentMetaModel" />
 		
 		<expand value="net::sourceforge::xmlfit::transform::test::Root FOR model" />
-		
-		<beautifier class="org.openarchitectureware.xsd.XMLBeautifier">
-			<maxLineWidth value="80" />
-			<formatComments value="true" />
-			<fileExtensions value=".xml, .html" />
-		</beautifier>
 	
 		<outlet path="${outputDir}">
 		</outlet>
