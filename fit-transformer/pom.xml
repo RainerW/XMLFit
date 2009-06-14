@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.sourceforge.xmlfit</groupId>
+	<artifactId>fit-transformer</artifactId>
+	<packaging>jar</packaging>
+	<name>XMLFit fit transformer</name>
+
+	<description>The xmlfit oaw project with templates for the model transformation to Fit HTML.</description>
+
+	
+	<parent>
+    	<groupId>net.sourceforge.xmlfit</groupId>
+    	<artifactId>xmlfit</artifactId>
+   		<version>0.0.3-SNAPSHOT</version>
+   		<relativePath>../</relativePath>
+   </parent>
+
+	<dependencies>
+
+		<dependency>
+      		<groupId>net.sourceforge.xmlfit</groupId>
+      		<artifactId>model</artifactId>
+      		<version>${version}</version>
+    	</dependency>
+
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>xsd</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.fornax.openarchitectureware</groupId>
+			<artifactId>oaw-xsd</artifactId>
+			<version>4.3.1</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>args4j</groupId>
+			<artifactId>args4j</artifactId>
+			<version>2.0.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openarchitectureware</groupId>
+			<artifactId>oaw-util-stdlib</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.8</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>net.sourceforge.xmlfit.runner.XMLFitCommandLineRunner</mainClass>
+							<packageName>net.sourceforge.xmlfit.runner</packageName>
+							<classpathPrefix>../lib/</classpathPrefix>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/assemble/distribution.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>

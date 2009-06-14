@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <head>
+    <title>001--LoginTest</title>
+  </head>
+  <body>
+    <p>
+      <h1>User DB Setup</h1>
+      <p>Setup the User DB for the Test.</p>
+    </p>
+    <p>
+      <table border="1">
+        <tr>
+          <td colspan="3">UserDbFixture</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>username</td>
+          <td>password</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>userXY Christian</td>
+          <td>PWD</td>
+        </tr>
+      </table>
+    </p>
+    <p>
+      <h1>Login - for User userXY Christian and Password PWD</h1>
+      <p>The Fixture doese the Login with Username and Password.</p>
+    </p>
+    <p>
+      <table border="1">
+        <tr>
+          <td colspan="8"> fit.ActionFixture </td>
+        </tr>
+        <tr>
+          <td colspan="1">start</td>
+          <td colspan="7"> LoginFixture </td>
+        </tr>
+        <tr>
+          <td colspan="1">enter</td>
+          <td colspan="1"> username </td>
+          <td colspan="6"> userXY Christian </td>
+        </tr>
+        <tr>
+          <td colspan="1">enter</td>
+          <td colspan="1"> password </td>
+          <td colspan="6"> PWD </td>
+        </tr>
+        <tr>
+          <td colspan="1">special</td>
+          <td colspan="1"> test </td>
+          <td colspan="1">01</td>
+          <td colspan="1">02</td>
+          <td colspan="4"> 03 </td>
+        </tr>
+        <tr>
+          <td colspan="1">type</td>
+          <td colspan="1"> loginForm:username </td>
+          <td colspan="6"> Christian.Baranowski@pro-pix.de </td>
+        </tr>
+        <tr>
+          <td colspan="1">getAll</td>
+          <td colspan="1">Test VALUE ONE</td>
+          <td colspan="6"> VALUE TWO </td>
+        </tr>
+      </table>
+    </p>
+  </body>
+</html>

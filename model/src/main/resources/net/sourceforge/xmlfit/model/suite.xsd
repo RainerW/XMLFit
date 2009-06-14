@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://xmlfit.sourceforge.net/schema/1.0/suite"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:suite="http://xmlfit.sourceforge.net/schema/1.0/suite" xmlns:test="http://xmlfit.sourceforge.net/test">
+
+	<complexType name="Suite">
+        <sequence maxOccurs="unbounded" minOccurs="0">
+			<element name="test" type="suite:Test" maxOccurs="unbounded" minOccurs="0">
+			</element>
+			<element name="suite" type="suite:TestSuite" maxOccurs="unbounded" minOccurs="0">
+			</element>
+		</sequence>
+		<attribute name="name" type="string"></attribute>
+	</complexType>
+
+
+    <complexType name="Test">
+    	<attribute name="file" type="string" use="required"></attribute>
+    </complexType>
+
+    <element name="suite" type="suite:Suite"></element>
+
+    <complexType name="TestSuite">
+    	<attribute name="file" type="string" use="required"></attribute>
+    </complexType>
+</schema>

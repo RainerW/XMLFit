@@ -1,0 +1,38 @@
+<assembly>
+	<id>distribution</id>
+
+	<formats>
+		<format>zip</format>
+	</formats>
+
+	<fileSets>
+
+		<fileSet>
+			<directory>${project.build.directory}/dependencies
+			</directory>
+			<includes>
+				<include>*.jar</include>
+			</includes>
+			<outputDirectory>lib</outputDirectory>
+		</fileSet>
+
+		<fileSet>
+			<directory>${basedir}/src/assemble</directory>
+			<includes>
+				<include>xmlfit.*</include>
+			</includes>
+			<outputDirectory>bin</outputDirectory>
+			<fileMode>0770</fileMode>
+		</fileSet>
+
+	</fileSets>
+
+	<files>
+		<file>
+			<source>${project.build.directory}/fit-transformer-${project.version}.jar</source>
+			<outputDirectory>/bin</outputDirectory>
+			<destName>xmlfit.jar</destName>
+		</file>
+	</files>
+
+</assembly>
