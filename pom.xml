@@ -96,7 +96,7 @@
    				<version>2.0-beta-9</version>
    				<configuration>
    					<autoVersionSubmodules>true</autoVersionSubmodules>
-   					<preparationGoals>clean deploy site-deploy</preparationGoals>
+   					<preparationGoals>clean deploy</preparationGoals>
    				</configuration>
    			</plugin>
 			
