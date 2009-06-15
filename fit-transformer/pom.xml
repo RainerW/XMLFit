@@ -21,7 +21,7 @@
 		<dependency>
       		<groupId>net.sourceforge.xmlfit</groupId>
       		<artifactId>model</artifactId>
-      		<version>${version}</version>
+      		<version>[0.0.1,)</version>
     	</dependency>
 
 		<dependency>
