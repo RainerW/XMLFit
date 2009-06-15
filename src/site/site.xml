@@ -8,7 +8,7 @@
     <menu name="Overview">
       <item name="Introduction" href="index.html" />
       <item name="Usage" href="usage.html" />
-      
+  	  <item name="Get XmlFit (download)" href="download.html" />
     </menu>
     <menu name="Components">
       <item name="XmlFit OAW" href="http://xmlfit.sourceforge.net/xmlfit-oaw/" />

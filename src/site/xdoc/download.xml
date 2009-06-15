@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>Download XMLFit</title>
+  </properties>
+  <body>
+    <section name="Download">
+     
+    <subsection name="Get XMlFit release from  a maven repo">
+     <p>
+      Add the follow code to the maven POM to use the XmlFit maven Plugin.
+      <source>
+      	...
+      	<repositories>
+			<repository>
+				<id>fornax.repository</id>
+				<name>Fornax Repository</name>
+				<url>http://xmlfit.sourceforge.net/m2-repo/</url>
+			</repository>
+		</repositories>
+      	...
+        <build>
+
+			<plugins>
+				...
+				<plugin>
+					<groupId>net.sourceforge.xmlfit</groupId>
+					<artifactId>maven-fit-transformer</artifactId>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>transform</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+	
+			</plugins>
+	
+		</build>
+      	
+       </source>
+      </p>
+     </subsection>
+    
+     <subsection name="Get XMlFit snapshots from  a maven repo">
+     <p>
+      For use snapshots versions of XmlFit add the follow repository to your maven pom.
+      <source>
+      	...
+      	<repositories>
+			<repository>
+				<id>fornax.repository</id>
+				<name>Fornax Repository</name>
+				<url>http://xmlfit.sourceforge.net/m2-repo-snapshots/</url>
+			</repository>
+		</repositories>
+      	...
+       </source>
+      </p>
+     </subsection>
+    
+    </section>
+  </body>
+</document>
