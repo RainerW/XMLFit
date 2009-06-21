@@ -62,7 +62,7 @@
 
     <complexType name="Component">
     	<sequence minOccurs="0" maxOccurs="1">
-    		<element name="parameters" type="comp:Parameters"></element>
+    		<element name="parameter" type="comp:Parameter" minOccurs="0" maxOccurs="unbounded"></element>
     		<sequence maxOccurs="unbounded" minOccurs="0">
     			<group ref="comp:Fixture"></group>
     		</sequence>
@@ -102,17 +102,14 @@
     	</complexContent>
     </complexType>
 
-    <complexType name="Parameters">
-    	<sequence>
-    		<element name="parameter" type="comp:Parameter" maxOccurs="unbounded" minOccurs="0"></element>
-    	</sequence>
-    </complexType>
 
     <complexType name="Parameter">
     	<sequence>
-    		<element name="description" type="string"></element>
+    		<element name="description" type="string" minOccurs="0" maxOccurs="1"></element>
     	</sequence>
     	<attribute name="name" type="string"></attribute>
     	<attribute name="required" type="boolean"></attribute>
+    	<attribute name="defaultValue" type="string"></attribute>
     </complexType>
+    
 </schema>
