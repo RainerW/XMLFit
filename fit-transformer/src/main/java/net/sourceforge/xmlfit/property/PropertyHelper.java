@@ -12,6 +12,9 @@ public class PropertyHelper {
 	private static HashMap<String, String> properties = 
 		new HashMap<String, String>();
 	
+	private static HashMap<String, String> parameters = 
+		new HashMap<String, String>();
+	
 	private static DataSet actualDataSet = DataSet.NULL_DATASET;
 	
 	private static DataSet defaultDataSet = DataSet.NULL_DATASET;
@@ -31,6 +34,11 @@ public class PropertyHelper {
 		properties.put(name, value);
 	}
 	
+	public static void addParameter(String name, String value)
+	{
+		parameters.put(name, value);
+	}
+	
 	public static String getPropertyValue(String name)
 	{
 		String value = null;
@@ -46,9 +54,13 @@ public class PropertyHelper {
 				value = defaultDataSet.getPropertyValue(name);
 				if(value == null)
 				{
-					throw new PropertyNotFoundException(name);
+					value = parameters.get(name);
 				}
 			}
+		}
+		if(value == null)
+		{
+			throw new PropertyNotFoundException(name);
 		}
 		return value;
 	}
@@ -62,6 +74,11 @@ public class PropertyHelper {
 	public static void clearTestProperties()
 	{
 		defaultDataSet = DataSet.NULL_DATASET;
+	}
+	
+	public static void clearPararmeters()
+	{
+		parameters = new HashMap<String, String>();
 	}
 	
 	public static String extractProperties(String value)

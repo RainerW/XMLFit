@@ -14,6 +14,10 @@
 	Template - for a Component (Comment, ActionFixture or ColumnFixture ...)
 «ENDREM»
 «DEFINE Root FOR Component»
+  «clearPararmeters()»
+  «FOREACH parameter AS param»
+  	«addParameter(param.name, param.defaultValue)»
+  «ENDFOREACH»
   «FOREACH eContents AS content»
   	<p>«EXPAND fixture FOR content»</p>
    «ENDFOREACH»
@@ -37,7 +41,7 @@
 	Template for fixture heading.
 «ENDREM»
 «DEFINE heading FOR String»
-	<h1>«extractProperties(this)»</h1>
+	<h4>«extractProperties(this)»</h4>
 «ENDDEFINE»
 
 «REM»
@@ -74,6 +78,10 @@
 	Count the max cells of one row of a action fixture.
 «ENDREM»
 «DEFINE countMaxActionCells FOR Command»
+	«LET counterInc("MAX_ACTIONS_CELLS") AS e»
+	«ENDLET»
+	«LET counterInc("MAX_ACTIONS_CELLS") AS e»
+	«ENDLET»
 	«FOREACH this.value AS value»
 		«LET counterInc("MAX_ACTIONS_CELLS") AS e»
 		«ENDLET»
@@ -136,7 +144,7 @@
 	«IF comment != null»
 		<td colspan="1">«extractProperties(comment)»</td>
 	«ELSEIF getGlobalVar("IS_COMMENT_ENABLE") == true»
-		<td colspan="1"></td>
+		<td colspan="1">&nbsp;</td>
 	«ENDIF»
 	
 	</tr>

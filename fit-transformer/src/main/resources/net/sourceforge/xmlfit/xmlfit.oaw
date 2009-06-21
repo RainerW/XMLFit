@@ -25,6 +25,8 @@
 		
 		<expand value="net::sourceforge::xmlfit::transform::test::Root FOR model" />
 	
+		
+		
 		<outlet path="${outputDir}">
 		</outlet>
 		

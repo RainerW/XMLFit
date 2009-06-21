@@ -16,3 +16,10 @@ String addTestPropertiesFromDataSet(Object dataSet) :
 
 String clearTestProperties() :
 	JAVA net.sourceforge.xmlfit.property.PropertyHelper.clearTestProperties();
+	
+String clearPararmeters() :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.clearPararmeters();
+
+String addParameter(String name, String value) :
+	JAVA net.sourceforge.xmlfit.property.PropertyHelper.addParameter(java.lang.String,java.lang.String);
+

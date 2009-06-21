@@ -27,10 +27,77 @@
    «ENDIF»
    <html>
      <head>
-      <title>«id+"--"+name»</title>
+      <title>«id+" - "+name»</title>
+      <script type="text/javascript">
+	  	function toggledisplay (id, link){
+  			if (document.getElementById) {
+    			var mydiv = document.getElementById(id);
+    			if(mydiv.style.display=='none')
+    			{
+    				link.firstChild.nodeValue = "Close";
+    			}
+    			else
+    			{
+    				link.firstChild.nodeValue = "Open";
+    			}
+    			mydiv.style.display = (mydiv.style.display=='none'?'block':'none');
+  			}
+		}
+	  </script>
+      
    </head>
    <body>
-   	«EXPAND testStep FOREACH testStep»		
+    <h1>«id+" - "+name»</h1>
+    <p><b>Test ID:</b> «id»</p>
+    <p><b>Testname:</b> «name»</p>
+    «IF description != null»
+    	<p><b>Description:</b><br/>«description»</p>
+    «ENDIF»
+    <hr/>
+    
+    «LET counterReset("STEPS") AS e»«ENDLET»
+    <h2>Precondition Test Steps</h2>
+    «REM»<p align="left"><a href="#" onClick="javascript:toggledisplay('precondition', this);">Close</a></p>«ENDREM»
+    «FOREACH precondition AS precondition»
+    	 «IF precondition.title != null»
+			<h3>Step «counterInc("STEPS")» - «precondition.title» («precondition.file»)</h3>
+		 «ENDIF»
+		 <p align="left"><a href="#" onClick="javascript:toggledisplay('precondition-«counterGet("STEPS")»', this);">Close</a></p>
+    	 <div id="precondition-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
+    	 <p>«EXPAND testStep FOR precondition»</p>		
+    	 </div>
+   	«ENDFOREACH»
+   	<hr/>
+   	
+   	
+   	«LET counterReset("STEPS") AS e»«ENDLET»
+   	<h2>Test Steps</h2>
+   	«REM»<p align="left"><a href="#" onClick="javascript:toggledisplay('steps', this);">Close</a></p>«ENDREM»
+   	«FOREACH testStep AS testStep»
+    	 «IF testStep.title != null»
+			<h3>Step «counterInc("STEPS")» - «testStep.title» («testStep.file»)</h3>
+		 «ENDIF»
+		 <p align="left"><a href="#" onClick="javascript:toggledisplay('steps-«counterGet("STEPS")»', this);">Close</a></p>
+    	 <div id="steps-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
+	   	 <p>«EXPAND testStep FOR testStep»</p>
+	   	 </div>
+   	«ENDFOREACH»
+   	<hr/>
+ 	  	
+   	«LET counterReset("STEPS") AS e»«ENDLET»
+   	<h2>Postcondition Test Steps</h2>
+   	«REM»<p align="left"><a href="#" onClick="javascript:toggledisplay('post', this);">Close</a></p>«ENDREM»
+   	«FOREACH postcondition AS postcondition»
+   		 «IF postcondition.title != null»
+			<h3>Step «counterInc("STEPS")» - «postcondition.title» («postcondition.file»)</h3>
+		 «ENDIF»
+		 <p align="left"><a href="#" onClick="javascript:toggledisplay('post-«counterGet("STEPS")»', this);">Close</a></p>
+    	 <div id="post-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
+	   	 <p>«EXPAND testStep FOR postcondition»</p>
+	   	 </div>
+   	«ENDFOREACH»
+   	<hr/>		
+   			
    </body>
    </html>	
  «ENDFILE»
@@ -41,10 +108,17 @@
 «ENDREM»
 «DEFINE testStep FOR Step»
 	«clearTestStepProperties()»
+	«IF description != null»
+		<p>«description»</p>
+	«ENDIF»
 	«IF file != null»
-		«EXPAND property FOREACH property»	
+		«IF property != null && property.size > 0»
+			<b>Properties:</b><br/>
+			«EXPAND property FOREACH property»	
+		«ENDIF»
 		«IF data != null»
 			«FOREACH createDataSource(data) AS dataSet»
+				<p><b>Test Data:</b><br/>«data»</p>
 				«addTestStepPropertiesFromDataSet(dataSet)»
 				«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
 			«ENDFOREACH»
@@ -52,11 +126,13 @@
 			«EXPAND net::sourceforge::xmlfit::transform::component::Root FOR loadModelFromXmlFile(file)»
 		«ENDIF»
 	«ENDIF»
+	</div>
 «ENDDEFINE»
 
 «REM»
 	Template for a property.
 «ENDREM»
 «DEFINE property FOR Property»
+    <b>«name»:</b> «value» <br/>
 	«addProperty(name, value)»
 «ENDDEFINE»

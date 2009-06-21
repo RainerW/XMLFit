@@ -6,9 +6,31 @@
 	
 	<test id="001" name="LoginTest" defaultdata="example-defaultdata.xml">
 		
-		<testStep file="example-component.xml" data="example-data.xml" >
+		<description>
+			The test check that the login works fine.
+		</description>
+		
+		<precondition title="Example Precondition" file="example-component.xml">
+			<property name="username" value="userXY Christian"/>
+		</precondition>
+		
+		<testStep title="Example Test Step" file="example-component.xml" data="example-data.xml" >
+			<description>
+				This step does a example step.
+			</description>
 			<property name="username" value="userXY Christian"/>
 		</testStep>
+		
+		<testStep title="Example Test Step" file="example-component.xml" data="example-data.xml" >
+			<description>
+				This step does a example step.
+			</description>
+			<property name="username" value="userXY Christian"/>
+		</testStep>
+		
+		<postcondition title="Meine Postcondition" file="example-component.xml">
+		
+		</postcondition>
 			
 	</test>
   

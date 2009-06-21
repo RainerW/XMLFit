@@ -5,34 +5,115 @@
 	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/component/component.xsd"
 	>
 	
-		<columnFixture>
-			<row>
-				<value>Testfall</value>
-				<value>ID-0001-1</value>
-			</row>
-			<row>
-				<value>//Befehl</value>
-				<value>Kontext</value>
-				<value>Selektor</value>
-				<value>Argumente</value>
-				<value>Bemerkung</value>
-			</row>
-			<row>
-				<value>Start</value>
-				<value>esta_xml</value>
-				<value>LoginXML</value>
-				<value></value>
-				<value></value>
-			</row>
-			<row>
-				<value>Enter</value>
-				<value>esta_kontext</value>
-				<value>ServiceURL</value>
-				<value>http://192.168.139.129</value>
-				<value>Test Step 01</value>
-			</row>
-		</columnFixture>
+		<parameter name="testParam" defaultValue="Test Default Param Value" />
+		<parameter name="password" defaultValue="Test Default Param Password" />
+		<parameter name="username" defaultValue="Test Default Param Password" />
+		
+		<actionFixture>
+			<command name="testCommandName">
+				<target>${testParam}</target>
+			</command>
+		</actionFixture>
 	
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+			</command>
+		</actionFixture>
+		
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<comment>Test Comment</comment>
+			</command>
+		</actionFixture>
+		
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+			</command>
+		</actionFixture>
+		
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+				<comment>test Comment</comment>
+			</command>
+		</actionFixture>
+		
+		<actionFixture type="fit.SeleniumFixture">
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+			</command>
+		</actionFixture>
+		
+		<actionFixture type="fit.SeleniumFixture">
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+				<comment>test Comment</comment>
+			</command>
+		</actionFixture>
+		
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<comment>test Comment</comment>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+				<comment>test Comment</comment>
+			</command>
+		</actionFixture>
+	
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<comment>test Comment</comment>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+			</command>
+		</actionFixture>
+		
+		<actionFixture>
+			<command name="testCommandName">
+				<target>testTarget</target>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<comment>test Comment</comment>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>testValue</value>
+			</command>
+			<command name="testCommandName">
+				<target>testTarget</target>
+				<value>test value 1</value>
+				<value>test value 2</value>
+				<comment>test Comment</comment>
+			</command>
+		</actionFixture>
 	
         <comment>
             <heading>${defaultData}User DB Setup</heading>
