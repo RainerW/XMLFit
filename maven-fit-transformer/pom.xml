@@ -10,7 +10,7 @@
   <parent>
     <groupId>net.sourceforge</groupId>
     <artifactId>xmlfit</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4</version>
     <relativePath>../</relativePath>
   </parent>
 
