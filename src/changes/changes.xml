@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>Änderungsdokumentation für den FIS Workflow Daemon</title>
+  </properties>
+  <body>
+
+    <release date="" 
+        version="Features for 1.0 Release" description="List of feature request for 1.0 Release">
+      <action date="unreleased" dev="unassigned" type="add">
+        Reihenfolge von prestep -> teststep -> poststep wird nicht erzwungen. Wird beispielsweise
+        innerhalb der poststep's ein teststep eingefügt wird dieser aus der Reihenfolge im
+        XML geworfen und nach 'oben' in die teststeps gezogen.
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+        Erlauben von 'beliebigen' XML innerhalb von description Tags. Oder zumindest ein Subset
+        davon wie z.B. Listen, br, p.
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+        Meta Informationen für CSS in Elemente einbetten.
+        Bsp class=poststep in hx Elementen im poststep Teil. 
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+         Generation von XMLFit Elementen nach Fit Ein/Ausschalten. 
+         Attribute 'active' an Elementen: test, testStep, *Fixture hinzufügen.
+         Zusätzlich sollte eine Negation möglich sein um ein einfaches if else 
+         implementieren zu können.
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+         Eingabemöglichkeit von Properties direkt im test. Innerhalb eines Test Elements
+         ist es praktisch eine property für z.B. username zu nutzen, welche dann in verschiedenen
+         testStep Elementen genutzt werden kann. 
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+         Datengetriebene Tests ermöglichen.
+         Eine Möglichkeit vorsehen um test Elemente mehrfach zu erzeugen mit unterschiedlichen
+         Datensets. Entweder mit Angabe eines data Attributes und einer Datei oder direkt 
+         über Properties im 'kopf' des test's.
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+        Required Attribute auswerten bei parameter Elementen in einer component.
+      </action>
+      <action date="unreleased" dev="unassigned" type="fix">
+        In einem command Element eines ActionFixtures ohne value und target, abe reinem comment.
+        Wird im Fit output der Kommentar in der falschen Spalte angezeigt.
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+        Aktuell kann im testStep ein tittle attribut angegeben werden. Wird dies nicht angegeben
+        sollte der title aus der component ermittelt werden. Erspart das Duplizieren der 
+        Title Informationen für jeden Test bei setup oder login Komponenten. Sehr praktisch auch 
+        wenn in component title gleich die properties ausgewertet werden welche als data übergeben
+        wurden. Dann ist ein title="Login als ${benutzertyp}" möglich. 
+      </action>
+    </release>
+
+    <release date="2009-06-22" version="0.0.3" description="Version 0.0.3">
+      <action date="2009-06-22" dev="RainerW,ChristianB" type="fix">
+        defaultValue von Parametern können nun auch Variablen enthalten.
+      </action>
+      <action date="2009-06-22" dev="RainerW,ChristianB" type="fix">
+        GroupId in parent pom angepasst. 
+      </action>
+    </release>
+
+  </body>
+</document>

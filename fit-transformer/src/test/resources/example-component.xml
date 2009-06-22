@@ -8,7 +8,15 @@
 		<parameter name="testParam" defaultValue="Test Default Param Value" />
 		<parameter name="password" defaultValue="Test Default Param Password" />
 		<parameter name="username" defaultValue="Test Default Param Password" />
-		
+		<parameter name="parmInner" defaultValue="http://localhost:8080/" />
+        <parameter name="parmOut" defaultValue="${parmInner}telcenter/" />
+        
+        <actionFixture>
+            <command name="testCommandName">
+                <target>${parmOut}</target>
+            </command>
+        </actionFixture>
+        
 		<actionFixture>
 			<command name="testCommandName">
 				<target>${testParam}</target>

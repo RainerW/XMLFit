@@ -16,7 +16,7 @@
 «DEFINE Root FOR Component»
   «clearPararmeters()»
   «FOREACH parameter AS param»
-  	«addParameter(param.name, param.defaultValue)»
+  	«addParameter(param.name, extractProperties(param.defaultValue))»
   «ENDFOREACH»
   «FOREACH eContents AS content»
   	<p>«EXPAND fixture FOR content»</p>
