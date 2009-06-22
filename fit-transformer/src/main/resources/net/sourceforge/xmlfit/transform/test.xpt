@@ -59,10 +59,13 @@
     <h2>Precondition Test Steps</h2>
     «REM»<p align="left"><a href="#" onClick="javascript:toggledisplay('precondition', this);">Close</a></p>«ENDREM»
     «FOREACH precondition AS precondition»
+    	 <a name="link-precondition-«counterInc("STEPS")»" />
+    	 <h3>Step «counterGet("STEPS")»
     	 «IF precondition.title != null»
-			<h3>Step «counterInc("STEPS")» - «precondition.title» («precondition.file»)</h3>
+			 - «precondition.title» 
 		 «ENDIF»
-		 <p align="left"><a href="#" onClick="javascript:toggledisplay('precondition-«counterGet("STEPS")»', this);">Close</a></p>
+		 («precondition.file»)</h3>
+		 <p align="left"><a href="#link-precondition-«counterGet("STEPS")»" onClick="javascript:toggledisplay('precondition-«counterGet("STEPS")»', this);">Close</a></p>
     	 <div id="precondition-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
     	 <p>«EXPAND testStep FOR precondition»</p>		
     	 </div>
@@ -74,10 +77,13 @@
    	<h2>Test Steps</h2>
    	«REM»<p align="left"><a href="#" onClick="javascript:toggledisplay('steps', this);">Close</a></p>«ENDREM»
    	«FOREACH testStep AS testStep»
+    	 <a name="link-steps-«counterInc("STEPS")»" />
+    	 <h3>Step «counterGet("STEPS")»
     	 «IF testStep.title != null»
-			<h3>Step «counterInc("STEPS")» - «testStep.title» («testStep.file»)</h3>
+			 - «testStep.title» 
 		 «ENDIF»
-		 <p align="left"><a href="#" onClick="javascript:toggledisplay('steps-«counterGet("STEPS")»', this);">Close</a></p>
+		 («testStep.file»)</h3>
+		 <p align="left"><a href="#link-steps-«counterGet("STEPS")»" onClick="javascript:toggledisplay('steps-«counterGet("STEPS")»', this);">Close</a></p>
     	 <div id="steps-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
 	   	 <p>«EXPAND testStep FOR testStep»</p>
 	   	 </div>
@@ -88,10 +94,13 @@
    	<h2>Postcondition Test Steps</h2>
    	«REM»<p align="left"><a href="#" onClick="javascript:toggledisplay('post', this);">Close</a></p>«ENDREM»
    	«FOREACH postcondition AS postcondition»
+   		 <a name="link-post-«counterInc("STEPS")»" />
+   		 <h3>Step «counterGet("STEPS")»
    		 «IF postcondition.title != null»
-			<h3>Step «counterInc("STEPS")» - «postcondition.title» («postcondition.file»)</h3>
+			 - «postcondition.title» 
 		 «ENDIF»
-		 <p align="left"><a href="#" onClick="javascript:toggledisplay('post-«counterGet("STEPS")»', this);">Close</a></p>
+		 («postcondition.file»)</h3>
+		 <p align="left"><a href="#link-post-«counterGet("STEPS")»" onClick="javascript:toggledisplay('post-«counterGet("STEPS")»', this);">Close</a></p>
     	 <div id="post-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
 	   	 <p>«EXPAND testStep FOR postcondition»</p>
 	   	 </div>

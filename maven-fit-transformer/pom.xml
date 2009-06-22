@@ -9,7 +9,7 @@
 	<description>The Maven Plugin to use XMLFit.</description>
 
 	<parent>
-    	<groupId>net.sourceforge.xmlfit</groupId>
+    	<groupId>net.sourceforge</groupId>
     	<artifactId>xmlfit</artifactId>
    		<version>0.0.3-SNAPSHOT</version>
    		<relativePath>../</relativePath>
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>net.sourceforge.xmlfit</groupId>
 			<artifactId>fit-transformer</artifactId>
-			<version>[0.0.1,)</version>
+			<version>${version}</version>
 		</dependency>
 
 		<dependency>

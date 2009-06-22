@@ -13,7 +13,7 @@
 	<modules>
 		<module>model</module>
 		<module>fit-transformer</module>
-		<module>maven-fit-transformer</module>
+		<!--  <module>maven-fit-transformer</module> don't work with maven plugins-->
 	</modules>
 	
 	<repositories>
