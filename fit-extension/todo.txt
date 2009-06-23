@@ -1,0 +1,4 @@
+# TODO FIT extensions
+
+- add to pom Selenium maven repo
+

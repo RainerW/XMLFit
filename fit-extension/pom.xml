@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.sourceforge.xmlfit</groupId>
+  <artifactId>fit-extension</artifactId>
+  <packaging>jar</packaging>
+  <name>XMLFit fit extensions</name>
+  
+  <parent>
+    <groupId>net.sourceforge</groupId>
+    <artifactId>xmlfit</artifactId>
+    <version>0.0.4</version>
+    <relativePath>../</relativePath>
+  </parent>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.4</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.c2.fit</groupId>
+      <artifactId>fit</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>httpunit</groupId>
+      <artifactId>httpunit</artifactId>
+      <version>1.6.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.8</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.openqa.selenium.client-drivers</groupId>
+      <artifactId>selenium-java-client-driver</artifactId>
+      <version>1.0-beta-1</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.openqa.selenium.server</groupId>
+    	<artifactId>selenium-server-coreless</artifactId>
+    	<version>1.0-beta-1</version>
+    </dependency>
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>openqa</id>
+      <name>OpenQA Repository</name>
+      <url>http://nexus.openqa.org/content/repositories/releases/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+      </releases>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <schemaDirectory>${basedir}/src/main/resources/xsd/</schemaDirectory>
+          <schemaFiles>AliasConfiguration.xsd</schemaFiles>
+          <outputDirectory>${project.build.directory}/generated-jaxb</outputDirectory>
+        </configuration>
+      </plugin>
+      
+    </plugins>
+  </build>
+</project>

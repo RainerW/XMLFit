@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project>
+	<bannerLeft>
+		<name>Seitenbau</name>
+		<src>images/seitenbau.jpg</src>
+		<href>http://www.seitenbau.net/</href>
+	</bannerLeft>
+
+	<body>
+		<menu name="sb-fit-extension">
+			<item name="Index" href="index.html" />
+		</menu>
+	</body>
+</project>

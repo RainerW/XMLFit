@@ -1,0 +1,10 @@
+<test author="cfaigle">
+	<fixture type="selenium.ContextFixture">
+        <command name="stop">
+        </command>
+        <command name="complete context">
+            <target><var name="context" /></target>
+        </command>
+    </fixture>
+        
+</test>

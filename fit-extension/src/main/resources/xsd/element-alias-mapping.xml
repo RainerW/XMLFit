@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aliasConfiguration xmlns="http://www.seitenbau.com/testing/AliasConfigurationFixture" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.seitenbau.com/testing/AliasConfigurationFixture AliasConfiguration.xsd ">
+
+  <!-- ***** Login Echtsystem -->
+  <alias name="username">           <value>usr</value></alias>
+  <alias name="password">           <value>pwd</value></alias>
+
+  <!-- ***** Login Simulator -->
+  <!-- 
+  <alias name="username">           <value>username</value></alias>
+  <alias name="password">           <value>password</value></alias>
+   -->
+  <alias name="Login-Button">       <value>plogin</value></alias>
+  <alias name="Logout-Link">        <value>linkLogout</value></alias>
+
+  <!-- ***** uebersicht.do ***** -->
+  <alias name="Weiterleitung-Link"> <value>link=Weiterleitung</value></alias>
+ 
+</aliasConfiguration>

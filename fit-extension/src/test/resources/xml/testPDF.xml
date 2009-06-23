@@ -1,0 +1,23 @@
+<test author="cfaigle">
+	<fixture type="pdf.PDFFixture">
+		
+        <command name="openDocument">
+		  <target>http://www.in.htwg-konstanz.de/inhalte/de/SERVICE/Download/pruefung-atteste/pruefungsanmeldung_bit_htwg.pdf</target>
+		</command>
+        
+        <command name="verifyAuthor">
+            <target>Wilhelm Erben</target>
+            <value></value>
+        </command>
+        
+         <command name="verifyDocumentIsEncrypted">
+            <target>false</target>
+             <value></value>
+        </command>
+        
+        <command name="verifyTextOnPage">
+            <target>Semester</target>
+            <value>1</value>
+         </command>
+    </fixture>
+</test>

@@ -5,8 +5,8 @@
   <artifactId>maven-fit-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   
-  <name>Maven Fit Plugin</name>
-  <description>Maven Fit Plugin</description>
+  <name>XMLFit maven fit plugin</name>
+  <description>XMLFit maven fit plugin</description>
   
   <parent>
     <groupId>net.sourceforge</groupId>
@@ -16,6 +16,12 @@
   </parent>
   
   <dependencies>
+    
+    <dependency>
+      <groupId>net.sourceforge.xmlfit</groupId>
+      <artifactId>fit-action-debugger</artifactId>
+      <version>${version}</version>
+    </dependency>
     
     <dependency>
       <groupId>org.apache.maven</groupId>

@@ -1,0 +1,34 @@
+<testsuite author="faigle">
+	<!-- <testgroup name="TestInsert1" id="2" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testInsert.xml" data="data/dbData1.xml"/>
+    </testgroup>
+	<testgroup name="TestQuery" id="1" defaultData="data/defaultData.xml">
+	   <call test="connectDB.xml"/>
+	   <call test="testQuery.xml" data="data/dbData1.xml"/>
+	</testgroup>
+    <testgroup name="TestInsert2" id="2" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testInsert.xml" data="data/dbData2.xml"/>
+    </testgroup>
+    <testgroup name="TestUpdate" id="3" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testUpdate.xml"/>
+    </testgroup>
+    <testgroup name="TestQuery2" id="4" defaultData="data/defaultData.xml">
+       <call test="connectDB.xml"/>
+       <call test="testQuery.xml" data="data/dbData2.xml"/>
+    </testgroup>
+    <testgroup name="TestExecute" id="6" defaultData="data/defaultData.xml">
+         <call test="connectDB.xml"/>
+        <call test="testExecute.xml"/>
+    </testgroup>-->
+     <testgroup name="TestSelenium" id="5">
+       <call test="startSelenium.xml" host="http://www.seitenbau.com" context="seitenbau-test" port="4444"/>
+       <call test="startSelenium.xml" host="http://www.google.de" context="google-test" port="4444"/>
+       <call test="testGoogle.xml" data="data/googleData.xml"/>
+       <call test="testSpiegel.xml" context="seitenbau-test"/>
+       <call test="stopSelenium.xml" context="seitenbau-test"/>
+       <call test="stopSelenium.xml" context="google-test"/>
+    </testgroup> 
+</testsuite>

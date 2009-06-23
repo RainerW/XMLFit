@@ -8,12 +8,25 @@ import java.util.*;
 import java.lang.reflect.*;
 import java.text.DateFormat;
 
-public class Fixture {
+import net.sourceforge.xmlfit.fit.stepper.gui.DebuggerFrame;
 
+public class Fixture {
+    
+    private static boolean debugMode = false;
+    
+    static
+    {
+      String property = System.getProperty("fit.debugmode");
+      if(property != null && property.equals("true"))
+      {
+        debugMode = true;
+      }
+    }
+  
     public Map summary = new HashMap();
     public Counts counts = new Counts();
     protected String[] args;
-
+    
     public class RunTime {
         long start = System.currentTimeMillis();
         long elapsed = 0;
@@ -37,9 +50,13 @@ public class Fixture {
 
 
     // Traversal //////////////////////////
-
+    private static DebuggerFrame frame = new DebuggerFrame();
+    
 	/* Altered by Rick Mugridge to dispatch on the first Fixture */
     public void doTables(Parse tables) {
+        if(debugMode)
+          frame.initTabeles(tables);
+      
         summary.put("run date", new Date());
         summary.put("run elapsed time", new RunTime());
         if (tables != null) {
@@ -142,11 +159,13 @@ public class Fixture {
     }
 
     public void doRow(Parse row) {
+        if(debugMode)
+          frame.doRow(row.parts); 
         doCells(row.parts);
     }
 
     public void doCells(Parse cells) {
-        for (int i=0; cells != null; i++) {
+      for (int i=0; cells != null; i++) {
             try {
                 doCell(cells, i);
             } catch (Exception e) {

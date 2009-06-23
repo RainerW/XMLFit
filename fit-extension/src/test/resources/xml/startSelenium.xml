@@ -1,0 +1,14 @@
+<test author="cfaigle">
+	  <fixture type="selenium.ContextFixture">
+        <command name="begin context">
+            <target><var name="context" /></target>
+            <value>selenium.SeleniumFixture</value>
+        </command>
+        <command name="start">
+            <value>localhost</value>
+            <value><var name="port"/></value>
+            <value>*chrome</value>
+            <value><var name="host" /></value>   
+        </command>
+    </fixture>
+</test>

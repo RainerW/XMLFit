@@ -1,0 +1,10 @@
+<test author="cfaigle">
+	<fixture type="dbfit.MySqlTest">
+		<command name="connect">
+			<value>localhost</value>
+			<value>root</value>
+			<value>sbpw</value>
+			<value>test</value>
+		</command>
+	</fixture>
+</test>

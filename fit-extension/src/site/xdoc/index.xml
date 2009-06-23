@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+  <properties>
+    <title>sb-fit-extension Library</title>
+  </properties>
+  <body>
+    <section name="Modul sb-fit-extensions">
+      <p>
+        Module with extensions to Fit ( Framework for Integrated Test )
+      </p>
+    </section>
+  </body>
+</document>

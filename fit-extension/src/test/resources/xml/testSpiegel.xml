@@ -1,0 +1,16 @@
+<test author="cfaigle">
+	
+	<fixture type="selenium.ContextFixture">
+	   <command name="select context">
+            <target><var name="context"/></target>
+        </command>
+		<command name="open">
+			<target>http://www.seitenbau.com</target>
+			<value></value>
+		</command>
+		<command name="verifyTitle">
+            <target>SEITENBAU GmbH | Content Management | Software-Entwicklung | Imperia </target>
+            <value></value>
+        </command>	
+	</fixture>
+</test>

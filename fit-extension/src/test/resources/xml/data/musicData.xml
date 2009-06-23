@@ -1,0 +1,48 @@
+<testdata>
+	<dataset>
+		<trackNumber>1</trackNumber>
+		<title>Akila</title>
+		<artist>Toure Kunda</artist>
+	</dataset>
+	<dataset>
+		<trackNumber>2</trackNumber>
+		<title>American Tango</title>
+		<artist>Weather Report</artist>
+		<album>Mysterious Traveller</album>
+		<year>1974</year>
+		<time>3.70</time>
+		<track>2 of 7</track>
+	</dataset>
+	<dataset>
+		<trackNumber>3</trackNumber>
+		<title>Ananas</title>
+		<artist>James Taylor</artist>
+		<album>Hourglass</album>
+		<year>1997</year>
+	</dataset>
+	<dataset>
+		<trackNumber>4</trackNumber>
+		<album>JT</album>
+		<year>1977</year>
+	</dataset>
+	<dataset>
+		<trackNumber>5</trackNumber>
+		<album>Sound Of Distant Deer</album>
+		<year>1998</year>
+	</dataset>
+	<dataset>
+		<trackNumber>6</trackNumber>
+		<album>Sound Of Distant Beer</album>
+		<year>1998</year>
+	</dataset>
+	<dataset>
+		<trackNumber>7</trackNumber>
+		<album>Sound Of Distant Beer</album>
+		<year>1998</year>
+	</dataset>
+	<dataset>
+		<trackNumber>8</trackNumber>
+		<album>Strange Angels</album>
+		<year>1989</year>
+	</dataset>
+</testdata>
