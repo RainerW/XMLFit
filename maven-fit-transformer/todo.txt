@@ -1,6 +1,0 @@
-# TODO Maven XMLFit Plugin
-
-- JUnit test for maven plugin 
-(with maven testing tools e.g. AbstractMojoTestCase)
-- add maven parent project
-- improve site

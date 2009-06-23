@@ -6,7 +6,7 @@
   <body>
 
     <release date="" 
-        version="Features for 1.0 Release" description="List of feature request for 1.0 Release">
+        version="Features for 1.0" description="Feature request list for 1.0 Release">
       <action date="unreleased" dev="unassigned" type="add">
         Reihenfolge von prestep -> teststep -> poststep wird nicht erzwungen. Wird beispielsweise
         innerhalb der poststep's ein teststep eingefügt wird dieser aus der Reihenfolge im
@@ -50,6 +50,28 @@
         Title Informationen für jeden Test bei setup oder login Komponenten. Sehr praktisch auch 
         wenn in component title gleich die properties ausgewertet werden welche als data übergeben
         wurden. Dann ist ein title="Login als ${benutzertyp}" möglich. 
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+        'Meta Informationen' wie Properties und Test Data ein/ausklappbar machen. Und beim Laden der 
+        html Seite per JS verstecken. 
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
+        Link zum Verstecken kompletter Blöcke wie preCondition ermöglichen. Somit kann der precondition 
+        Block weggeklappt als komplettes weggeklappt werden. 
+      </action>
+       <action date="unreleased" dev="unassigned" type="add">
+        Text "Step x" beim preCondition und post Condition austauschen durch "Precondition x" 
+        bzw. "Postcondition x". Bei längeren Tests ist somit Unterscheidung des Typs ohne scrollen 
+        möglich.  
+      </action>
+      <action date="unreleased" dev="unassigned" type="fix">
+        comment Tag im testStep wird nicht ausgewertet bzw. vermutlich obsolet, da description 
+        ausgeweret wird. 
+      </action>
+      <action date="unreleased" dev="unassigned" type="fix">
+        Im testStep werden comment Elemente in den output übernommen. Schön wäre wenn im comment
+        auch gleich Variablen aufgelöst werden. Womit übergebene properties nicht doppelt 
+        geschrieben werden müssen.
       </action>
     </release>
 
