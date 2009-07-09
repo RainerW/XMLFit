@@ -18,8 +18,8 @@ public class FileRunner {
     		new FileRunner().run(argv);
 		} 
 		catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.exit(-1);
+//			System.err.println(e.getMessage());
+//			System.exit(-1);
 		}
     }
 
@@ -74,7 +74,6 @@ public class FileRunner {
     protected void exit() {
         output.close();
         System.err.println(fixture.counts());
-        System.exit(fixture.counts.wrong + fixture.counts.exceptions);
     }
 
 }
