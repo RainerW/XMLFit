@@ -8,6 +8,13 @@
     <release date="" 
         version="Features for 1.0" description="Feature request list for 1.0 Release">
       <action date="unreleased" dev="unassigned" type="add">
+        Freies Tagging ermöglichen: Vorsehen einer Möglichkeit einen Test mit 
+        Meta Daten in Form von frei vergebbaren Tags zu markieren. Dadurch wird es möglich
+        Freie Gruppierungen von Tests einzuführen. Also Tests die für die Itaration-X eingeführt
+        wurden oder für Integrations/System-Tests entsprechend zu markeiren. Dies kann für 
+        spezifische Reports oder auch für gezieltes Ausführen bestimmter Tests eingesetzt werden.
+      </action>
+      <action date="unreleased" dev="unassigned" type="add">
         Reihenfolge von prestep -> teststep -> poststep wird nicht erzwungen. Wird beispielsweise
         innerhalb der poststep's ein teststep eingefügt wird dieser aus der Reihenfolge im
         XML geworfen und nach 'oben' in die teststeps gezogen.
