@@ -27,6 +27,8 @@ import fit.FileRunner;
 public class FitRunnerMojo extends AbstractMojo
 {
 
+  private static final String ENV_RUN_TEST_WITH_ID = "fitTest";
+
   private static final String COMMA = ",";
 
   private static final String EXECUTION_PARAMETERS = "sourceDirectory={0}, caseSensitive={1},"
@@ -94,7 +96,7 @@ public class FitRunnerMojo extends AbstractMojo
   private DirectoryScanner scanner = new DirectoryScanner();
 
   public Counts counts = new Counts();
-  
+
   public void execute() throws MojoExecutionException, MojoFailureException
   {
     final String executionParameters = MessageFormat.format(
@@ -104,6 +106,16 @@ public class FitRunnerMojo extends AbstractMojo
             Boolean.valueOf(ignoreFailures)});
     getLog()
         .debug("Executing FitRunner with parameters " + executionParameters);
+
+    String runOnlyID = System.getProperty(ENV_RUN_TEST_WITH_ID);
+    if (runOnlyID != null)
+    {
+      getLog().info(
+          "Detected environment Variable " + ENV_RUN_TEST_WITH_ID + " is "
+              + runOnlyID);
+      sourceIncludes = "**/*" + runOnlyID + "*";
+      getLog().info("Therefore sourceIncludes are now = " + sourceIncludes);
+    }
     try
     {
       getLog().debug("sourceDirectory : " + sourceDirectory);
@@ -119,11 +131,9 @@ public class FitRunnerMojo extends AbstractMojo
 
       FixtureClassLoader classLoader = createClassLoader();
       Thread.currentThread().setContextClassLoader(classLoader);
-      
-     
-      
+
       StringBuffer resultHtml = new StringBuffer();
-      
+
       for (int i = 0; i < listFiles.length; i++)
       {
         String fileName = listFiles[i];
@@ -136,20 +146,21 @@ public class FitRunnerMojo extends AbstractMojo
         fileRunner.args(argv);
         fileRunner.process();
         fileRunner.output.close();
-        
-        counts.tally( fileRunner.fixture.counts);
-        
+
+        counts.tally(fileRunner.fixture.counts);
+
         resultHtml.append("<tr>");
         resultHtml.append("<td>");
-        resultHtml.append("<a href=\""+fileName+"\">"+ outputDirectory + "/" + fileName +"</a>");
+        resultHtml.append("<a href=\"" + fileName + "\">" + outputDirectory
+            + "/" + fileName + "</a>");
         resultHtml.append("</td>");
-        
-        if(fileRunner.fixture.counts.exceptions > 0)
+
+        if (fileRunner.fixture.counts.exceptions > 0)
         {
           // gelb
           resultHtml.append("<td bgcolor=\"#ffffcf\">");
         }
-        else if( fileRunner.fixture.counts.wrong > 0)
+        else if (fileRunner.fixture.counts.wrong > 0)
         {
           // rot
           resultHtml.append("<td bgcolor=\"#ffcfcf\">");
@@ -159,25 +170,26 @@ public class FitRunnerMojo extends AbstractMojo
           // grün
           resultHtml.append("<td bgcolor=\"#cfffcf\" >");
         }
-        
+
         resultHtml.append(fileRunner.fixture.counts());
         resultHtml.append("</td>");
         resultHtml.append("</tr>");
-        
+
         getLog().info(fileRunner.fixture.counts());
       }
-      FileWriter fileWriter = new FileWriter(outputDirectory+"/result.html", false);
+      FileWriter fileWriter = new FileWriter(outputDirectory + "/result.html",
+          false);
       fileWriter.append("<html>");
       fileWriter.append("<body>");
       fileWriter.append("<h1> Results </h1>");
       fileWriter.append("<table border=\"1\">");
       fileWriter.append("<tr>");
-      if(counts.exceptions > 0)
+      if (counts.exceptions > 0)
       {
         // gelb
         fileWriter.append("<td bgcolor=\"#ffffcf\">");
       }
-      else if(counts.wrong > 0)
+      else if (counts.wrong > 0)
       {
         // rot
         fileWriter.append("<td bgcolor=\"#ffcfcf\">");
@@ -187,17 +199,17 @@ public class FitRunnerMojo extends AbstractMojo
         // grün
         fileWriter.append("<td bgcolor=\"#cfffcf\" >");
       }
-      
+
       fileWriter.append(counts.toString());
       fileWriter.append("</td>");
       fileWriter.append("</tr>");
       fileWriter.append("</table>");
-      
+
       fileWriter.append("<h1> Details </h1>");
       fileWriter.append("<table border=\"1\">");
       fileWriter.append(resultHtml.toString());
       fileWriter.append("</table>");
-      
+
       fileWriter.append("</body>");
       fileWriter.close();
     }
@@ -207,7 +219,7 @@ public class FitRunnerMojo extends AbstractMojo
           "Failed to execute FitRunner with parameters " + executionParameters,
           e);
     }
-    
+
     getLog().info("");
     getLog().info("----------------------------------------");
     getLog().info("");
@@ -217,12 +229,12 @@ public class FitRunnerMojo extends AbstractMojo
     getLog().info("");
     getLog().info("----------------------------------------");
     getLog().info("");
-    
-    if(counts.exceptions > 0 || counts.wrong > 0)
+
+    if (counts.exceptions > 0 || counts.wrong > 0)
     {
       throw new MojoFailureException("Errors in FIT Tests");
     }
-    
+
   }
 
   private void createOutputDirectory()
