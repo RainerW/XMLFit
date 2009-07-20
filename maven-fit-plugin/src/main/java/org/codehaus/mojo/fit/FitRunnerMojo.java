@@ -108,6 +108,11 @@ public class FitRunnerMojo extends AbstractMojo
         .debug("Executing FitRunner with parameters " + executionParameters);
 
     String runOnlyID = System.getProperty(ENV_RUN_TEST_WITH_ID);
+
+    if (runOnlyID == null) // Also accept lowercase Version
+    {
+      runOnlyID = System.getProperty(ENV_RUN_TEST_WITH_ID.toLowerCase());
+    }
     if (runOnlyID != null)
     {
       getLog().info(
