@@ -885,14 +885,11 @@ public class ContextSeleniumFixture extends ArgumentFixture
   public void select(Argument selektor, Argument arg)
   {
 	  selenium.select(selektor.text(), arg.text());
-	  right(selektor);
-	  right(arg);
   }
   
   public void selectAndWait(Argument selektor, Argument arg) throws InterruptedException
   {
 	  Thread.sleep(2000);
-	  select(selektor, arg);
   }
   
 }
