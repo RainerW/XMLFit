@@ -27,7 +27,7 @@ import fit.FileRunner;
 public class FitRunnerMojo extends AbstractMojo
 {
 
-  private static final String ENV_RUN_TEST_WITH_ID = "fitTest";
+  private static final String ENV_RUN_TEST_WITH_ID = "fit.test";
 
   private static final String COMMA = ",";
 
