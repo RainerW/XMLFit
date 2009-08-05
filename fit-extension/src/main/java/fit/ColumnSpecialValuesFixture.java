@@ -43,12 +43,12 @@ public class ColumnSpecialValuesFixture extends ColumnFixture
         return replace(source, index);
       }
     });
-    String text = cell.text();
-    if (text.equals(SPECIAL_EMPTY))
+    String unmapped = cells.text();
+    if (unmapped.equals(SPECIAL_EMPTY))
     {
       compareEmpty(cell, a, "");
     }
-    else if (text.equals(SPECIAL_NULL))
+    else if (unmapped.equals(SPECIAL_NULL))
     {
       compareNull(cell, a);
     }
