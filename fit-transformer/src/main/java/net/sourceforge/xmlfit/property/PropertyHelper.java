@@ -42,22 +42,23 @@ public class PropertyHelper {
 	public static String getPropertyValue(String name)
 	{
 		String value = null;
-		if(actualDataSet != null)
-		{
-			value = actualDataSet.getPropertyValue(name);
-		}
-		if(value == null)
-		{
-			value = properties.get(name);
-			if(value == null)
-			{
-				value = defaultDataSet.getPropertyValue(name);
-				if(value == null)
-				{
-					value = parameters.get(name);
-				}
-			}
-		}
+		
+        value = properties.get(name);
+        if(value == null)
+        {
+            if(actualDataSet != null)
+            {
+                value = actualDataSet.getPropertyValue(name);
+            }
+            if(value == null)
+            {
+                value = defaultDataSet.getPropertyValue(name);
+                if(value == null)
+                {
+                    value = parameters.get(name);
+                }
+            }
+        }
 		if(value == null)
 		{
 			throw new PropertyNotFoundException(name);
