@@ -1,6 +1,7 @@
 package net.sourceforge.xmlfit.fit.stepper.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,47 +16,43 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.text.StyleConstants.ColorConstants;
 
 import fit.Parse;
 
-public class DebuggerFrame extends JDialog
+public class DebuggerFrame extends JFrame
 {
-  
+
   private static final String TITEL_DEBUGGER_FRAME = "FIT Action Fixture Debugger";
 
   private int maxCellCount = 0;
-  
-  private static JFrame frame = new JFrame("");
-  
+
   private JButton nextStepButton = new JButton("step");
-  
+
   private JButton runButtonp = new JButton("run");
-  
+
   private JPanel buttonPanel = new JPanel();
-   
+
   private HashMap<Parse, Integer> parseToCount = new HashMap<Parse, Integer>();
-  
+
   private JTable tableView;
-  
+
   private boolean isStepMode = false;
-  
-  static
-  {
-    frame.pack();
-  }
-   
+
+  private static Boolean lock = false;
+
   public DebuggerFrame()
   {
-    super(frame, TITEL_DEBUGGER_FRAME,true);
+    super(TITEL_DEBUGGER_FRAME);
     initButtons();
   }
-  
+
   public void initTabeles(Parse tables)
   {
     int count = 1;
     Parse table = tables;
     ArrayList<List<String>> rowList = new ArrayList<List<String>>();
-    while(table != null)
+    while (table != null)
     {
       Parse rows = table.parts;
       count = doRows(count, rowList, rows);
@@ -66,11 +63,12 @@ public class DebuggerFrame extends JDialog
     initTableView(rowList);
     pack();
     setVisible(true);
+    warten();
   }
 
   private int doRows(int count, ArrayList<List<String>> rowList, Parse rows)
   {
-    while(rows != null)
+    while (rows != null)
     {
       parseToCount.put(rows.parts, count++);
       ArrayList<String> cellList = doCells(rows.parts);
@@ -84,7 +82,7 @@ public class DebuggerFrame extends JDialog
   {
     ArrayList<String> cellList = new ArrayList<String>();
     int tmpCellCount = 0;
-    while(cells != null)
+    while (cells != null)
     {
       cellList.add(cells.text());
       cells = cells.more;
@@ -96,7 +94,7 @@ public class DebuggerFrame extends JDialog
 
   private void setMaxCellCount(int count)
   {
-    if(count > maxCellCount)
+    if (count > maxCellCount)
     {
       maxCellCount = count;
     }
@@ -119,46 +117,71 @@ public class DebuggerFrame extends JDialog
     buttonPanel.add(nextStepButton);
     buttonPanel.add(runButtonp);
 
-    
-    nextStepButton.addActionListener(new ActionListener(){
+    nextStepButton.addActionListener(new ActionListener()
+    {
       public void actionPerformed(ActionEvent e)
       {
         isStepMode = true;
-        setVisible(false);
+        fortsetzen();
       }
     });
-    
-    runButtonp.addActionListener(new ActionListener(){
+
+    runButtonp.addActionListener(new ActionListener()
+    {
       public void actionPerformed(ActionEvent e)
       {
-        setVisible(false);
+        fortsetzen();
       }
-     });
+    });
   }
-  
+
   public void doRow(Parse parse)
   {
-    if(isDebuggerEnable(parse))
+    if (isDebuggerEnable(parse))
     {
       isStepMode = false;
       Integer row = parseToCount.get(parse);
       setActualRowSelected(row);
-      scrollToRow(row); 
+      scrollToRow(row);
       setVisible(true);
+      warten();
+    }
+  }
+
+  private void warten()
+  {
+    try
+    {
+      synchronized (lock)
+      {
+        tableView.setForeground(Color.BLACK);
+        lock.wait();
+        tableView.setForeground(Color.LIGHT_GRAY);
+      }
+    }
+    catch (InterruptedException e1)
+    {
+    }
+  }
+
+  private void fortsetzen()
+  {
+    synchronized (lock)
+    {
+      lock.notifyAll();
     }
   }
 
   private void scrollToRow(Integer row)
   {
-    Rectangle rect = tableView.getCellRect(row-1, 0, true);
+    Rectangle rect = tableView.getCellRect(row - 1, 0, true);
     tableView.scrollRectToVisible(rect);
   }
 
   private void setActualRowSelected(Integer row)
   {
-    ListSelectionModel selectionModel = 
-      tableView.getSelectionModel();
-    selectionModel.setSelectionInterval(row-1, row-1);
+    ListSelectionModel selectionModel = tableView.getSelectionModel();
+    selectionModel.setSelectionInterval(row - 1, row - 1);
   }
 
   private boolean isDebuggerEnable(Parse parse)
@@ -169,7 +192,7 @@ public class DebuggerFrame extends JDialog
   private boolean isBreakPoint(Parse parse)
   {
     Integer count = parseToCount.get(parse);
-    Object object =  tableView.getModel().getValueAt(count-1, 0);
+    Object object = tableView.getModel().getValueAt(count - 1, 0);
     if (object instanceof Boolean)
     {
       Boolean result = (Boolean) object;

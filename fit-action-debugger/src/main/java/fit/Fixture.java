@@ -12,11 +12,12 @@ import net.sourceforge.xmlfit.fit.stepper.gui.DebuggerFrame;
 
 public class Fixture {
     
+    private static final String FIT_DEBUGMODE = "fit.debugmode";
     private static boolean debugMode = false;
     
     static
     {
-      String property = System.getProperty("fit.debugmode");
+      String property = System.getProperty(FIT_DEBUGMODE);
       if(property != null && property.equals("true"))
       {
         debugMode = true;
