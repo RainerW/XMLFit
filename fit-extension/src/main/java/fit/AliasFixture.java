@@ -28,6 +28,8 @@ public class AliasFixture extends Fixture
   private static final String SPECIAL_EMPTY = "#{EMPTY}";
 
   private HashMap<String, String> fAliasMap = null;
+  
+  private static HashMap<String, String> fStaticAliasMap = null;
 
   private Fixture fDelegateFixture;
 
@@ -141,6 +143,7 @@ public class AliasFixture extends Fixture
   public void loadMapping(String filename)
   {
     fAliasMap = new HashMap<String, String>();
+    fStaticAliasMap= new HashMap<String, String>();
     try
     {
       JAXBContext ctx = JAXBContext.newInstance(AliasConfiguration.class
@@ -161,6 +164,7 @@ public class AliasFixture extends Fixture
           String name = alias.getName();
           String value = alias.getValue();
           fAliasMap.put(name, value);
+          fStaticAliasMap.put(name,value);
         }
       }
     }
