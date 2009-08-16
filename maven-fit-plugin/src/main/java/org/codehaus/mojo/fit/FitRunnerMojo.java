@@ -15,6 +15,7 @@ import org.apache.tools.ant.DirectoryScanner;
 
 import fit.Counts;
 import fit.FileRunner;
+import fit.gui.FitGUI;
 
 /**
  * Maven Fit Runner.
@@ -28,6 +29,8 @@ public class FitRunnerMojo extends AbstractMojo
 {
 
   private static final String ENV_RUN_TEST_WITH_ID = "fit.test";
+
+  private static final String ENV_RUN_WITH_GUI = "fit.gui";
 
   private static final String COMMA = ",";
 
@@ -93,9 +96,13 @@ public class FitRunnerMojo extends AbstractMojo
   /**
    * The scanner to list files
    */
-  private DirectoryScanner scanner = new DirectoryScanner();
+  protected DirectoryScanner scanner = new DirectoryScanner();
 
   public Counts counts = new Counts();
+
+  protected boolean displayGUI = false;
+
+  private FitGUI gui;
 
   public void execute() throws MojoExecutionException, MojoFailureException
   {
@@ -121,6 +128,17 @@ public class FitRunnerMojo extends AbstractMojo
       sourceIncludes = "**/*" + runOnlyID + "*";
       getLog().info("Therefore sourceIncludes are now = " + sourceIncludes);
     }
+
+    String runWithGUI = System.getProperty(ENV_RUN_WITH_GUI);
+    if (runWithGUI != null)
+    {
+      if (runWithGUI.equals("true"))
+      {
+        displayGUI = true;
+        getGUI();
+      }
+    }
+
     try
     {
       getLog().debug("sourceDirectory : " + sourceDirectory);
@@ -153,6 +171,7 @@ public class FitRunnerMojo extends AbstractMojo
         fileRunner.output.close();
 
         counts.tally(fileRunner.fixture.counts);
+        updateStatusDisplay(counts,fileName);
 
         resultHtml.append("<tr>");
         resultHtml.append("<td>");
@@ -240,6 +259,23 @@ public class FitRunnerMojo extends AbstractMojo
       throw new MojoFailureException("Errors in FIT Tests");
     }
 
+  }
+
+  private void updateStatusDisplay(Counts counts2, String fileName)
+  {
+    if (displayGUI)
+    {
+      getGUI().update(counts2,fileName);
+    }
+  }
+
+  private FitGUI getGUI()
+  {
+    if (gui == null)
+    {
+      gui = new FitGUI();
+    }
+    return gui;
   }
 
   private void createOutputDirectory()
