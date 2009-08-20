@@ -5,21 +5,16 @@
 	xmlns:comp="http://xmlfit.sourceforge.net/component" xmlns:com="http://xmlfit.sourceforge.net/schema/1.0/component">
 
 	<complexType name="Test">
-		<sequence>
-		  <element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
-		  <element name="precondition" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
-		  <element name="testStep" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
-		  <element name="postcondition" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
-		  <element name="rem" type="string" maxOccurs="unbounded" minOccurs="0"></element>
-		</sequence>
-		<attribute name="id" type="string" use="required"></attribute>
-		<attribute name="name" type="string" use="required"></attribute>
-		<attribute name="author" type="string" use="optional"></attribute>
-		<attribute name="defaultdata" type="string" use="optional"></attribute>
-		<attribute name="priority" type="int" use="optional"
-			default="1">
-		</attribute>
-		<attribute name="usecase" type="string" use="optional"></attribute>
+	  <sequence>
+            <element name="detail" type="test:TestDetail" maxOccurs="1" minOccurs="0"></element>
+            <element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+            <element name="precondition" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
+	    <element name="testStep" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
+	    <element name="postcondition" type="test:Step" maxOccurs="unbounded" minOccurs="0"></element>
+	  </sequence>
+	  <attribute name="id" type="string" use="required"></attribute>
+	  <attribute name="name" type="string" use="required"></attribute>
+	  <attribute name="defaultdata" type="string" use="optional"></attribute>
 	</complexType>
 
 	<complexType name="Step">
@@ -39,10 +34,9 @@
 
 
 	<complexType name="Tests">
-		<sequence>
-			<element name="test" type="test:Test" maxOccurs="unbounded"
-				minOccurs="0">
-			</element>
+        <sequence>
+            <element name="rem" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+            <element name="test" type="test:Test" maxOccurs="unbounded" minOccurs="0"></element>
 		</sequence>
 	</complexType>
 
@@ -56,4 +50,12 @@
 
 
 
+
+	<complexType name="TestDetail">
+        <sequence maxOccurs="unbounded" minOccurs="0">
+          <choice><element name="usecase" type="string" maxOccurs="1" minOccurs="0"></element><element name="ticketId" type="string" maxOccurs="unbounded" minOccurs="0"></element><element name="author" type="string" maxOccurs="unbounded" minOccurs="0"></element></choice>
+        </sequence>
+        
+        
+	</complexType>
 </schema>

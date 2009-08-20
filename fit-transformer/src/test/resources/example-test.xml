@@ -6,6 +6,15 @@
 	
 	<test id="001" name="LoginTest" defaultdata="example-defaultdata.xml">
 		
+        <detail>
+            <usecase>Suche ausführen</usecase>
+            
+            <ticketId>TEST-1</ticketId>
+            <ticketId>TEST-2</ticketId>
+            
+            <author>Robert Haase</author>
+        </detail>
+        
 		<description>
 			The test check that the login works fine.
 		</description>

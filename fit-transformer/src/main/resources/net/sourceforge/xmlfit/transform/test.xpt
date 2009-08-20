@@ -47,12 +47,38 @@
       
    </head>
    <body>
+    
     <h1>«id+" - "+name»</h1>
     <p><b>Test ID:</b> «id»</p>
     <p><b>Testname:</b> «name»</p>
-    «IF description != null»
-    	<p><b>Description:</b><br/>«description»</p>
+    
+    
+    «FOREACH detail.usecase AS usecase»
+        <p><b>Use Case:</b> «usecase»</p>
+    «ENDFOREACH»
+    
+    «IF detail.author != null»
+        <b>Author:</b>
+        <ul>
+        «FOREACH detail.author AS author»
+            <li>«author»</li>
+        «ENDFOREACH»
+        </ul>
     «ENDIF»
+    
+    «IF detail.ticketId  != null»
+        <b>Tickets:</b>
+        <ul>
+        «FOREACH detail.ticketId AS ticketId»
+            <li>«ticketId»</li>
+        «ENDFOREACH»
+        </ul>
+    «ENDIF»  
+    
+    «IF description != null»
+        <p><b>Description:</b><br/>«description»</p>
+    «ENDIF»
+    
     <hr/>
     
     «LET counterReset("STEPS") AS e»«ENDLET»
