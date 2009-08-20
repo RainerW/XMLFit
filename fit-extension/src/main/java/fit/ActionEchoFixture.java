@@ -14,9 +14,9 @@ import java.lang.reflect.Method;
  * will be used. Otherwise the code tries to find the Field 
  * "String youFieldName".   
  */
-public class ActionStateFixture extends ActionFixture
+public class ActionEchoFixture extends ActionFixture
 {
-  public void state() throws Exception
+  public void echo() throws Exception
   {
     Parse cell = cells.more;
     String target = cell.text();
