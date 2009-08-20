@@ -27,6 +27,22 @@ public class ColumnSpecialValuesFixture extends ColumnFixture
   private HashMap<String, String> fAliasMap = null;
 
   @Override
+  public void doTable(Parse parse)
+  {
+    beforeTable(parse);
+    super.doTable(parse);
+    afterTable(parse);
+  }
+
+  @Override
+  public void doRow(Parse parse)
+  {
+    beforeRow(parse);
+    super.doRow(parse);
+    afterRow(parse);
+  }
+
+  @Override
   public void doCells(Parse cells)
   {
     super.doCells(cells);
@@ -61,19 +77,20 @@ public class ColumnSpecialValuesFixture extends ColumnFixture
   public void wrong(Parse cell, String actual)
   {
     String key = null;
-    if(cell instanceof ReplaceParser) {
-      key = ((ReplaceParser)cell).getUndecoratedParseObject().text();
+    if (cell instanceof ReplaceParser)
+    {
+      key = ((ReplaceParser) cell).getUndecoratedParseObject().text();
     }
     if (key == null || !getMapping().containsKey(key))
     {
       super.wrong(cell, actual);
       return;
     }
-    
+
     wrong(cell);
-    cell.addToBody(label("expected") + "<hr>"
-        + "key [" + key + "] resolved as [" + cell.text() + "] " 
-        + "<hr>" + escape(actual) + label("actual"));
+    cell.addToBody(label("expected") + "<hr>" + "key [" + key
+        + "] resolved as [" + cell.text() + "] " + "<hr>" + escape(actual)
+        + label("actual"));
   }
 
   protected String replace(String value, int index)
@@ -175,6 +192,22 @@ public class ColumnSpecialValuesFixture extends ColumnFixture
       e.printStackTrace();
       throw new RuntimeException(e);
     }
+  }
+
+  protected void afterTable(Parse parse)
+  {
+  }
+
+  protected void beforeTable(Parse parse)
+  {
+  }
+
+  protected void afterRow(Parse parse)
+  {
+  }
+
+  protected void beforeRow(Parse parse)
+  {
   }
 
 }
