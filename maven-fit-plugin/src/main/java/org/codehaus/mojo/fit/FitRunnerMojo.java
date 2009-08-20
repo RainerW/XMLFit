@@ -13,9 +13,10 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.tools.ant.DirectoryScanner;
 
+import com.seitenbau.fit.mojo.gui.FitGUI;
+
 import fit.Counts;
 import fit.FileRunner;
-import fit.gui.FitGUI;
 
 /**
  * Maven Fit Runner.
@@ -156,7 +157,7 @@ public class FitRunnerMojo extends AbstractMojo
       Thread.currentThread().setContextClassLoader(classLoader);
 
       StringBuffer resultHtml = new StringBuffer();
-
+      fileCount(listFiles.length);
       for (int i = 0; i < listFiles.length; i++)
       {
         String fileName = listFiles[i];
@@ -171,7 +172,7 @@ public class FitRunnerMojo extends AbstractMojo
         fileRunner.output.close();
 
         counts.tally(fileRunner.fixture.counts);
-        updateStatusDisplay(counts,fileName);
+        updateStatusDisplay(counts, fileName,i,fileRunner.fixture.counts);
 
         resultHtml.append("<tr>");
         resultHtml.append("<td>");
@@ -261,11 +262,19 @@ public class FitRunnerMojo extends AbstractMojo
 
   }
 
-  private void updateStatusDisplay(Counts counts2, String fileName)
+  private void fileCount(int length)
   {
     if (displayGUI)
     {
-      getGUI().update(counts2,fileName);
+      getGUI().setTestCount(length);
+    }
+  }
+
+  private void updateStatusDisplay(Counts counts2, String fileName,int curIndex, Counts counts3)
+  {
+    if (displayGUI)
+    {
+      getGUI().update(counts2, fileName,curIndex,counts3);
     }
   }
 
