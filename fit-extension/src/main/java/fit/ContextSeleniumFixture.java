@@ -889,6 +889,7 @@ public class ContextSeleniumFixture extends ArgumentFixture
   
   public void selectAndWait(Argument selektor, Argument arg) throws InterruptedException
   {
+      select(selektor, arg);
 	  Thread.sleep(2000);
   }
   
