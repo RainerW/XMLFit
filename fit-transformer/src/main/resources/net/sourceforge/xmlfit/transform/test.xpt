@@ -48,10 +48,10 @@
    </head>
    <body>
     
+    «REM» TODO: Quick Fix Detail - Refactor it
     <h1>«id+" - "+name»</h1>
     <p><b>Test ID:</b> «id»</p>
     <p><b>Testname:</b> «name»</p>
-    
     
     «FOREACH detail.usecase AS usecase»
         <p><b>Use Case:</b> «usecase»</p>
@@ -74,6 +74,7 @@
         «ENDFOREACH»
         </ul>
     «ENDIF»  
+    «ENDREM»
     
     «IF description != null»
         <p><b>Description:</b><br/>«description»</p>
