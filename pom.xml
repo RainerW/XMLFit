@@ -82,11 +82,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http:/
 
   <scm>
     <connection> 
-              scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk
-          </connection>
+        scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk
+    </connection>
     <developerConnection> 
-              scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk
-        </developerConnection>
+        scm:svn:https://xmlfit.svn.sourceforge.net/svnroot/xmlfit/trunk
+    </developerConnection>
     <url>http://xmlfit.svn.sourceforge.net/viewvc/xmlfit/</url>
   </scm>
 
