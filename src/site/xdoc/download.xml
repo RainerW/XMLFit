@@ -10,19 +10,17 @@
      <p>
       Add the follow code to the maven POM to use the XmlFit maven Plugin.
       <source>
-      	...
+      	<![CDATA[
+
       	<repositories>
 			<repository>
-				<id>fornax.repository</id>
-				<name>Fornax Repository</name>
+				<id>XMLFit-SF</id>
+				<name>XMLFit-SF Repository</name>
 				<url>http://xmlfit.sourceforge.net/m2-repo/</url>
 			</repository>
 		</repositories>
-      	...
-        <build>
-
+      	<build>
 			<plugins>
-				...
 				<plugin>
 					<groupId>net.sourceforge.xmlfit</groupId>
 					<artifactId>maven-fit-transformer</artifactId>
@@ -35,11 +33,9 @@
 						</execution>
 					</executions>
 				</plugin>
-	
 			</plugins>
-	
 		</build>
-      	
+		]]>
        </source>
       </p>
      </subsection>
@@ -48,15 +44,15 @@
      <p>
       For use snapshots versions of XmlFit add the follow repository to your maven pom.
       <source>
-      	...
+      	<![CDATA[
       	<repositories>
 			<repository>
-				<id>fornax.repository</id>
-				<name>Fornax Repository</name>
+				<id>XMLFit-SF-SNAP</id>
+				<name>XMLFit-SF-SNAP Repository</name>
 				<url>http://xmlfit.sourceforge.net/m2-repo-snapshots/</url>
 			</repository>
 		</repositories>
-      	...
+		]]>
        </source>
       </p>
      </subsection>
