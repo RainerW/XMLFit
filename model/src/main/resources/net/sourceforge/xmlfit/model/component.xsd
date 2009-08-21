@@ -71,9 +71,10 @@
 
     <group name="Fixture">
       <choice>
-        <element name="actionFixture" type="comp:ActionFixture"></element>
-        <element name="columnFixture" type="comp:ColumnFixture"></element>
-        <element name="comment" type="comp:CommentFixture"></element>
+      	<element name="tableFixture" type="comp:TabelFixture"></element>
+      	<element name="actionFixture" type="comp:ActionFixture"></element>
+      	<element name="columnFixture" type="comp:ColumnFixture"></element>
+      	<element name="comment" type="comp:CommentFixture"></element>
       </choice>
     </group>
 
@@ -96,7 +97,13 @@
     	<complexContent>
     		<extension base="comp:Fixture">
     			<sequence>
-    				<element name="row" type="comp:Row" maxOccurs="unbounded" minOccurs="0"></element>
+    				<element name="command" type="comp:Command"
+    					maxOccurs="unbounded" minOccurs="0">
+    				</element>
+    				<element name="column" type="comp:Column" maxOccurs="unbounded" minOccurs="0"></element>
+    				<element name="row" type="comp:Row"
+    					maxOccurs="unbounded" minOccurs="0">
+    				</element>
     			</sequence>
     		</extension>
     	</complexContent>
