@@ -105,6 +105,7 @@ public class FitRunnerMojo extends AbstractMojo
 
   private FitGUI gui;
 
+  // TODO: Refactoring execute methode in smaller pices
   public void execute() throws MojoExecutionException, MojoFailureException
   {
     final String executionParameters = MessageFormat.format(
@@ -146,8 +147,7 @@ public class FitRunnerMojo extends AbstractMojo
       getLog().debug("sourceIncludes : " + sourceIncludes);
       getLog().debug("sourceExcludes : " + sourceExcludes);
       getLog().debug("outputDirectory : " + outputDirectory);
-      // run( sourceDirectory, caseSensitive, sourceIncludes,
-      // sourceExcludes, outputDirectory );
+   
       String[] listFiles = listFiles(sourceDirectory, caseSensitive,
           sourceIncludes, sourceExcludes);
 
@@ -182,17 +182,17 @@ public class FitRunnerMojo extends AbstractMojo
 
         if (fileRunner.fixture.counts.exceptions > 0)
         {
-          // gelb
+          // yellow
           resultHtml.append("<td bgcolor=\"#ffffcf\">");
         }
         else if (fileRunner.fixture.counts.wrong > 0)
         {
-          // rot
+          // red
           resultHtml.append("<td bgcolor=\"#ffcfcf\">");
         }
         else
         {
-          // grün
+          // green
           resultHtml.append("<td bgcolor=\"#cfffcf\" >");
         }
 
@@ -211,17 +211,17 @@ public class FitRunnerMojo extends AbstractMojo
       fileWriter.append("<tr>");
       if (counts.exceptions > 0)
       {
-        // gelb
+        // green
         fileWriter.append("<td bgcolor=\"#ffffcf\">");
       }
       else if (counts.wrong > 0)
       {
-        // rot
+        // red
         fileWriter.append("<td bgcolor=\"#ffcfcf\">");
       }
       else
       {
-        // grün
+        // green
         fileWriter.append("<td bgcolor=\"#cfffcf\" >");
       }
 
