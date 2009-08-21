@@ -1,4 +1,4 @@
-package com.seitenbau.fit.mojo.gui;
+package net.sourceforge.xmlfit.fit.mojo.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

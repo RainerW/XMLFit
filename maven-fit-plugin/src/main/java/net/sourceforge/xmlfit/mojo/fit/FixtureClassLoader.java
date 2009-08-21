@@ -1,4 +1,4 @@
-package org.codehaus.mojo.fit;
+package net.sourceforge.xmlfit.mojo.fit;
 
 import java.io.File;
 import java.net.MalformedURLException;

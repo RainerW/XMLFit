@@ -1,4 +1,4 @@
-package org.codehaus.mojo.fit;
+package net.sourceforge.xmlfit.mojo.fit;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,12 +8,13 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 
+import net.sourceforge.xmlfit.fit.mojo.gui.FitGUI;
+
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.tools.ant.DirectoryScanner;
 
-import com.seitenbau.fit.mojo.gui.FitGUI;
 
 import fit.Counts;
 import fit.FileRunner;
