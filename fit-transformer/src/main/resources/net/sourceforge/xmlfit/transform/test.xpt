@@ -91,7 +91,7 @@
 			 - «precondition.title» 
 		 «ENDIF»
 		 («precondition.file»)</h3>
-		 <p align="left"><a href="#link-precondition-«counterGet("STEPS")»" onClick="javascript:toggledisplay('precondition-«counterGet("STEPS")»', this);">Close</a></p>
+		 <p align="left"><a href="#" onClick="javascript:toggledisplay('precondition-«counterGet("STEPS")»', this);">Close</a></p>
     	 <div id="precondition-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
     	 <p>«EXPAND testStep FOR precondition»</p>		
     	 </div>
@@ -109,7 +109,7 @@
 			 - «testStep.title» 
 		 «ENDIF»
 		 («testStep.file»)</h3>
-		 <p align="left"><a href="#link-steps-«counterGet("STEPS")»" onClick="javascript:toggledisplay('steps-«counterGet("STEPS")»', this);">Close</a></p>
+		 <p align="left"><a href="#" onClick="javascript:toggledisplay('steps-«counterGet("STEPS")»', this);">Close</a></p>
     	 <div id="steps-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
 	   	 <p>«EXPAND testStep FOR testStep»</p>
 	   	 </div>
@@ -126,7 +126,7 @@
 			 - «postcondition.title» 
 		 «ENDIF»
 		 («postcondition.file»)</h3>
-		 <p align="left"><a href="#link-post-«counterGet("STEPS")»" onClick="javascript:toggledisplay('post-«counterGet("STEPS")»', this);">Close</a></p>
+		 <p align="left"><a href="#" onClick="javascript:toggledisplay('post-«counterGet("STEPS")»', this);">Close</a></p>
     	 <div id="post-«counterGet("STEPS")»" style="border: solid 1px #b3b2b2; padding: 10px;">
 	   	 <p>«EXPAND testStep FOR postcondition»</p>
 	   	 </div>

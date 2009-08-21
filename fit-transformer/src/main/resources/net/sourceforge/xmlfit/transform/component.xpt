@@ -19,6 +19,8 @@
   	«addParameter(param.name, extractProperties(param.defaultValue))»
   «ENDFOREACH»
   «FOREACH eContents AS content»
+  	«LET counterReset("MAX_ACTIONS_CELLS") AS e»«ENDLET»
+  	«LET storeGlobalVar("IS_COMMENT_ENABLE", false) AS e»«ENDLET»
   	<p>«EXPAND fixture FOR content»</p>
    «ENDFOREACH»
 «ENDDEFINE»
@@ -55,8 +57,6 @@
 	Template for a action fixture.
 «ENDREM»
 «DEFINE fixture FOR ActionFixture»
-	«LET counterReset("MAX_ACTIONS_CELLS") AS e»«ENDLET»
-	«LET storeGlobalVar("IS_COMMENT_ENABLE", false) AS e»«ENDLET»
 	«EXPAND countMaxActionCells FOREACH command»
 	<table border="1">
 		<tr>
@@ -71,7 +71,6 @@
 		</tr>
 	«EXPAND command FOREACH command»
 </table>
-
 «ENDDEFINE»
 
 «REM»
@@ -89,6 +88,44 @@
 	«IF comment != null»
 		«LET storeGlobalVar("IS_COMMENT_ENABLE", true) AS e»
 		«ENDLET»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE fixture FOR TabelFixture»
+	«EXPAND countMaxActionCells FOR this»
+	<table border="1">
+		«IF type != null»
+		<tr>
+			<td colspan="«counterGet("MAX_ACTIONS_CELLS")»">
+				«type»
+			</td>
+		</tr>
+		«ENDIF»
+		«EXPAND command FOREACH command»
+		«IF column.size > 0»
+		<tr>
+			«EXPAND column FOREACH column»
+		</tr>
+		«ENDIF»
+		«FOREACH row AS row»
+			<tr>
+				«EXPAND value FOREACH row.value»
+			</tr>
+		«ENDFOREACH»
+	</table>
+«ENDDEFINE»
+
+«DEFINE countMaxActionCells FOR TabelFixture»
+	«IF column.size > 0»
+		«FOREACH column AS c»
+			«LET counterInc("MAX_ACTIONS_CELLS") AS e»
+			«ENDLET»
+		«ENDFOREACH»
+	«ELSE»
+		«FOREACH row.first().value AS value»
+			«LET counterInc("MAX_ACTIONS_CELLS") AS e»
+			«ENDLET»
+		«ENDFOREACH»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -140,13 +177,11 @@
 			«extractProperties(value.last())»
 			</td>
 	«ENDIF»
-	
 	«IF comment != null»
 		<td colspan="1">«extractProperties(comment)»</td>
 	«ELSEIF getGlobalVar("IS_COMMENT_ENABLE") == true»
 		<td colspan="1">&nbsp;</td>
 	«ENDIF»
-	
 	</tr>
 «ENDDEFINE»
 
@@ -154,12 +189,12 @@
 	Template for column of column fixture.
 «ENDREM»
 «DEFINE column FOR Column»
-	<td>«name»</td>
+	<td colspan="1">«name»</td>
 «ENDDEFINE»
 
 «REM»
 	Template for value of a column fixture row.
 «ENDREM»
 «DEFINE value FOR String»
-	<td>«extractProperties(this)»</td>
+	<td colspan="1">«extractProperties(this)»</td>
 «ENDDEFINE»
