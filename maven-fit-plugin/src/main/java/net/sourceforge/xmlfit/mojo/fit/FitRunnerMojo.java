@@ -20,9 +20,8 @@ import fit.Counts;
 import fit.FileRunner;
 
 /**
- * Maven Fit Runner.
+ * XMLFit - Maven Fit Runner.
  * 
- * @author Mauro Talevi
  * @goal run
  * @phase integration-test
  * @requiresDependencyResolution test
