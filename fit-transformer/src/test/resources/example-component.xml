@@ -2,14 +2,53 @@
 <component
 	xmlns="http://xmlfit.sourceforge.net/schema/1.0/component" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/component/component.xsd"
-	>
+	xsi:schemaLocation="http://xmlfit.sourceforge.net/schema/1.0/component/component.xsd">
 	
 		<parameter name="testParam" defaultValue="Test Default Param Value" />
 		<parameter name="password" defaultValue="Test Default Param Password" />
 		<parameter name="username" defaultValue="Test Default Param Password" />
 		<parameter name="parmInner" defaultValue="http://localhost:8080/" />
         <parameter name="parmOut" defaultValue="${parmInner}telcenter/" />
+        
+        <tableFixture type="db.Table">
+        	<command name="name">
+        		<target>detailTable</target>
+        	</command>
+        	<column name="id" />
+        	<column name="detail"/>
+        	<row>
+        		<value>1</value>
+        		<value>My Detail Text</value>
+        	</row>
+        </tableFixture>
+        
+        <tableFixture type="db.Table">
+        	<command name="name">
+        		<target>detailTable</target>
+        	</command>
+        	<column name="id" />
+        	<column name="detail"/>
+        	<column name="description"/>
+        	<column name="email"/>
+        	<row>
+        		<value>1</value>
+        		<value>My Detail Text</value>
+        		<value>meine description</value>
+        		<value>test@test.de</value>
+        	</row>
+        </tableFixture>
+        
+        <tableFixture type="db.Table">
+        	<command name="name">
+        		<target>detailTable</target>
+        	</command>
+        	<row>
+        		<value>1</value>
+        		<value>My Detail Text</value>
+        		<value>meine description</value>
+        		<value>test@test.de</value>
+        	</row>
+        </tableFixture>
         
         <actionFixture>
             <command name="testCommandName">
