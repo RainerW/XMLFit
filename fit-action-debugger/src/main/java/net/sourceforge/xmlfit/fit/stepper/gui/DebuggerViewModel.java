@@ -9,35 +9,35 @@ public class DebuggerViewModel extends AbstractTableModel
 {
 
   private Object[][] data;
-  
+
   private int maxCellCount;
-  
-  public DebuggerViewModel(ArrayList<List<String>> tabel, int maxCellCount)
+
+  public DebuggerViewModel(ArrayList<List<String>> table, int maxCellCount)
   {
-    this.maxCellCount = maxCellCount;
-    this.data = initData(tabel);
+    this.maxCellCount = maxCellCount + 1; // +1 = Breakpoint Checkbox
+    this.data = initData(table);
   }
-  
-  private Object[][] initData(ArrayList<List<String>> tabel)
+
+  private Object[][] initData(ArrayList<List<String>> table)
   {
-    Object[][] result = new Object[tabel.size()][maxCellCount+1];
+    Object[][] result = new Object[table.size()][maxCellCount];
     clean(result);
-    for (int i = 0; i < tabel.size(); i++)
+    for (int i = 0; i < table.size(); i++)
     {
       Object[] cellsObjects = result[i];
-      List<String> cells = tabel.get(i);
-      if(cells.size() > 0)
+      List<String> cells = table.get(i);
+      if (cells.size() > 0)
       {
         cellsObjects[0] = new Boolean(false);
       }
       for (int j = 0; j < cells.size(); j++)
       {
-        cellsObjects[j+1] = cells.get(j);
+        cellsObjects[j + 1] = cells.get(j);
       }
     }
     return result;
   }
-  
+
   private void clean(Object[][] result)
   {
     for (Object[] objects : result)
@@ -48,31 +48,35 @@ public class DebuggerViewModel extends AbstractTableModel
       }
     }
   }
-  
-  public Class getColumnClass(int c) {
-     if(c == 0)
-     {
-       return Boolean.class;
-     }
-     return super.getColumnClass(c);
+
+  public Class getColumnClass(int c)
+  {
+    if (c == 0)
+    {
+      return Boolean.class;
+    }
+    return super.getColumnClass(c);
   }
 
-  public boolean isCellEditable(int row, int col) {
-      if (col == 0) {  
-        Object object = data[row][col];
-        if (object instanceof Boolean)
-        {
-          return true;
-        }
+  public boolean isCellEditable(int row, int col)
+  {
+    if (col == 0)
+    {
+      Object object = data[row][col];
+      if (object instanceof Boolean)
+      {
+        return true;
       }
-      return false;
+    }
+    return false;
   }
-  
-  public void setValueAt(Object value, int row, int col) {
-      data[row][col] = value;
-      fireTableCellUpdated(row, col);
+
+  public void setValueAt(Object value, int row, int col)
+  {
+    data[row][col] = value;
+    fireTableCellUpdated(row, col);
   }
-  
+
   public int getColumnCount()
   {
     return maxCellCount;
